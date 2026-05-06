@@ -371,10 +371,6 @@ a.rounded-3xl:active {
     #virtual-cursor {
         display: none !important;
     }
-
-    .marquee-track {
-        animation: none !important;
-    }
 }
 
 /* Infinite Marquee for Testimonials */
