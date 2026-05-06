@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docdril</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind for Dark Mode -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Satoshi"', 'sans-serif'],
+                        outfit: ['"Satoshi"', 'sans-serif'],
+                        inter: ['"Satoshi"', 'sans-serif'],
+                        noir: ['"Satoshi"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Load Vimeo Player API -->
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <!-- Load Satoshi font -->
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light Mode Gradient Colors */
+            --bg-grad-1: #ffffff;
+            --bg-grad-2: #ffffff;
+            --bg-grad-3: #ffffff;
+            --line-color: rgba(0, 0, 0, 0.05);
+            --glass-border: rgba(230, 230, 230, 0.7);
+            --glass-shadow: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Dark Mode Variables - Set to Pitch Black */
+        .dark {
+            --bg-grad-1: #000000; /* Pure Black */
+            --bg-grad-2: #000000; /* Pure Black */
+            --bg-grad-3: #000000; /* Almost Black */
+            --line-color: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            font-family: 'Satoshi', sans-serif;
+            background: linear-gradient(120deg, var(--bg-grad-1) 0%, var(--bg-grad-2) 100%);
+            transition: color 0.3s ease, background 0.3s ease;
+        }
+
+        header, nav, #mobile-menu {
+            font-family: 'Satoshi', sans-serif;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Satoshi', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em; 
+        }
+
+        .brand-logo {
+            font-family: 'Satoshi', sans-serif;
+            /* Removed hardcoded font-weight to let Tailwind handle the different weights inside */
+            letter-spacing: normal; 
+        }
+
+        /* PERFORMANCE OPTIMIZATION: Reduced blur from 30px/25px to 12px for massive GPU savings */
+        .glass-blur, .glass-internal {
+            position: relative; 
+            overflow: hidden; 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px 0 var(--glass-shadow);
+            z-index: 10;
+            background-color: rgba(255, 255, 255, 0.0); 
+        }
+        
+        .glass-blur {
+            border: 2px solid rgba(255, 255, 255, 0.4); 
+        }
+        .dark .glass-blur {
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .glass-internal {
+            box-shadow: 0 4px 12px 0 var(--glass-shadow); 
+            border: 1px solid var(--glass-border); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-internal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .glass-blur::before, .glass-internal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%; 
+            width: 200%; 
+            height: 100%;
+            z-index: -1; 
+            background: linear-gradient(
+                90deg, 
+                rgba(255, 255, 255, 0.0) 0%, 
+                rgba(255, 255, 255, 1.0) 35%,
+                rgba(255, 255, 255, 0.0) 65%
+            );
+            background-size: 50% 100%;
+            transform-origin: bottom center; 
+            transform: translateX(-50%);
+        }
+        
+        .dark .glass-blur::before, .dark .glass-internal::before {
+             background: linear-gradient(
+                90deg, 
+                rgba(255, 255, 255, 0.0) 0%, 
+                rgba(255, 255, 255, 0.15) 35%, 
+                rgba(255, 255, 255, 0.0) 65%
+            );
+        }
+
+        .glass-modal {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        }
+        .dark .glass-modal {
+            background-color: rgba(10, 10, 10, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+            margin-left: 2px;
+            color: currentColor;
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .robot-container {
+            will-change: transform;
+        }
+
+        @keyframes float-small {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); } 
+            100% { transform: translateY(0px); }
+        }
+        
+        .text-accent {
+            color: #000;
+        }
+        .dark .text-accent {
+            color: #fff;
+        }
+        .border-accent {
+            border-color: #000;
+        }
+        .dark .border-accent {
+            border-color: #fff;
+        }
+
+        /* --- Reveal Animations --- */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out; 
+            will-change: opacity, transform;
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .flowing-section {
+            position: relative;
+            z-index: 5; 
+            padding-bottom: 0 !important; 
+            padding-top: 0 !important; 
+        }
+        .flowing-section > div {
+            padding-top: 5rem; 
+            padding-bottom: 5rem;
+        }
+        @media (min-width: 768px) {
+            .flowing-section > div {
+                padding-top: 6rem; 
+                padding-bottom: 6rem;
+            }
+        }
+        
+        .flow-top { clip-path: none; }
+        .flow-bottom { clip-path: none; }
+        
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden; 
+        }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .flip-card-inner.is-flipped { transform: rotateY(180deg); }
+
+        .scroll-zoom-wrapper {
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform-origin: center center;
+            will-change: transform; 
+        }
+        .scroll-zoom-wrapper.is-active {
+            transform: scale(1.05); 
+            z-index: 10;
+            position: relative;
+        }
+
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        button:active,
+        .cursor-pointer:active,
+        [class*="hover:scale"]:active,
+        a.rounded-full:active,
+        a.rounded-lg:active,
+        a.rounded-3xl:active {
+            transform: scale(0.95) !important; 
+            transition: transform 0.05s ease-out !important; 
+        }
+
+        @keyframes slideInFromBottom {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .header-slide-in {
+            opacity: 0; 
+            animation: slideInFromBottom 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes zoomInEntrance {
+            0% { opacity: 0; transform: scale(0.8) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .zoom-in-entrance {
+            animation: zoomInEntrance 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); } 
+        }
+        
+        .breathe-animation {
+            /* PERFORMANCE OPTIMIZATION: Slowed down from 3s to 6s */
+            animation: breathe 6s ease-in-out infinite;
+            display: flex; 
+            align-items: center;
+            justify-content: center;
+        }
+
+        #virtual-cursor {
+            position: absolute;
+            z-index: 9999;
+            pointer-events: none;
+            transition: top 0.5s cubic-bezier(0.22, 1, 0.36, 1), left 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s;
+            opacity: 0; 
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+        
+        .sim-hover {
+            transform: scale(1.05) !important;
+        }
+        #btn-ideate.sim-hover svg { color: #ca8a04 !important; } 
+        #btn-design.sim-hover svg { color: #e11d48 !important; } 
+        #btn-edit.sim-hover svg { color: #1d4ed8 !important; }   
+
+        #mobile-menu-btn {
+            min-height: 4rem; 
+            min-width: 140px; 
+        }
+        @media (min-width: 768px) {
+            #mobile-menu-btn {
+                min-height: 6rem; 
+                min-width: 280px;
+            }
+        }
+
+        /* --- BATTERY SAVER CRITICAL CLASSES --- */
+        .tab-inactive * {
+            animation-play-state: paused !important;
+            transition: none !important;
+        }
+        .gpu-paused {
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        /* --- PREFERS REDUCED MOTION (LOW POWER MODE SAVER) --- */
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .robot-container {
+                animation: none !important;
+            }
+        }
+
+        /* ---------------------------------------------------- */
+        /* MOBILE PERFORMANCE OPTIMIZATIONS (Fixes Heat & Scroll Jank) */
+        /* ---------------------------------------------------- */
+        @media (max-width: 768px) {
+            body {
+                background: linear-gradient(120deg, var(--bg-grad-2) 0%, var(--bg-grad-3) 100%);
+            }
+            
+            .flowing-section > div {
+                padding-top: 1.5rem !important; 
+                padding-bottom: 2rem !important;
+            }
+
+            .glass-blur {
+                backdrop-filter: blur(8px) !important;
+                -webkit-backdrop-filter: blur(8px) !important;
+            }
+            
+            .glass-internal {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                background-color: rgba(255, 255, 255, 0.85) !important;
+            }
+            .dark .glass-internal {
+                background-color: rgba(20, 20, 20, 0.85) !important;
+            }
+
+            /* Notice spin duration updated to 8s here too */
+            .animate-\[spin_8s_linear_infinite\] {
+                animation: none !important;
+                background: linear-gradient(120deg, #E5E7EB, #FFFFFF);
+            }
+            .dark .animate-\[spin_8s_linear_infinite\] {
+                background: linear-gradient(120deg, #000000, #333333);
+            }
+            
+            .glass-blur::before, .glass-internal::before {
+                display: none;
+            }
+            
+            .robot-container, .liquid-bubble {
+                animation: none;
+            }
+
+            .scroll-zoom-wrapper {
+                transition: none;
+                transform: none !important;
+            }
+            .scroll-zoom-wrapper.is-active {
+                transform: none !important;
+            }
+            
+            #virtual-cursor {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 antialiased dark:bg-black dark:text-gray-100 transition-colors duration-300">
+
+    <!-- Wrapper -->
+    <div class="flex flex-col min-h-screen">
+
+        <!-- Header -->
+        <header class="fixed top-4 z-50 w-full px-4 sm:px-6 lg:px-8 flex flex-col items-center pointer-events-none transition-all duration-300">
+            <!-- Nav Strip -->
+            <nav class="relative w-full max-w-7xl lg:max-w-full bg-white/70 dark:bg-black/70 backdrop-blur-2xl border border-white/60 dark:border-gray-800/60 shadow-lg shadow-black/5 dark:shadow-white/5 rounded-full px-4 sm:px-6 md:px-10 py-2 lg:py-3 pointer-events-auto transition-all duration-300 header-slide-in" style="animation-delay: 0.1s;">
+                <div class="flex justify-between items-center w-full gap-4 xl:gap-8">
+                    <!-- Left Side: Logo + Play Button Group + Theme Toggle -->
+                    <div class="flex items-center gap-3 md:gap-4 flex-shrink-0">
+                        <button id="mobile-menu-btn" title="Menu" class="cursor-pointer flex items-center justify-center space-x-2 sm:space-x-3 bg-white dark:bg-black rounded-full shadow-lg border border-gray-100 dark:border-gray-800 py-2 px-4 md:py-2 md:px-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl group relative overflow-hidden flex-shrink-0">
+                            <img src="https://uploads.onecompiler.io/445by7jfj/4497yex8j/logo-2-white.png" 
+                                 alt="Docdril Logo" 
+                                 class="w-10 h-10 md:w-16 md:h-16 relative z-10"
+                                 onerror="this.src='https://placehold.co/48x48/FFFFFF/000000?text=D'; this.onerror=null;">
+                            <span class="text-xl sm:text-2xl md:text-3xl text-gray-900 dark:text-white relative z-10 brand-logo transition-transform duration-300 group-hover:-translate-x-1">
+                                <span class="font-bold">Docdril</span><span class="font-bold text-[0.75em] align-super relative -top-1 opacity-80">&trade;</span>
+                            </span>
+                        </button>
+                        <button id="header-play-btn" class="bg-white dark:bg-black text-black dark:text-white hover:text-gray-700 dark:hover:text-gray-300 rounded-full p-1.5 md:p-2 shadow-lg hover:shadow-2xl transition-transform transform hover:scale-110 border border-gray-100 dark:border-gray-800 flex items-center justify-center group" title="Play Video">
+                            <svg class="w-4 h-4 md:w-5 md:h-5 fill-current ml-0.5" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </button>
+                        <!-- Dark Mode Toggle Button -->
+                        <button id="theme-toggle-btn" class="bg-white dark:bg-black text-black dark:text-white hover:text-gray-700 dark:hover:text-gray-300 rounded-full p-1.5 md:p-2 shadow-lg hover:shadow-2xl transition-transform transform hover:scale-110 border border-gray-100 dark:border-gray-800 flex items-center justify-center" title="Toggle Theme">
+                            <svg class="w-4 h-4 md:w-5 md:h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                            <svg class="w-4 h-4 md:w-5 md:h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Right Side: Navigation & Primary CTA -->
+                    <div class="flex items-center gap-2 sm:gap-3 lg:gap-4 flex-shrink-0">
+                        <!-- Navigation Links (Hidden on smaller screens) -->
+                        <div class="hidden xl:flex items-center space-x-1">
+                            <a href="#" class="flex items-center gap-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100/80 dark:hover:bg-gray-800/80 active:scale-95 active:bg-gray-200 dark:active:bg-gray-700 px-4 py-2 rounded-full transition-all duration-200">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                                Home
+                            </a>
+                            <a href="https://portfolio.docdril.com" class="flex items-center gap-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100/80 dark:hover:bg-gray-800/80 active:scale-95 active:bg-gray-200 dark:active:bg-gray-700 px-4 py-2 rounded-full transition-all duration-200">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                                Portfolio
+                            </a>
+                            <a href="about/index.html" class="flex items-center gap-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100/80 dark:hover:bg-gray-800/80 active:scale-95 active:bg-gray-200 dark:active:bg-gray-700 px-4 py-2 rounded-full transition-all duration-200">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                About
+                            </a>
+                            <a href="services/index.html" class="flex items-center gap-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100/80 dark:hover:bg-gray-800/80 active:scale-95 active:bg-gray-200 dark:active:bg-gray-700 px-4 py-2 rounded-full transition-all duration-200">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                                Services
+                            </a>
+                            <a href="policy/index.html" class="flex items-center gap-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100/80 dark:hover:bg-gray-800/80 active:scale-95 active:bg-gray-200 dark:active:bg-gray-700 px-4 py-2 rounded-full transition-all duration-200">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                Policy
+                            </a>
+                            
+                            <!-- Docdril OS Desktop Nav Link -->
+                            <a href="https://os.docdril.com" class="flex items-center gap-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100/80 dark:hover:bg-gray-800/80 active:scale-95 active:bg-gray-200 dark:active:bg-gray-700 px-4 py-2 rounded-full transition-all duration-200">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                App
+                            </a>
+
+                            <a href="contact/index.html" class="ml-2 text-sm font-bold text-gray-900 dark:text-white py-2 px-5 border border-gray-200 dark:border-gray-800 rounded-full bg-white dark:bg-black hover:bg-gray-50 dark:hover:bg-gray-900 active:scale-95 transition-all duration-200 shadow-sm hover:shadow-md">
+                                Contact
+                            </a>
+                        </div>
+                        
+                        <!-- Fixed Enquiry Button (Headphone Icon) -->
+                        <a href="enquiry/index.html" class="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full shadow-lg hover:shadow-xl transition-transform transform hover:scale-110 active:scale-95 group flex-shrink-0" title="Enquiry">
+                            <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 18v-6a9 9 0 0118 0v6M3 18a2 2 0 002 2h2a2 2 0 002-2v-4a2 2 0 00-2-2H5M21 18a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4a2 2 0 012-2h2"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Mobile Menu (Dropdown) -->
+            <div id="mobile-menu" class="hidden xl:hidden w-full max-w-7xl mt-2 bg-white/95 dark:bg-black/95 backdrop-blur-xl rounded-2xl border border-white/60 dark:border-gray-800/60 shadow-xl pointer-events-auto flex-col space-y-2 px-4 py-6 transition-all duration-300">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-900 dark:text-white font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    Home
+                </a>
+                <a href="https://portfolio.docdril.com" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-900 dark:text-white font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    Portfolio
+                </a>
+                <a href="about/index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-900 dark:text-white font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    About
+                </a>
+                <a href="services/index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-900 dark:text-white font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                    Services
+                </a>
+                <a href="policy/index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-900 dark:text-white font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    Policy
+                </a>
+                
+                <!-- Docdril OS Mobile Nav Link -->
+                <a href="https://os.docdril.com" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-900 dark:text-white font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    App
+                </a>
+
+                <a href="contact/index.html" class="block text-center text-gray-900 dark:text-white font-bold py-3 px-5 mt-4 border border-gray-200 dark:border-gray-800 rounded-xl bg-white dark:bg-black shadow-sm active:scale-95 transition-transform hover:bg-gray-50 dark:hover:bg-gray-900">
+                    Contact
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow pt-24 relative"> 
+
+            <!-- 1. Hero Section Part 1: White Gradient Background (Robot + Ask) -->
+            <section id="hero-section" class="w-full pt-6 pb-2 px-4 sm:px-6 lg:px-8 relative z-10">
+                <!-- Inner Light Container -->
+                <div class="w-full max-w-6xl mx-auto bg-gradient-to-b from-gray-50 to-white dark:from-black dark:to-black rounded-[2.5rem] overflow-hidden relative pt-6 sm:pt-12 pb-4 shadow-2xl shadow-black/25 border-8 border-gray-100 dark:border-gray-800 zoom-in-entrance">
+
+                    <!-- Photo Background -->
+                    <div class="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-80 dark:opacity-60 transition-opacity duration-300" style="background-image: url('https://uploads.onecompiler.io/445by7jfj/44gphz9hz/web-cover-2.png'); background-size: cover; background-position: center;"></div>
+                    
+                    <!-- Audio Play Button -->
+                    <div class="absolute bottom-4 left-4 md:bottom-8 md:left-8 z-30">
+                        <audio id="robot-audio">
+                            <source src="audio/sound.mp3" type="audio/mpeg">
+                        </audio>
+                        <button id="audio-toggle-btn" class="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-white/80 dark:bg-black/80 backdrop-blur-md rounded-full shadow-lg border border-white/50 dark:border-gray-700 text-gray-800 dark:text-white hover:scale-110 transition-transform active:scale-95 group" title="Play Sound">
+                            <svg id="icon-play" class="w-5 h-5 md:w-6 md:h-6 fill-current ml-0.5 transition-colors" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            <svg id="icon-pause" class="w-5 h-5 md:w-6 md:h-6 fill-current hidden transition-colors" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        </button>
+                    </div>
+
+                    <div class="w-full max-w-4xl mx-auto relative z-10">
+                        <!-- Robot Text Bubble -->
+                        <div id="robot-bubble" class="absolute z-20 top-[5%] right-[5%] sm:top-[10%] sm:right-[15%] md:right-[25%] liquid-bubble typing-cursor"></div>
+
+                        <!-- Robot Column -->
+                        <div class="max-w-lg mx-auto h-[200px] md:h-[280px] robot-container overflow-hidden rounded-lg relative z-10 pointer-events-none sm:pointer-events-auto">
+                            <div class="absolute inset-0 z-20 pointer-events-none bg-[radial-gradient(circle_at_50%_40%,_rgba(255,255,255,0.8)_0%,_transparent_70%)] mix-blend-soft-light dark:hidden"></div>
+                            <iframe 
+                                id="robot-iframe"
+                                src='https://my.spline.design/genkubgreetingrobot-1risyBQsn5fHVnO9r2idsNhk/?logo=0&bg=transparent' 
+                                frameborder='0' 
+                                class="w-full border-0 h-[150%] md:h-[131%] -translate-y-[13%] md:-translate-y-[8%]"
+                                loading="lazy"
+                            ></iframe>
+                        </div>
+
+                        <!-- CHAT BUTTON (RIGHT) -->
+                        <div class="absolute z-20 top-1/2 -translate-y-1/2 right-4 sm:right-16 lg:right-0 flex items-center gap-2 sm:gap-4 chat-button-group">
+                            <span class="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white reveal-on-scroll">Ask</span>
+                            <div class="breathe-animation">
+                                <button id="chatbot-trigger" class="flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 bg-white dark:bg-black text-black dark:text-white border-2 border-black dark:border-white rounded-full shadow-xl transform transition-transform hover:scale-110 focus:outline-none">
+                                    <svg class="w-8 h-8 sm:w-12 sm:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-2.138a1.125 1.125 0 0 1 .865-.501h.002c1.153-.086 2.294-.213 3.423-.379 1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" stroke-width="1.5"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 1. Hero Section Part 2: White/Light Background (Text Content) -->
+            <section class="w-full pt-2 pb-2 sm:pb-3 px-4 sm:px-6 lg:px-8 overflow-hidden relative z-20">
+                <div class="text-center">
+                    <!-- Portfolio Badge -->
+                    <button id="portfolio-trigger" class="header-slide-in relative inline-flex overflow-hidden rounded-full p-[1px] mb-4 group focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-black shadow-xl shadow-black/20" style="animation-delay: 0.3s;">
+                        <!-- PERFORMANCE OPTIMIZATION: Slowed from 2s to 8s -->
+                        <span class="absolute inset-[-1000%] animate-[spin_8s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E5E7EB_0%,#FFFFFF_50%,#E5E7EB_100%)] dark:bg-[conic-gradient(from_90deg_at_50%_50%,#000000_0%,#FFFFFF_50%,#000000_100%)]"></span>
+                        <span class="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-gray-100 dark:bg-black px-4 py-2 text-sm font-medium text-gray-800 dark:text-gray-200 backdrop-blur-3xl transition-colors hover:bg-gray-200 dark:hover:bg-gray-900 gap-2">
+                            <span class="relative flex h-2 w-2">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                            </span>
+                            View Portfolio
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </span>
+                    </button>
+
+                    <!-- H1 Box -->
+                    <div class="w-full flex justify-center">
+                        <div class="header-slide-in relative inline-flex overflow-hidden rounded-full p-[1px] shadow-2xl shadow-black/25" style="animation-delay: 0.5s;">
+                            <!-- PERFORMANCE OPTIMIZATION: Slowed from 2s to 8s -->
+                            <span class="absolute inset-[-1000%] animate-[spin_8s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E5E7EB_0%,#FFFFFF_50%,#E5E7EB_100%)] dark:bg-[conic-gradient(from_90deg_at_50%_50%,#000000_0%,#FFFFFF_50%,#000000_100%)]"></span>
+                            
+                            <h1 class="relative inline-flex h-full w-full items-center justify-center rounded-full bg-white/90 dark:bg-black/90 backdrop-blur-3xl p-4 md:p-8 text-lg sm:text-3xl md:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight flex-nowrap gap-x-3 md:gap-x-8">
+                                <button id="btn-ideate" onclick="showInfoModal('ideate', 'Ideate', 'Before the first cut, we conceptualize. This stage involves deep-vision intake, scripting for retention, and identifying psychological hooks that align with your specific target audience and content goals.')" 
+                                        class="font-outfit flex items-center gap-2 md:gap-3 transition-transform hover:scale-105 active:opacity-70 focus:outline-none group">
+                                    <svg class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-black dark:text-white group-hover:text-yellow-600 transition-colors" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                    </svg>
+                                    <span>Ideate</span>
+                                </button>
+                                <button id="btn-design" onclick="showInfoModal('design', 'Design', 'Establishing the visual identity. We define the color palette, craft custom motion graphics, select high-impact typography, and integrate branding elements to ensure your video stands out in a crowded feed.')"
+                                        class="font-outfit flex items-center gap-2 md:gap-3 transition-transform hover:scale-105 active:opacity-70 focus:outline-none group">
+                                    <svg class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-black dark:text-white group-hover:text-rose-600 transition-colors" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                    </svg>
+                                    <span>Design</span>
+                                </button>
+                                <button id="btn-edit" onclick="showInfoModal('edit', 'Edit', 'The final convergence of vision and assets. Our editors utilize advanced cutting techniques, audio mastering, color grading, and SFX to turn raw footage into a polished, high-impact final deliverable.')"
+                                        class="font-outfit flex items-center gap-2 md:gap-3 transition-transform hover:scale-105 active:opacity-70 focus:outline-none group">
+                                    <svg class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-black dark:text-white group-hover:text-blue-700 transition-colors" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.452-2.452L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.452-2.452L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.452 2.452L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.452 2.452Z" />
+                                    </svg>
+                                    <span>Edit</span>
+                                </button>
+                            </h1>
+                        </div>
+                    </div>
+                    
+                    <!-- Docdril OS Hero Prominent Button (PREMIUM APPLE-STYLE PILL) -->
+                    <div class="header-slide-in w-full flex flex-col items-center justify-center mt-6 sm:mt-8 mb-0" style="animation-delay: 0.7s;">
+                        <a href="https://os.docdril.com" class="group relative inline-flex items-center justify-center gap-2 sm:gap-3 px-1.5 py-1.5 pr-4 sm:px-2 sm:py-2 sm:pr-5 bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-full shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 overflow-hidden z-10">
+                            
+                            <!-- Sleek App Badge -->
+                            <span class="relative z-20 flex items-center justify-center px-3 py-1.5 sm:px-4 sm:py-2 bg-black dark:bg-white text-white dark:text-gray-900 text-[10px] sm:text-xs font-bold uppercase tracking-widest rounded-full">
+                                <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse mr-1.5 sm:mr-2"></span>
+                                APP
+                            </span>
+                            
+                            <span class="relative z-20 flex items-center text-sm sm:text-base font-bold text-gray-900 dark:text-white tracking-wide">
+                                Docdril OS
+                                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1 sm:ml-1.5 text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </span>
+                        </a>
+
+                        <!-- App Info Details (Always Visible) -->
+                        <div class="mt-6 max-w-2xl mx-auto bg-white dark:bg-[#0a0a0a] border border-gray-100 dark:border-gray-800 rounded-[1.5rem] p-6 sm:p-8 text-left shadow-sm">
+                            <h3 class="text-xs sm:text-sm font-bold text-gray-900 dark:text-white uppercase tracking-widest mb-5 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span> PROJECT DELIVERY APP
+                            </h3>
+                            <div class="text-sm sm:text-[15px] text-gray-500 dark:text-gray-400 space-y-4 leading-relaxed">
+                                <p><strong class="text-gray-900 dark:text-white">Client Project Delivery & Management:</strong> Seamlessly add projects, track process, output, and delivery all in one centralized hub.</p>
+                                <p><strong class="text-gray-900 dark:text-white">Built-in Communication:</strong> Features integrated queries, chat functions, and timestamped comments for better assistance and precise revisions.</p>
+                                <p><strong class="text-gray-900 dark:text-white">Integrated Wallet & Payments:</strong> Onboard projects smoothly. Start with an advance or pay in full upfront, then settle any remaining balance at the end for a seamless experience.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- The Studio / Briefing Section (Bento Style) -->
+            <section id="the-studio" class="w-full py-20 md:py-32 bg-white dark:bg-black relative z-20 overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+                        
+                        <!-- Left Content: The Philosophy -->
+                        <div class="w-full lg:w-1/2 text-center lg:text-left">
+                            <div class="reveal-on-scroll mb-8">
+                                <h2 class="text-5xl sm:text-6xl md:text-[5.5rem] leading-[1.1] font-semibold text-gray-900 dark:text-white tracking-tight mb-3 block text-center lg:text-left">
+                                    <span class="font-normal">@</span>Creative Tech Studio.
+                                </h2>
+                                <p class="text-[1.1rem] sm:text-xl md:text-2xl text-gray-800 dark:text-gray-200 italic font-light tracking-wide">
+                                    video editing <span class="mx-1.5 sm:mx-2 font-thin opacity-50">|</span> web design <span class="mx-1.5 sm:mx-2 font-thin opacity-50">|</span> ai automation
+                                </p>
+                            </div>
+                            
+                            <p class="reveal-on-scroll text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 font-medium leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                                At Docdril, we merge high-end visual storytelling with robust digital engineering. We are a hybrid creative and tech studio built to elevate your brand from every angle—whether you need cinematic content that hooks your audience or scalable digital infrastructure that drives growth.
+                            </p>
+                        </div>
+                        
+                        <!-- Right Content: The Mechanics (Offset Bento Grid) -->
+                        <div class="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-4 lg:mt-0">
+                            
+                            <!-- Card 1: Creative -->
+                            <div class="reveal-on-scroll bg-gray-50 dark:bg-[#0a0a0a] rounded-[2rem] p-8 sm:p-10 border border-gray-200/60 dark:border-gray-800 hover:-translate-y-1 transition-transform duration-300">
+                                <div class="w-12 h-12 rounded-2xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 flex items-center justify-center text-gray-900 dark:text-white mb-6 shadow-sm">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Creative Media</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed font-medium">Expert video editing, dynamic motion graphics, custom branding, and original song making to give your brand an unforgettable identity.</p>
+                            </div>
+                            
+                            <!-- Card 2: Tech (Offset downwards on larger screens) -->
+                            <div class="reveal-on-scroll sm:translate-y-8 bg-gray-50 dark:bg-[#0a0a0a] rounded-[2rem] p-8 sm:p-10 border border-gray-200/60 dark:border-gray-800 hover:-translate-y-1 transition-transform duration-300">
+                                <div class="w-12 h-12 rounded-2xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 flex items-center justify-center text-gray-900 dark:text-white mb-6 shadow-sm">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Tech & Automation</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed font-medium">Full-stack web and app design, custom SaaS website development, and smart AI automations designed to streamline your operations.</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Services Section (PREMIUM MINIMALIST GRID) -->
+            <section id="services" class="w-full bg-gray-50/50 dark:bg-black/50 backdrop-blur-sm flowing-section flow-top relative z-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 !pt-2 sm:!pt-2">
+                    <div class="text-center mb-10 md:mb-16 mt-0">
+                        <h2 class="reveal-on-scroll text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">Our Service Menu</h2>
+                        <p class="reveal-on-scroll mt-3 sm:mt-4 text-xs sm:text-lg text-gray-500 dark:text-gray-400 font-medium">Everything you need to scale your brand and digital presence.</p>
+                    </div>
+                    
+                    <!-- PREMIUM 2x2 GRID -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+                        
+                        <!-- Category 1: Content Creation -->
+                        <a href="services/content-creation/index.html" class="h-full reveal-on-scroll block group" style="transition-delay: 0.0s;">
+                            <div class="relative h-full bg-white dark:bg-gray-900 rounded-[1.5rem] sm:rounded-[2rem] border border-gray-100 dark:border-gray-800 p-6 sm:p-10 flex flex-col hover:-translate-y-1.5 transition-all duration-500 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] overflow-hidden">
+                                <!-- Subtle background glow -->
+                                <div class="absolute inset-0 bg-gradient-to-br from-blue-50/80 to-transparent dark:from-blue-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                                
+                                <div class="relative w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 text-blue-600 dark:text-blue-400">
+                                    <svg class="w-6 h-6 sm:w-8 sm:h-8 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                </div>
+                                
+                                <h3 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-white mb-3 relative z-10">Content Creation</h3>
+                                <p class="text-sm sm:text-base text-gray-500 dark:text-gray-400 leading-relaxed flex-grow relative z-10">
+                                    High-retention short-form, long-form, and complete video production tailored for your audience.
+                                </p>
+                                
+                                <div class="mt-6 flex items-center text-sm font-bold text-blue-600 dark:text-blue-400 group-hover:translate-x-2 transition-transform duration-300 relative z-10">
+                                    Explore Content
+                                    <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Category 2: AI Solutions -->
+                        <a href="services/ai-automation/index.html" class="h-full reveal-on-scroll block group" style="transition-delay: 0.1s;">
+                            <div class="relative h-full bg-white dark:bg-gray-900 rounded-[1.5rem] sm:rounded-[2rem] border border-gray-100 dark:border-gray-800 p-6 sm:p-10 flex flex-col hover:-translate-y-1.5 transition-all duration-500 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-br from-amber-50/80 to-transparent dark:from-amber-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                                
+                                <div class="relative w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 text-amber-600 dark:text-amber-400">
+                                    <svg class="w-6 h-6 sm:w-8 sm:h-8 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                </div>
+                                
+                                <h3 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-white mb-3 relative z-10">AI Solutions</h3>
+                                <p class="text-sm sm:text-base text-gray-500 dark:text-gray-400 leading-relaxed flex-grow relative z-10">
+                                    Intelligent agents, custom chatbots, and automated pipelines to scale your operations rapidly.
+                                </p>
+                                
+                                <div class="mt-6 flex items-center text-sm font-bold text-amber-600 dark:text-amber-400 group-hover:translate-x-2 transition-transform duration-300 relative z-10">
+                                    Explore AI
+                                    <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Category 3: Web Development -->
+                        <a href="services/web-development/index.html" class="h-full reveal-on-scroll block group" style="transition-delay: 0.15s;">
+                            <div class="relative h-full bg-white dark:bg-gray-900 rounded-[1.5rem] sm:rounded-[2rem] border border-gray-100 dark:border-gray-800 p-6 sm:p-10 flex flex-col hover:-translate-y-1.5 transition-all duration-500 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-br from-emerald-50/80 to-transparent dark:from-emerald-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                                
+                                <div class="relative w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-emerald-50 dark:bg-emerald-900/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 text-emerald-600 dark:text-emerald-400">
+                                    <svg class="w-6 h-6 sm:w-8 sm:h-8 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                                </div>
+                                
+                                <h3 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-white mb-3 relative z-10">Web Development</h3>
+                                <p class="text-sm sm:text-base text-gray-500 dark:text-gray-400 leading-relaxed flex-grow relative z-10">
+                                    High-converting SaaS websites and robust, responsive web applications built for scale.
+                                </p>
+                                
+                                <div class="mt-6 flex items-center text-sm font-bold text-emerald-600 dark:text-emerald-400 group-hover:translate-x-2 transition-transform duration-300 relative z-10">
+                                    Explore Web
+                                    <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Category 4: Branding -->
+                        <a href="services/branding-growth/index.html" class="h-full reveal-on-scroll block group" style="transition-delay: 0.2s;">
+                            <div class="relative h-full bg-white dark:bg-gray-900 rounded-[1.5rem] sm:rounded-[2rem] border border-gray-100 dark:border-gray-800 p-6 sm:p-10 flex flex-col hover:-translate-y-1.5 transition-all duration-500 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-br from-violet-50/80 to-transparent dark:from-violet-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                                
+                                <div class="relative w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-violet-50 dark:bg-violet-900/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 text-violet-600 dark:text-violet-400">
+                                    <svg class="w-6 h-6 sm:w-8 sm:h-8 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+                                </div>
+                                
+                                <h3 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-white mb-3 relative z-10">Branding</h3>
+                                <p class="text-sm sm:text-base text-gray-500 dark:text-gray-400 leading-relaxed flex-grow relative z-10">
+                                    Complete brand identity creation, strategic pitch decks, and premium graphic design.
+                                </p>
+                                
+                                <div class="mt-6 flex items-center text-sm font-bold text-violet-600 dark:text-violet-400 group-hover:translate-x-2 transition-transform duration-300 relative z-10">
+                                    Explore Branding
+                                    <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+
+                    <!-- View All Services Button -->
+                    <div class="mt-10 md:mt-14 text-center reveal-on-scroll" style="transition-delay: 0.3s;">
+                        <a href="services/index.html" class="inline-flex items-center gap-2 bg-white dark:bg-black text-gray-900 dark:text-white border border-gray-200 dark:border-gray-800 font-bold py-3.5 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 active:scale-95 group">
+                            View All Services
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Projects Stats Section -->
+            <section class="w-full py-8 md:py-12 bg-white/20 dark:bg-black/20 backdrop-blur-sm flex justify-center items-center relative z-20">
+                <div class="reveal-on-scroll flex items-center justify-center gap-5 sm:gap-8 px-6">
+                    <div class="text-right flex flex-col justify-center">
+                        <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-gray-800 dark:text-gray-200 tracking-tight">Projects</span>
+                        <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-gray-400 dark:text-gray-500 tracking-tight">Delivered</span>
+                    </div>
+                    <div class="w-1 h-16 sm:h-24 bg-gradient-to-b from-pink-500 to-red-600 rounded-full"></div>
+                    <div class="flex items-center">
+                        <span class="text-6xl sm:text-7xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-red-600 counter-value leading-none" data-target="450">0</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Why Us -->
+            <section id="why-us" class="w-full bg-white/40 dark:bg-black/40 backdrop-blur-sm flowing-section flow-bottom relative z-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 !pt-2 sm:!pt-8">
+                    <h2 class="reveal-on-scroll text-center text-3xl sm:text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-8 md:mb-16 tracking-tight">
+                        Why Us?
+                    </h2>
+                    
+                    <div class="reveal-on-scroll flex md:grid md:grid-cols-3 gap-6 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-8 md:pb-0 max-w-6xl mx-auto no-scrollbar">
+                        
+                        <!-- Value Prop 1 -->
+                        <div class="scroll-zoom-wrapper group perspective-1000 min-w-[75vw] md:min-w-0 w-full h-[250px] md:h-[400px] cursor-pointer snap-center">
+                            <div class="flip-card-inner relative w-full h-full transition-transform duration-700 transform-style-3d shadow-xl rounded-3xl">
+                                <!-- Front Face -->
+                                <div class="absolute inset-0 backface-hidden bg-white/80 dark:bg-black/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/50 dark:border-gray-600 flex flex-col items-center justify-center text-center z-10">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-t-3xl"></div>
+                                    <div class="w-12 h-12 md:w-20 md:h-20 mb-3 md:mb-6 rounded-2xl bg-gradient-to-br from-cyan-100 to-blue-100 dark:from-cyan-900 dark:to-blue-900 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
+                                        <svg class="w-6 h-6 md:w-10 md:h-10 text-blue-600 dark:text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.452-2.452L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.452-2.452L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.452 2.452L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.452 2.452Z" />
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-lg md:text-3xl font-bold text-gray-900 dark:text-white mb-1 md:mb-2">Cinema-Grade Quality</h3>
+                                    <p class="text-[10px] md:text-xs text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-1 md:mt-4">Tap to Reveal</p>
+                                </div>
+                                <!-- Back Face -->
+                                <div class="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-cyan-600 to-blue-700 p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center text-center border border-blue-500/50 shadow-inner">
+                                    <h3 class="text-lg md:text-2xl font-bold text-white mb-2 md:mb-4">Perfection in Pixels</h3>
+                                    <p class="text-white/90 leading-relaxed text-[11px] md:text-base font-medium">We ensure every video is pixel-perfect with 4K Edits, professional Color Grading, seamless Motion Graphics, and Text Animation.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Value Prop 2 -->
+                        <div class="scroll-zoom-wrapper group perspective-1000 min-w-[75vw] md:min-w-0 w-full h-[250px] md:h-[400px] cursor-pointer snap-center">
+                            <div class="flip-card-inner relative w-full h-full transition-transform duration-700 transform-style-3d shadow-xl rounded-3xl">
+                                <!-- Front Face -->
+                                <div class="absolute inset-0 backface-hidden bg-white/80 dark:bg-black/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/50 dark:border-gray-600 flex flex-col items-center justify-center text-center z-10">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 to-pink-600 rounded-t-3xl"></div>
+                                    <div class="w-12 h-12 md:w-20 md:h-20 mb-3 md:mb-6 rounded-2xl bg-gradient-to-br from-orange-100 to-pink-100 dark:from-orange-900 dark:to-pink-900 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
+                                        <svg class="w-6 h-6 md:w-10 md:h-10 text-pink-600 dark:text-pink-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.5 2.25A.75.75 0 0 0 14.75 3v18a.75.75 0 0 0 1.5 0V3a.75.75 0 0 0-.75-.75Zm-6 0A.75.75 0 0 0 8.75 3v18a.75.75 0 0 0 1.5 0V3a.75.75 0 0 0-.75-.75Zm-6 0A.75.75 0 0 0 2.75 3v18a.75.75 0 0 0 1.5 0V3a.75.75 0 0 0-.75-.75Zm18 0A.75.75 0 0 0 20.75 3v18a.75.75 0 0 0 1.5 0V3a.75.75 0 0 0-.75-.75Z" />
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-lg md:text-3xl font-bold text-gray-900 dark:text-white mb-1 md:mb-2">Viral-Ready Content</h3>
+                                    <p class="text-[10px] md:text-xs text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-1 md:mt-4">Tap to Reveal</p>
+                                </div>
+                                <!-- Back Face -->
+                                <div class="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-orange-500 to-pink-600 p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center text-center border border-pink-500/50 shadow-inner">
+                                    <h3 class="text-lg md:text-2xl font-bold text-white mb-2 md:mb-4">Hook Your Audience</h3>
+                                    <p class="text-white/90 leading-relaxed text-[11px] md:text-base font-medium">We specialize in high-retention editing, including precise Captioning, compelling Visual Effects, and strategic use of Stock Footage.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Value Prop 3 -->
+                        <div class="scroll-zoom-wrapper group perspective-1000 min-w-[75vw] md:min-w-0 w-full h-[250px] md:h-[400px] cursor-pointer snap-center">
+                            <div class="flip-card-inner relative w-full h-full transition-transform duration-700 transform-style-3d shadow-xl rounded-3xl">
+                                <!-- Front Face -->
+                                <div class="absolute inset-0 backface-hidden bg-white/80 dark:bg-black/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/50 dark:border-gray-600 flex flex-col items-center justify-center text-center z-10">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-indigo-600 rounded-t-3xl"></div>
+                                    <div class="w-12 h-12 md:w-20 md:h-20 mb-3 md:mb-6 rounded-2xl bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-purple-900 dark:to-indigo-900 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
+                                        <svg class="w-6 h-6 md:w-10 md:h-10 text-indigo-600 dark:text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.429 7.026c.287-.84.84-1.637 1.545-2.296C12.448 3.015 14.595 2.25 16.75 2.25a7.5 7.5 0 0 1 0 15c-2.155 0-4.302-.765-6.776-3.778-1.574-1.93-2.37-4.14-2.245-6.074.08-.667.436-1.378.892-1.895Zm0 0L19.5 7.125m-1.5-4.875h3m-1.5 1.5v-3" />
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-lg md:text-3xl font-bold text-gray-900 dark:text-white mb-1 md:mb-2">AI & Future Integration</h3>
+                                    <p class="text-[10px] md:text-xs text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-1 md:mt-4">Tap to Reveal</p>
+                                </div>
+                                <!-- Back Face -->
+                                <div class="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-purple-600 to-indigo-700 p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center text-center border border-indigo-500/50 shadow-inner">
+                                    <h3 class="text-lg md:text-2xl font-bold text-white mb-2 md:mb-4">Cutting-Edge Tech</h3>
+                                    <p class="text-white/90 leading-relaxed text-[11px] md:text-base font-medium">Stay ahead with AI Integration. We streamline editing and explore innovative tools to deliver content that keeps your brand current.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scroll Hint for Mobile -->
+                    <div class="md:hidden text-center text-xs text-gray-400 dark:text-gray-500 mt-2 flex items-center justify-center gap-2">
+                        <span>Tap cards to flip</span>
+                        <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Workflow -->
+            <section id="workflow" class="w-full bg-gray-50/50 dark:bg-black/50 backdrop-blur-sm flowing-section flow-top relative z-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 !pt-2 sm:!pt-8">
+                    <div class="text-center mb-8 md:mb-16 mt-0">
+                        <h2 class="reveal-on-scroll text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">How We Work</h2>
+                        <p class="reveal-on-scroll mt-3 sm:mt-4 text-xs sm:text-lg text-gray-500 dark:text-gray-400 font-medium">A streamlined, stress-free journey from start to finish.</p>
+                    </div>
+                    
+                    <div class="reveal-on-scroll w-full overflow-x-auto no-scrollbar py-8 px-2 sm:px-4 cursor-grab active:cursor-grabbing">
+                        <div class="flex items-start justify-between min-w-[800px] lg:min-w-full relative mx-auto">
+                            
+                            <!-- Step 1: Lead -->
+                            <div class="flex flex-col items-center relative group flex-1 cursor-pointer">
+                                <div class="relative w-full flex justify-center">
+                                    <div class="absolute top-1/2 left-1/2 w-full h-0 border-t-2 sm:border-t-[3px] border-dashed border-gray-300 dark:border-gray-700 -translate-y-1/2 z-0 transition-all duration-500 group-hover:border-gray-500 dark:group-hover:border-gray-400"></div>
+                                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center font-bold text-sm sm:text-lg text-gray-400 dark:text-gray-500 z-10 transition-all duration-500 group-hover:scale-110 group-hover:bg-black dark:group-hover:bg-white group-hover:border-black dark:group-hover:border-white group-hover:text-white dark:group-hover:text-black shadow-sm group-hover:shadow-xl">
+                                        1
+                                    </div>
+                                </div>
+                                <span class="mt-4 text-[11px] sm:text-sm font-bold text-gray-500 dark:text-gray-400 transition-colors duration-500 group-hover:text-black dark:group-hover:text-white uppercase tracking-wider">Lead</span>
+                            </div>
+
+                            <!-- Step 2: Meet -->
+                            <div class="flex flex-col items-center relative group flex-1 cursor-pointer">
+                                <div class="relative w-full flex justify-center">
+                                    <div class="absolute top-1/2 left-1/2 w-full h-0 border-t-2 sm:border-t-[3px] border-dashed border-gray-300 dark:border-gray-700 -translate-y-1/2 z-0 transition-all duration-500 group-hover:border-gray-500 dark:group-hover:border-gray-400"></div>
+                                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center font-bold text-sm sm:text-lg text-gray-400 dark:text-gray-500 z-10 transition-all duration-500 group-hover:scale-110 group-hover:bg-black dark:group-hover:bg-white group-hover:border-black dark:group-hover:border-white group-hover:text-white dark:group-hover:text-black shadow-sm group-hover:shadow-xl">
+                                        2
+                                    </div>
+                                </div>
+                                <span class="mt-4 text-[11px] sm:text-sm font-bold text-gray-500 dark:text-gray-400 transition-colors duration-500 group-hover:text-black dark:group-hover:text-white uppercase tracking-wider">Meet</span>
+                            </div>
+
+                            <!-- Step 3: Deal -->
+                            <div class="flex flex-col items-center relative group flex-1 cursor-pointer">
+                                <div class="relative w-full flex justify-center">
+                                    <div class="absolute top-1/2 left-1/2 w-full h-0 border-t-2 sm:border-t-[3px] border-dashed border-gray-300 dark:border-gray-700 -translate-y-1/2 z-0 transition-all duration-500 group-hover:border-gray-500 dark:group-hover:border-gray-400"></div>
+                                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center font-bold text-sm sm:text-lg text-gray-400 dark:text-gray-500 z-10 transition-all duration-500 group-hover:scale-110 group-hover:bg-black dark:group-hover:bg-white group-hover:border-black dark:group-hover:border-white group-hover:text-white dark:group-hover:text-black shadow-sm group-hover:shadow-xl">
+                                        3
+                                    </div>
+                                </div>
+                                <span class="mt-4 text-[11px] sm:text-sm font-bold text-gray-500 dark:text-gray-400 transition-colors duration-500 group-hover:text-black dark:group-hover:text-white uppercase tracking-wider">Deal</span>
+                            </div>
+
+                            <!-- Step 4: Advance -->
+                            <div class="flex flex-col items-center relative group flex-1 cursor-pointer">
+                                <div class="relative w-full flex justify-center">
+                                    <div class="absolute top-1/2 left-1/2 w-full h-0 border-t-2 sm:border-t-[3px] border-dashed border-gray-300 dark:border-gray-700 -translate-y-1/2 z-0 transition-all duration-500 group-hover:border-gray-500 dark:group-hover:border-gray-400"></div>
+                                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center font-bold text-sm sm:text-lg text-gray-400 dark:text-gray-500 z-10 transition-all duration-500 group-hover:scale-110 group-hover:bg-black dark:group-hover:bg-white group-hover:border-black dark:group-hover:border-white group-hover:text-white dark:group-hover:text-black shadow-sm group-hover:shadow-xl">
+                                        4
+                                    </div>
+                                </div>
+                                <span class="mt-4 text-[11px] sm:text-sm font-bold text-gray-500 dark:text-gray-400 transition-colors duration-500 group-hover:text-black dark:group-hover:text-white uppercase tracking-wider">Advance</span>
+                            </div>
+
+                            <!-- Step 5: Onboard -->
+                            <div class="flex flex-col items-center relative group flex-1 cursor-pointer">
+                                <div class="relative w-full flex justify-center">
+                                    <div class="absolute top-1/2 left-1/2 w-full h-0 border-t-2 sm:border-t-[3px] border-dashed border-gray-300 dark:border-gray-700 -translate-y-1/2 z-0 transition-all duration-500 group-hover:border-gray-500 dark:group-hover:border-gray-400"></div>
+                                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center font-bold text-sm sm:text-lg text-gray-400 dark:text-gray-500 z-10 transition-all duration-500 group-hover:scale-110 group-hover:bg-black dark:group-hover:bg-white group-hover:border-black dark:group-hover:border-white group-hover:text-white dark:group-hover:text-black shadow-sm group-hover:shadow-xl">
+                                        5
+                                    </div>
+                                </div>
+                                <span class="mt-4 text-[11px] sm:text-sm font-bold text-gray-500 dark:text-gray-400 transition-colors duration-500 group-hover:text-black dark:group-hover:text-white uppercase tracking-wider">Onboard</span>
+                            </div>
+
+                            <!-- Step 6: Production -->
+                            <div class="flex flex-col items-center relative group flex-1 cursor-pointer">
+                                <div class="relative w-full flex justify-center">
+                                    <div class="absolute top-1/2 left-1/2 w-full h-0 border-t-2 sm:border-t-[3px] border-dashed border-gray-300 dark:border-gray-700 -translate-y-1/2 z-0 transition-all duration-500 group-hover:border-gray-500 dark:group-hover:border-gray-400"></div>
+                                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center font-bold text-sm sm:text-lg text-gray-400 dark:text-gray-500 z-10 transition-all duration-500 group-hover:scale-110 group-hover:bg-black dark:group-hover:bg-white group-hover:border-black dark:group-hover:border-white group-hover:text-white dark:group-hover:text-black shadow-sm group-hover:shadow-xl">
+                                        6
+                                    </div>
+                                </div>
+                                <span class="mt-4 text-[11px] sm:text-sm font-bold text-gray-500 dark:text-gray-400 transition-colors duration-500 group-hover:text-black dark:group-hover:text-white uppercase tracking-wider">Production</span>
+                            </div>
+
+                            <!-- Step 7: Review -->
+                            <div class="flex flex-col items-center relative group flex-1 cursor-pointer">
+                                <div class="relative w-full flex justify-center">
+                                    <div class="absolute top-1/2 left-1/2 w-full h-0 border-t-2 sm:border-t-[3px] border-dashed border-gray-300 dark:border-gray-700 -translate-y-1/2 z-0 transition-all duration-500 group-hover:border-gray-500 dark:group-hover:border-gray-400"></div>
+                                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center font-bold text-sm sm:text-lg text-gray-400 dark:text-gray-500 z-10 transition-all duration-500 group-hover:scale-110 group-hover:bg-black dark:group-hover:bg-white group-hover:border-black dark:group-hover:border-white group-hover:text-white dark:group-hover:text-black shadow-sm group-hover:shadow-xl">
+                                        7
+                                    </div>
+                                </div>
+                                <span class="mt-4 text-[11px] sm:text-sm font-bold text-gray-500 dark:text-gray-400 transition-colors duration-500 group-hover:text-black dark:group-hover:text-white uppercase tracking-wider">Review</span>
+                            </div>
+
+                            <!-- Step 8: Delivery -->
+                            <div class="flex flex-col items-center relative group flex-1 cursor-pointer">
+                                <div class="relative w-full flex justify-center">
+                                    <!-- No connecting line for the last item -->
+                                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center font-bold text-sm sm:text-lg text-gray-400 dark:text-gray-500 z-10 transition-all duration-500 group-hover:scale-110 group-hover:bg-black dark:group-hover:bg-white group-hover:border-black dark:group-hover:border-white group-hover:text-white dark:group-hover:text-black shadow-sm group-hover:shadow-xl">
+                                        8
+                                    </div>
+                                </div>
+                                <span class="mt-4 text-[11px] sm:text-sm font-bold text-gray-500 dark:text-gray-400 transition-colors duration-500 group-hover:text-black dark:group-hover:text-white uppercase tracking-wider">Delivery</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Scroll Hint for Mobile -->
+                    <div class="md:hidden text-center text-xs text-gray-400 dark:text-gray-500 mt-2 flex items-center justify-center gap-2">
+                        <span>Swipe to explore journey</span>
+                        <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Pillars -->
+            <section class="w-full bg-white/40 dark:bg-black/40 backdrop-blur-sm flowing-section flow-bottom">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="reveal-on-scroll text-center text-3xl sm:text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-8 md:mb-20 tracking-tight">
+                        Pillars of Docdril
+                    </h2>
+                    
+                    <div class="reveal-on-scroll flex flex-nowrap overflow-x-auto gap-4 snap-x snap-mandatory pb-8 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 md:overflow-visible md:pb-0 no-scrollbar">
+                        
+                        <!-- Step 1 -->
+                        <div class="min-w-[75vw] md:min-w-0 snap-center group relative bg-white/80 dark:bg-black/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/50 dark:border-gray-600 shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 hover:-translate-y-2 overflow-hidden h-full">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-teal-600"></div>
+                            <span class="text-7xl font-black text-emerald-50/80 absolute -right-2 -top-2 select-none group-hover:text-emerald-100/80 transition-colors z-0">01</span>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4 relative z-10 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">Deep Vision Intake</h3>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed text-sm relative z-10">We don't just take orders. We capture your <span class="text-emerald-600 dark:text-emerald-400 font-semibold">entire vision</span>—goals, desired tone, and creative notes—before the first cut.</p>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="min-w-[75vw] md:min-w-0 snap-center group relative bg-white/80 dark:bg-black/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/50 dark:border-gray-600 shadow-lg hover:shadow-blue-500/20 transition-all duration-300 hover:-translate-y-2 overflow-hidden h-full">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-600"></div>
+                            <span class="text-7xl font-black text-blue-50/80 absolute -right-2 -top-2 select-none group-hover:text-blue-100/80 transition-colors z-0">02</span>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4 relative z-10 group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors">Strategic Editing</h3>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed text-sm relative z-10">Our process is driven by <span class="text-blue-600 dark:text-blue-400 font-semibold">psychology & data</span>. Every edit and effect is placed to maximize viewer retention.</p>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="min-w-[75vw] md:min-w-0 snap-center group relative bg-white/80 dark:bg-black/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/50 dark:border-gray-600 shadow-lg hover:shadow-amber-500/20 transition-all duration-300 hover:-translate-y-2 overflow-hidden h-full">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-orange-600"></div>
+                            <span class="text-7xl font-black text-amber-50/80 absolute -right-2 -top-2 select-none group-hover:text-amber-100/80 transition-colors z-0">03</span>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4 relative z-10 group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">Transparent Kick-off</h3>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed text-sm relative z-10">Clear contracts, secure payments, and optional free samples ensure <span class="text-amber-600 dark:text-amber-400 font-semibold">complete confidence</span>. No surprises.</p>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="min-w-[75vw] md:min-w-0 snap-center group relative bg-white/80 dark:bg-black/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/50 dark:border-gray-600 shadow-lg hover:shadow-rose-500/20 transition-all duration-300 hover:-translate-y-2 overflow-hidden h-full">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-rose-400 to-red-600"></div>
+                            <span class="text-7xl font-black text-rose-50/80 absolute -right-2 -top-2 select-none group-hover:text-rose-100/80 transition-colors z-0">04</span>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4 relative z-10 group-hover:text-rose-700 dark:group-hover:text-rose-400 transition-colors">Guaranteed Success</h3>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed text-sm relative z-10">We deliver high-impact edits on time. Our process ends with your video <span class="text-rose-600 dark:text-rose-400 font-semibold">published & performing</span>.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Scroll Hint for Mobile -->
+                    <div class="md:hidden text-center text-xs text-gray-400 dark:text-gray-500 mt-2 flex items-center justify-center gap-2">
+                        <span>Scroll for more</span>
+                        <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Payment Policy -->
+            <section class="w-full bg-gray-100/70 dark:bg-black/70 backdrop-blur-sm flowing-section flow-top">
+                <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="reveal-on-scroll text-center text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-8 sm:mb-12 md:mb-16 tracking-tight">
+                        Transparent Payment Policy
+                    </h2>
+                    <div class="reveal-on-scroll max-w-sm sm:max-w-md mx-auto w-full">
+                        <div class="scroll-zoom-wrapper w-full h-full">
+                            <div class="flex flex-col justify-center items-center relative bg-white/90 dark:bg-black/90 backdrop-blur-xl p-6 sm:p-12 rounded-[1.5rem] sm:rounded-[2.5rem] border border-white/50 dark:border-gray-600 shadow-xl overflow-hidden transition-all duration-300 text-center">
+                                <!-- Dynamic Top Gradient Line -->
+                                <div id="payment-gradient-line" class="absolute top-0 left-0 w-full h-1.5 sm:h-2 bg-gradient-to-r from-violet-500 to-purple-600 transition-colors duration-500"></div>
+
+                                <!-- Toggle UI -->
+                                <div class="relative flex items-center p-1 bg-gray-100 dark:bg-gray-800 rounded-full mb-6 sm:mb-10 w-full max-w-[280px] sm:max-w-[320px] shadow-inner">
+                                    <div id="toggle-slider" class="absolute top-1 bottom-1 w-[calc(50%-4px)] bg-white dark:bg-gray-700 rounded-full shadow-sm transition-all duration-300 ease-out z-0 left-1"></div>
+                                    <button id="btn-new" class="relative z-10 flex-1 py-2 sm:py-3 text-[12px] sm:text-sm font-bold transition-colors duration-300 focus:outline-none text-gray-900 dark:text-white tracking-wide" onclick="togglePayment('new')">New Clients</button>
+                                    <button id="btn-loyal" class="relative z-10 flex-1 py-2 sm:py-3 text-[12px] sm:text-sm font-bold transition-colors duration-300 focus:outline-none text-gray-400 dark:text-gray-500 tracking-wide" onclick="togglePayment('loyal')">Loyal Clients</button>
+                                </div>
+
+                                <!-- Dynamic Number Display -->
+                                <div class="h-16 sm:h-24 flex items-center justify-center mb-1 sm:mb-2">
+                                    <div id="payment-pct" class="text-5xl sm:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600 transition-all duration-300 transform scale-100 opacity-100 drop-shadow-sm">
+                                        20%
+                                    </div>
+                                </div>
+                                <p class="text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest text-[10px] sm:text-xs">Advance Payment</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. Get in Touch -->
+            <section id="get-in-touch" class="w-full py-16 md:py-24 bg-gray-50/50 dark:bg-black/50 backdrop-blur-sm relative z-20">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-10 sm:mb-14">
+                        <h2 class="reveal-on-scroll text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-4">
+                            Get in Touch
+                        </h2>
+                        <p class="reveal-on-scroll text-sm sm:text-lg text-gray-600 dark:text-gray-400 font-medium">
+                            Have questions? Our team is ready to provide the expert support your business needs.
+                        </p>
+                    </div>
+
+                    <div class="reveal-on-scroll w-full bg-white dark:bg-[#0a0a0a] rounded-[2rem] p-6 sm:p-10 md:p-12 border border-gray-100 dark:border-gray-800 shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgb(255,255,255,0.02)] flex flex-col gap-8 md:gap-12">
+                        
+                        <!-- Email Section -->
+                        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-8 text-center sm:text-left">
+                            <div class="w-16 h-16 shrink-0 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-900 dark:text-white">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <div class="flex flex-col justify-center sm:pt-1">
+                                <p class="text-xs font-bold tracking-widest text-gray-500 dark:text-gray-400 uppercase mb-2">Email Us</p>
+                                <a href="mailto:info@docdril.in" class="text-2xl sm:text-3xl font-semibold text-gray-900 dark:text-white hover:text-gray-500 dark:hover:text-gray-300 transition-colors duration-300">info@docdril.in</a>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2.5">Drop us a line anytime. We usually reply within 24 hours.</p>
+                            </div>
+                        </div>
+
+                        <!-- WhatsApp Inner Card -->
+                        <div class="bg-gray-50 dark:bg-[#111] border border-gray-100 dark:border-gray-800 rounded-[1.5rem] p-6 sm:p-8 flex flex-col md:flex-row items-center gap-6 justify-between transition-transform hover:-translate-y-1 duration-300">
+                            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6 text-center sm:text-left w-full md:w-auto">
+                                <div class="w-16 h-16 shrink-0 rounded-full bg-[#25D366] flex items-center justify-center text-white shadow-lg shadow-[#25D366]/30">
+                                    <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <p class="text-xs font-bold tracking-widest text-gray-500 dark:text-gray-400 uppercase mb-2">WhatsApp Chat</p>
+                                    <p class="text-sm sm:text-[15px] text-gray-700 dark:text-gray-300 font-medium leading-relaxed max-w-sm">Prefer quick answers? Chat directly with our support team.</p>
+                                </div>
+                            </div>
+                            <a href="https://wa.me/917304631447" target="_blank" rel="noopener noreferrer" class="shrink-0 inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#20b958] text-white font-semibold py-3.5 px-8 rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-[#25D366]/20 whitespace-nowrap w-full md:w-auto">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                                Chat Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. Contact -->
+            <section id="contact" class="w-full py-24 md:py-40 bg-gray-100/70 dark:bg-gray-900/70 backdrop-blur-sm">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="reveal-on-scroll text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-6">Thank You.</h2>
+                    <p class="reveal-on-scroll text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-8">Let's create something inspiring together.</p>
+                    
+                    <div class="reveal-on-scroll flex flex-nowrap justify-center items-center gap-3 sm:gap-6 mb-12 overflow-visible">
+                        <!-- LinkedIn -->
+                        <a href="https://www.linkedin.com/company/docdril/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BMtYAjo9UQRSkchadjGCpLA%3D%3D" target="_blank" rel="noopener noreferrer" class="text-[#0a66c2] hover:opacity-80 transition-all duration-300 transform hover:scale-110">
+                            <span class="sr-only">LinkedIn</span>
+                            <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd" /></svg>
+                        </a>
+                        
+                        <!-- Instagram -->
+                        <a href="https://www.instagram.com/docdril/" target="_blank" rel="noopener noreferrer" class="text-[#E1306C] hover:opacity-80 transition-all duration-300 transform hover:scale-110">
+                            <span class="sr-only">Instagram</span>
+                            <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.315 1.347 20.646.935 19.856.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+
+                        <!-- Facebook -->
+                        <a href="https://www.facebook.com/docdril" target="_blank" rel="noopener noreferrer" class="text-[#1877F2] hover:opacity-80 transition-all duration-300 transform hover:scale-110">
+                            <span class="sr-only">Facebook</span>
+                            <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                        </a>
+
+                        <!-- YouTube -->
+                        <a href="https://www.youtube.com/@Docdril" target="_blank" rel="noopener noreferrer" class="text-[#FF0000] hover:opacity-80 transition-all duration-300 transform hover:scale-110">
+                            <span class="sr-only">YouTube</span>
+                            <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.254.418-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z" clip-rule="evenodd" /></svg>
+                        </a>
+
+                        <!-- X (Black) -->
+                        <a href="https://x.com/docdril" target="_blank" rel="noopener noreferrer" class="text-black dark:text-white hover:opacity-80 transition-all duration-300 transform hover:scale-110">
+                            <span class="sr-only">X</span>
+                            <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z"/></svg>
+                        </a>
+
+                        <!-- Pinterest -->
+                        <a href="https://in.pinterest.com/docdril/" target="_blank" rel="noopener noreferrer" class="text-[#E60023] hover:opacity-80 transition-all duration-300 transform hover:scale-110">
+                            <span class="sr-only">Pinterest</span>
+                            <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.399.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.173 0 7.41 2.967 7.41 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z" clip-rule="evenodd" /></svg>
+                        </a>
+                        
+                        <!-- WhatsApp Channel -->
+                        <a href="https://whatsapp.com/channel/0029Vb6MycQ77qVPVBqp2y44" target="_blank" rel="noopener noreferrer" class="text-[#25D366] hover:opacity-80 transition-all duration-300 transform hover:scale-110">
+                            <span class="sr-only">WhatsApp Channel</span>
+                            <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.592 2.654-.696c1.025.558 1.284.782 2.806.781 3.181 0 5.767-2.587 5.767-5.766.001-3.185-2.585-5.767-5.767-5.767zm.592 7.633h-.002c-.528 0-1.587-.707-1.97-1.252-.161-.229-.194-.364-.235-.487L9.954 11.2l.338-.285c.145-.123.327-.275.452-.381.185-.156.241-.336.143-.531-.082-.164-.326-.851-.433-1.127-.116-.301-.331-.222-.455-.224l-.391-.005c-.135 0-.356.051-.541.254-.186.202-.712.695-.712 1.694 0 .999.728 1.964.829 2.1.101.135 1.433 2.189 3.472 3.068.485.209.864.335 1.157.428.483.153.923.131 1.272.079.39-.057 1.202-.491 1.372-.966.17-.474.17-.881.119-.966-.051-.085-.186-.135-.391-.237zM12.056 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10c-1.879 0-3.666-.516-5.195-1.42L2 22l1.458-5.155A9.957 9.957 0 0 1 2.056 12a10 10 0 0 1 10-10z"/></svg>
+                        </a>
+                    </div>
+
+                    <a href="mailto:info@docdril.in" 
+                        class="reveal-on-scroll inline-block text-lg sm:text-xl md:text-2xl font-bold text-gray-900 bg-white border border-gray-200 dark:bg-black dark:text-white dark:border-gray-800 py-3 px-8 sm:py-4 sm:px-10 rounded-xl shadow-lg transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-900 hover:scale-105 hover:shadow-xl">
+                        Connect
+                    </a>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="w-full glass-blur border-t border-gray-100/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="text-gray-500 dark:text-gray-400 mb-4 md:mb-0">
+                        &copy; 2025 Docdril. All rights reserved.
+                    </div>
+                    <div class="flex space-x-6">
+                        <a href="policy/index.html" class="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition duration-200">Privacy & Terms</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Video Modal Overlay -->
+        <div id="video-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+            <div id="modal-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-md transition-opacity duration-300 opacity-0"></div>
+            <div id="modal-content" class="relative z-10 w-full max-w-md md:max-w-lg bg-black rounded-3xl shadow-2xl overflow-hidden transform scale-90 opacity-0 transition-all duration-300">
+                <button id="close-video-btn" class="absolute top-4 right-4 z-20 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full backdrop-blur-sm transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <div style="padding:177.78% 0 0 0;position:relative;">
+                    <iframe id="vimeo-iframe" src="https://player.vimeo.com/video/1139672991?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Comp1"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chatbot Floating Window -->
+        <div id="chatbot-window" class="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[9999] w-[90vw] sm:w-[400px] h-[600px] max-h-[75vh] bg-white dark:bg-black rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-800 flex flex-col transition-all duration-500 transform translate-y-[120%] opacity-0 pointer-events-none overflow-hidden">
+            <div class="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-800 bg-white/95 dark:bg-black/95 backdrop-blur">
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                    </div>
+                    <div>
+                        <span class="block font-bold text-gray-900 dark:text-white text-sm">Docdril AI</span>
+                        <span class="block text-xs text-gray-500">Online</span>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <button id="refresh-chatbot" class="p-2 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-800" title="Reload">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </button>
+                    <button id="close-chatbot" class="p-2 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-800" title="Close">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <iframe id="chatbot-iframe" data-src="https://ask.docdril.com" class="flex-grow w-full border-0 bg-gray-50 dark:bg-gray-900" allow="microphone;"></iframe>
+        </div>
+
+        <!-- Portfolio Floating Window (Left Side) -->
+        <div id="portfolio-window" class="fixed bottom-4 left-4 sm:bottom-8 sm:left-8 z-[9999] w-[90vw] sm:w-[500px] h-[600px] max-h-[75vh] bg-white dark:bg-black rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-800 flex flex-col transition-all duration-500 transform translate-y-[120%] opacity-0 pointer-events-none overflow-hidden">
+            <div class="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-800 bg-white/95 dark:bg-black/95 backdrop-blur">
+                <div class="flex items-center gap-3">
+                    <div class="p-1.5 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                        <svg class="w-4 h-4 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                    </div>
+                    <div>
+                        <span class="block font-bold text-gray-900 dark:text-white text-sm">Portfolio</span>
+                        <a href="https://portfolio.docdril.com" target="_blank" class="block text-xs text-blue-500 hover:underline">Open in new tab</a>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <button id="refresh-portfolio" class="p-2 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-800" title="Reload">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </button>
+                    <button id="close-portfolio" class="p-2 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-800" title="Close">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <iframe id="portfolio-iframe" data-src="https://portfolio.docdril.com" class="flex-grow w-full border-0 bg-gray-50 dark:bg-gray-900"></iframe>
+        </div>
+
+        <!-- Virtual Cursor Element -->
+        <div id="virtual-cursor" class="text-black dark:text-white">
+            <svg class="w-6 h-6 fill-current drop-shadow-md" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
+                <path d="M302.189 329.126H196.105l55.831 135.993c3.889 9.428-.555 19.999-9.444 23.999l-49.165 21.427c-9.165 4-19.443-.571-23.332-9.714l-53.053-129.136-86.664 89.138C18.729 472.71 0 463.554 0 447.977V18.299C0 1.899 19.921-6.096 30.277 5.443l284.412 292.542c11.472 11.179 3.007 31.141-12.5 31.141z"></path>
+            </svg>
+        </div>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        window.isMouseLoopPaused = false;
+        let isTabActive = true;
+        let idleTime = 0; // OPTIMIZATION: Track user idle time
+        let cursorInterval; // Moved to global scope to fix ReferenceError
+
+        // Reset idle time on user interaction
+        const resetIdleTime = () => {
+            idleTime = 0;
+            // Unpause the loop if we start moving again after sleeping
+            if(window.isMouseLoopPaused && typeof cursorInterval !== 'undefined' && cursorInterval) {
+                 window.isMouseLoopPaused = false;
+            }
+        };
+        
+        window.addEventListener('mousemove', resetIdleTime);
+        window.addEventListener('scroll', resetIdleTime);
+        window.addEventListener('touchstart', resetIdleTime);
+        window.addEventListener('keydown', resetIdleTime);
+        
+        // Increment idle time every second
+        setInterval(() => { idleTime += 1000; }, 1000);
+
+        // Mobile service card text toggle
+        window.toggleMobileText = function(card) {
+            if (window.innerWidth >= 640) return; // Only toggle on small screens
+            const p = card.querySelector('p');
+            if (p) {
+                p.classList.toggle('line-clamp-3');
+            }
+        };
+
+        // Payment Policy Toggle logic
+        window.togglePayment = function(type) {
+            const slider = document.getElementById('toggle-slider');
+            const btnNew = document.getElementById('btn-new');
+            const btnLoyal = document.getElementById('btn-loyal');
+            const pct = document.getElementById('payment-pct');
+            const line = document.getElementById('payment-gradient-line');
+
+            const activeClasses = "relative z-10 flex-1 py-2 sm:py-3 text-[12px] sm:text-sm font-bold transition-colors duration-300 focus:outline-none text-gray-900 dark:text-white tracking-wide";
+            const inactiveClasses = "relative z-10 flex-1 py-2 sm:py-3 text-[12px] sm:text-sm font-bold transition-colors duration-300 focus:outline-none text-gray-400 dark:text-gray-500 tracking-wide";
+
+            // Fade out the number quickly
+            pct.style.opacity = '0';
+            pct.style.transform = 'scale(0.8)';
+
+            setTimeout(() => {
+                // Clear inline styles so the Tailwind classes can fade it back in
+                pct.style.opacity = '';
+                pct.style.transform = '';
+
+                if (type === 'new') {
+                    slider.style.left = '4px';
+                    btnNew.className = activeClasses;
+                    btnLoyal.className = inactiveClasses;
+
+                    pct.textContent = '20%';
+                    pct.className = 'text-5xl sm:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600 transition-all duration-300 transform scale-100 opacity-100 drop-shadow-sm';
+                    line.className = 'absolute top-0 left-0 w-full h-1.5 sm:h-2 bg-gradient-to-r from-violet-500 to-purple-600 transition-colors duration-500';
+                } else {
+                    slider.style.left = 'calc(50% + 2px)';
+                    btnLoyal.className = activeClasses;
+                    btnNew.className = inactiveClasses;
+
+                    pct.textContent = '15%';
+                    pct.className = 'text-5xl sm:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-600 to-pink-600 transition-all duration-300 transform scale-100 opacity-100 drop-shadow-sm';
+                    line.className = 'absolute top-0 left-0 w-full h-1.5 sm:h-2 bg-gradient-to-r from-fuchsia-500 to-pink-600 transition-colors duration-500';
+                }
+            }, 150); // Small delay to let it fade out before changing and fading in
+        };
+
+        document.addEventListener("visibilitychange", () => {
+            isTabActive = !document.hidden;
+            if (document.hidden) {
+                document.body.classList.add('tab-inactive');
+            } else {
+                document.body.classList.remove('tab-inactive');
+            }
+        });
+
+        // BATTERY SAVER: Suspend 3D Robot iframe when scrolled out of view
+        const robotIframe = document.getElementById('robot-iframe');
+        const heroSection = document.getElementById('hero-section'); 
+        if (robotIframe && heroSection) {
+            const heroObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        // Out of view: hide iframe to pause WebGL rendering
+                        robotIframe.classList.add('gpu-paused');
+                    } else {
+                        // In view: resume rendering
+                        robotIframe.classList.remove('gpu-paused');
+                    }
+                });
+            }, { rootMargin: '100px' });
+            heroObserver.observe(heroSection);
+        }
+
+        // Info Modal Helper
+        function showInfoModal(type, title, text) {
+            window.isMouseLoopPaused = true;
+            const virtualCursor = document.getElementById('virtual-cursor');
+            if (virtualCursor) virtualCursor.style.opacity = '0';
+            
+            ['btn-ideate', 'btn-design', 'btn-edit'].forEach(id => {
+                const btn = document.getElementById(id);
+                if (btn) btn.classList.remove('sim-hover');
+            });
+
+            const config = {
+                ideate: { color: 'text-yellow-600', path: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z' },
+                design: { color: 'text-rose-600', path: 'm16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10' },
+                edit: { color: 'text-blue-700', path: 'M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.452-2.452L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.452-2.452L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.452 2.452L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.452 2.452Z' }
+            };
+
+            const currentConfig = config[type] || config['ideate'];
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black/10 dark:bg-black/30 backdrop-blur-sm flex items-center justify-center p-4 z-[100] transition-all duration-300';
+            modal.innerHTML = `
+                <div class="relative bg-white/90 dark:bg-black/90 backdrop-blur-3xl border border-white/40 dark:border-white/10 rounded-[2rem] p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl animate-in zoom-in-95 duration-300 transform scale-100">
+                    <div class="absolute top-10 left-1/2 -translate-x-1/2 w-16 h-16 bg-white/30 dark:bg-white/5 rounded-full blur-xl pointer-events-none"></div>
+                    <svg class="w-12 h-12 mx-auto mb-4 ${currentConfig.color} drop-shadow-sm relative z-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="${currentConfig.path}" />
+                    </svg>
+                    <h3 class="text-xl font-outfit font-bold text-gray-900 dark:text-white mb-3 tracking-tight">${title}</h3>
+                    <p id="modal-typing-text" class="text-sm font-medium text-gray-700 dark:text-gray-300 leading-relaxed min-h-[80px] typing-cursor"></p>
+                    <button id="modal-close-btn" class="mt-6 px-6 py-2 bg-white/50 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 border border-white/20 dark:border-white/10 rounded-full text-sm font-semibold text-gray-900 dark:text-white transition-all duration-200 shadow-sm hover:shadow-md">
+                        Close
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            const closeBtn = modal.querySelector('#modal-close-btn');
+            const textContainer = modal.querySelector('#modal-typing-text');
+            let i = 0;
+            const speed = 20; 
+            
+            function typeWriter() {
+                if (i < text.length) {
+                    textContainer.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                } else {
+                    textContainer.classList.remove('typing-cursor');
+                }
+            }
+            setTimeout(typeWriter, 100);
+
+            const closeModal = () => {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => {
+                    modal.remove();
+                    window.isMouseLoopPaused = false;
+                }, 300);
+            };
+
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // --- Reveal on Scroll Observer ---
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.05 
+            };
+
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    const counter = entry.target.querySelector('.counter-value');
+                    
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        
+                        if (counter && !counter.classList.contains('animated')) {
+                            counter.classList.add('animated'); 
+                            const target = +counter.getAttribute('data-target');
+                            const duration = 2000; 
+                            const start = performance.now();
+                            
+                            const step = (currentTime) => {
+                                const progress = Math.min((currentTime - start) / duration, 1);
+                                const ease = 1 - Math.pow(1 - progress, 4);
+                                
+                                counter.textContent = Math.floor(ease * target);
+                                
+                                if (progress < 1) {
+                                    requestAnimationFrame(step);
+                                } else {
+                                    counter.textContent = target + "+"; 
+                                }
+                            };
+                            requestAnimationFrame(step);
+                        }
+                        
+                        // Stop observing once it has become visible so it stays forever!
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+            const elements = document.querySelectorAll('.reveal-on-scroll');
+            elements.forEach(el => {
+                observer.observe(el);
+            });
+
+
+            // --- LOGO ANIMATION LOOP (LIMITED LOGO ANIMATIONS) ---
+            const logoBox = document.getElementById('mobile-menu-btn');
+            if (logoBox) {
+                const originalLogoHTML = logoBox.innerHTML;
+                let isAnimatingLogo = false;
+                let logoAnimCount = 0;
+                const maxLogoAnims = 2; // Only run the animation sequence twice
+
+                const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+                async function playLogoAnimation() {
+                    // Check if we should animate (also added idle condition to save battery)
+                    if (isAnimatingLogo || !isTabActive || logoAnimCount >= maxLogoAnims || idleTime > 10000) return;
+                    isAnimatingLogo = true;
+                    logoAnimCount++;
+
+                    logoBox.innerHTML = `
+                        <div class="flex items-center gap-2 w-full animate-in fade-in duration-300">
+                            <svg class="w-5 h-5 md:w-8 md:h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            <span id="logo-search-text" class="text-sm md:text-xl text-gray-600 font-medium whitespace-nowrap overflow-hidden"></span>
+                            <span class="w-0.5 h-5 md:h-8 bg-black animate-pulse"></span>
+                        </div>
+                    `;
+
+                    const textToType = "Looking for Edits?";
+                    const textSpan = document.getElementById('logo-search-text');
+                    for (let i = 0; i < textToType.length; i++) {
+                        if(textSpan) textSpan.textContent += textToType[i];
+                        await wait(80); 
+                    }
+                    await wait(1500); 
+
+                    logoBox.innerHTML = `
+                        <div class="flex items-center gap-2 w-full animate-in fade-in zoom-in duration-300 justify-center relative">
+                            <span class="text-sm md:text-xl text-gray-600 font-medium">Visit docdril.com</span>
+                        </div>
+                    `;
+                    
+                    await wait(2000);
+                    
+                    logoBox.style.transform = "scale(0.9)";
+                    await wait(200);
+                    logoBox.style.transform = "scale(1)";
+                    await wait(200);
+                    logoBox.style.transform = "";
+
+                    // Restore to original logo and mark done
+                    logoBox.innerHTML = originalLogoHTML;
+                    logoBox.classList.add('animate-pulse');
+                    setTimeout(() => logoBox.classList.remove('animate-pulse'), 500);
+
+                    isAnimatingLogo = false;
+                }
+
+                setTimeout(() => {
+                    playLogoAnimation(); 
+                    
+                    // Start interval, but clear it once max count is reached to free resources
+                    const animIntervalId = setInterval(() => {
+                        if (logoAnimCount >= maxLogoAnims) {
+                            clearInterval(animIntervalId);
+                        } else {
+                            playLogoAnimation();
+                        }
+                    }, 20000);
+                    
+                }, 10); 
+            }
+
+            // --- ROBOT BUBBLE TYPING ANIMATION (LIMITED LOOP) ---
+            const robotBubble = document.getElementById('robot-bubble');
+            if (robotBubble) {
+                const messages = ["Hi, folks!", "I'm Pluto.", "An AI Agent."];
+                let msgIndex = 0;
+                let charIndex = 0;
+                let isDeleting = false;
+                let cycleCount = 0;
+                const maxCycles = 2; // 0, 1, 2 gives exactly 3 full cycles
+                
+                function typeLoop() {
+                    // Added idleTime check to save battery
+                    if (!isTabActive || idleTime > 10000) {
+                        setTimeout(typeLoop, 1000); 
+                        return;
+                    }
+
+                    const currentMsg = messages[msgIndex];
+                    
+                    if (isDeleting) {
+                        robotBubble.textContent = currentMsg.substring(0, charIndex - 1);
+                        charIndex--;
+                    } else {
+                        robotBubble.textContent = currentMsg.substring(0, charIndex + 1);
+                        charIndex++;
+                    }
+
+                    let typeSpeed = isDeleting ? 50 : 100;
+
+                    if (!isDeleting && charIndex === currentMsg.length) {
+                        typeSpeed = 2000; 
+                        
+                        // Stop condition: Typed "Hi, folks!" and completed required cycles
+                        if (cycleCount >= maxCycles && msgIndex === 0) {
+                            robotBubble.classList.remove('typing-cursor');
+                            return; // Stop animation permanently
+                        }
+                        
+                        isDeleting = true;
+                    } else if (isDeleting && charIndex === 0) {
+                        isDeleting = false;
+                        msgIndex++;
+                        if (msgIndex >= messages.length) {
+                            msgIndex = 0;
+                            cycleCount++;
+                        }
+                        typeSpeed = 500; 
+                    }
+
+                    setTimeout(typeLoop, typeSpeed);
+                }
+                typeLoop();
+            }
+
+            // --- Theme Toggle Logic ---
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                if (localStorage.getItem('color-theme') === 'dark') {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+
+            themeToggleBtn.addEventListener('click', function() {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            });
+
+            // --- CHATBOT FLOATING WINDOW LOGIC ---
+            const chatbotTrigger = document.getElementById('chatbot-trigger');
+            const chatbotWindow = document.getElementById('chatbot-window');
+            const closeChatbot = document.getElementById('close-chatbot');
+            const refreshChatbot = document.getElementById('refresh-chatbot');
+            const chatbotIframe = document.getElementById('chatbot-iframe');
+            let isChatbotLoaded = false;
+
+            function toggleChatbot() {
+                if (!chatbotWindow) return;
+                const isHidden = chatbotWindow.classList.contains('translate-y-[120%]');
+                
+                if (isHidden) {
+                    chatbotWindow.classList.remove('translate-y-[120%]', 'opacity-0', 'pointer-events-none');
+                    if (!isChatbotLoaded && chatbotIframe) {
+                        chatbotIframe.src = chatbotIframe.getAttribute('data-src');
+                        isChatbotLoaded = true;
+                    }
+                    window.isMouseLoopPaused = true;
+                    const vCursor = document.getElementById('virtual-cursor');
+                    if (vCursor) vCursor.style.opacity = '0';
+                } else {
+                    chatbotWindow.classList.add('translate-y-[120%]', 'opacity-0', 'pointer-events-none');
+                    window.isMouseLoopPaused = false;
+                }
+            }
+
+            if (chatbotTrigger) {
+                chatbotTrigger.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    toggleChatbot();
+                });
+            }
+
+            if (closeChatbot) {
+                closeChatbot.addEventListener('click', toggleChatbot);
+            }
+
+            if (refreshChatbot && chatbotIframe) {
+                refreshChatbot.addEventListener('click', () => {
+                    chatbotIframe.src = chatbotIframe.src;
+                });
+            }
+
+            // --- PORTFOLIO FLOATING WINDOW LOGIC ---
+            const portfolioTrigger = document.getElementById('portfolio-trigger');
+            const portfolioWindow = document.getElementById('portfolio-window');
+            const closePortfolio = document.getElementById('close-portfolio');
+            const refreshPortfolio = document.getElementById('refresh-portfolio');
+            const portfolioIframe = document.getElementById('portfolio-iframe');
+            let isPortfolioLoaded = false;
+
+            function togglePortfolio() {
+                if (!portfolioWindow) return;
+                const isHidden = portfolioWindow.classList.contains('translate-y-[120%]');
+                
+                if (isHidden) {
+                    portfolioWindow.classList.remove('translate-y-[120%]', 'opacity-0', 'pointer-events-none');
+                    if (!isPortfolioLoaded && portfolioIframe) {
+                        portfolioIframe.src = portfolioIframe.getAttribute('data-src');
+                        isPortfolioLoaded = true;
+                    }
+                    const chatbotWin = document.getElementById('chatbot-window');
+                    if (chatbotWin && !chatbotWin.classList.contains('translate-y-[120%]')) {
+                        chatbotWin.classList.add('translate-y-[120%]', 'opacity-0', 'pointer-events-none');
+                    }
+                    window.isMouseLoopPaused = true;
+                    const vCursor = document.getElementById('virtual-cursor');
+                    if (vCursor) vCursor.style.opacity = '0';
+                } else {
+                    portfolioWindow.classList.add('translate-y-[120%]', 'opacity-0', 'pointer-events-none');
+                    window.isMouseLoopPaused = false;
+                }
+            }
+
+            if (portfolioTrigger) {
+                portfolioTrigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    togglePortfolio();
+                });
+            }
+
+            if (closePortfolio) {
+                closePortfolio.addEventListener('click', togglePortfolio);
+            }
+
+            if (refreshPortfolio && portfolioIframe) {
+                refreshPortfolio.addEventListener('click', () => {
+                    portfolioIframe.src = portfolioIframe.src;
+                });
+            }
+
+            // --- Video Modal Logic ---
+            const headerPlayBtn = document.getElementById('header-play-btn');
+            const videoModal = document.getElementById('video-modal');
+            const closeVideoBtn = document.getElementById('close-video-btn');
+            const modalBackdrop = document.getElementById('modal-backdrop');
+            const modalContent = document.getElementById('modal-content');
+            const iframe = document.getElementById('vimeo-iframe');
+            
+            let player;
+            try {
+                if (typeof Vimeo !== 'undefined' && iframe) {
+                    player = new Vimeo.Player(iframe);
+                }
+            } catch (e) {
+                console.error("Vimeo Player could not be initialized:", e);
+            }
+
+            function openModal() {
+                videoModal.classList.remove('hidden');
+                setTimeout(() => {
+                    modalBackdrop.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-90', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                    if (player) {
+                        player.play().catch(function(error) {
+                            console.error("Error playing video:", error);
+                        });
+                    }
+                }, 10);
+                window.isMouseLoopPaused = true;
+                const virtualCursor = document.getElementById('virtual-cursor');
+                if (virtualCursor) virtualCursor.style.opacity = '0';
+            }
+
+            function closeModal() {
+                modalBackdrop.classList.add('opacity-0');
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                modalContent.classList.add('scale-90', 'opacity-0');
+                if (player) {
+                    player.pause().catch(console.error);
+                }
+                setTimeout(() => {
+                    videoModal.classList.add('hidden');
+                    window.isMouseLoopPaused = false;
+                }, 300);
+            }
+
+            if (headerPlayBtn) headerPlayBtn.addEventListener('click', openModal);
+            if (closeVideoBtn) closeVideoBtn.addEventListener('click', closeModal);
+            if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) closeModal();
+            });
+
+            // --- Mobile Menu Toggle ---
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Only toggle if the target isn't the logo itself during animation
+                    if(e.target.closest('#logo-search-text')) return;
+                    
+                    mobileMenu.classList.toggle('hidden');
+
+                    const isMenuOpen = !mobileMenu.classList.contains('hidden');
+                    const virtualCursor = document.getElementById('virtual-cursor');
+                    
+                    if (isMenuOpen) {
+                        window.isMouseLoopPaused = true;
+                        if (virtualCursor) virtualCursor.style.opacity = '0';
+                    } else {
+                        window.isMouseLoopPaused = false;
+                    }
+                });
+
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                        window.isMouseLoopPaused = false;
+                    });
+                });
+
+                // Close menu when tapping/clicking outside
+                document.addEventListener('click', (e) => {
+                    const isMenuOpen = !mobileMenu.classList.contains('hidden');
+                    if (isMenuOpen && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                        mobileMenu.classList.add('hidden');
+                        window.isMouseLoopPaused = false;
+                    }
+                });
+            }
+
+            // --- AUDIO PLAYER TOGGLE ---
+            const audioBtn = document.getElementById('audio-toggle-btn');
+            const audioEl = document.getElementById('robot-audio');
+            const iconPlay = document.getElementById('icon-play');
+            const iconPause = document.getElementById('icon-pause');
+
+            if (audioBtn && audioEl) {
+                audioEl.addEventListener('ended', () => {
+                    iconPlay.classList.remove('hidden');
+                    iconPause.classList.add('hidden');
+                });
+
+                audioBtn.addEventListener('click', () => {
+                    if (audioEl.paused) {
+                        audioEl.play().then(() => {
+                            iconPlay.classList.add('hidden');
+                            iconPause.classList.remove('hidden');
+                        }).catch(e => {
+                            console.error("Audio playback failed:", e);
+                        });
+                    } else {
+                        audioEl.pause();
+                        iconPlay.classList.remove('hidden');
+                        iconPause.classList.add('hidden');
+                    }
+                });
+            }
+
+            // --- Virtual Mouse Loop Animation ---
+            const cursor = document.getElementById('virtual-cursor');
+            const buttons = [
+                document.getElementById('btn-ideate'),
+                document.getElementById('btn-design'),
+                document.getElementById('btn-edit')
+            ];
+            
+            let currentIndex = 0;
+            let moveCount = 0;
+            const maxMoves = 21; // 7 full cycles of the 3 buttons
+            
+            function moveCursor() {
+                if (!cursor) return; 
+
+                if (moveCount >= maxMoves) {
+                    cursor.style.opacity = '0';
+                    buttons.forEach(b => b.classList.remove('sim-hover'));
+                    if (cursorInterval) clearInterval(cursorInterval);
+                    return;
+                }
+
+                if (window.isMouseLoopPaused) return;
+                if (window.matchMedia('(hover: none)').matches) return;
+                if (window.innerWidth <= 768) return; // Completely disable on mobile screens
+                if (!isTabActive) return;
+
+                const prevIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+                if(buttons[prevIndex]) buttons[prevIndex].classList.remove('sim-hover');
+
+                const targetBtn = buttons[currentIndex];
+                if (!targetBtn) return;
+
+                const rect = targetBtn.getBoundingClientRect();
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
+
+                if (rect.top >= -100 && rect.bottom <= window.innerHeight + 100) {
+                    cursor.style.opacity = '1';
+                    cursor.style.top = (rect.top + scrollTop + rect.height / 2 + 15) + 'px'; 
+                    cursor.style.left = (rect.left + scrollLeft + rect.width / 2 + 15) + 'px';
+                    
+                    setTimeout(() => {
+                        if(cursor.style.opacity === '1' && !window.isMouseLoopPaused) {
+                            targetBtn.classList.add('sim-hover');
+                        }
+                    }, 500);
+
+                    moveCount++; // Track successful moves
+                } else {
+                    cursor.style.opacity = '0';
+                    buttons.forEach(b => b.classList.remove('sim-hover'));
+                }
+
+                currentIndex = (currentIndex + 1) % buttons.length;
+            }
+
+            setTimeout(() => {
+                moveCursor(); 
+                cursorInterval = setInterval(moveCursor, 2500); 
+            }, 1600);
+
+            // --- SCROLL ZOOM EFFECT LOGIC ---
+            const zoomObserverOptions = {
+                root: null,
+                rootMargin: "-20% 0px -20% 0px",
+                threshold: 0
+            };
+
+            const zoomObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-active');
+                    } else {
+                        entry.target.classList.remove('is-active');
+                    }
+                });
+            }, zoomObserverOptions);
+
+            const zoomTargets = document.querySelectorAll('.scroll-zoom-wrapper');
+            zoomTargets.forEach(el => zoomObserver.observe(el));
+
+            // --- WHY US CARD CLICK LOGIC ---
+            const flipCards = document.querySelectorAll('#why-us .group.perspective-1000');
+
+            flipCards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const inner = card.querySelector('.flip-card-inner');
+                    const isCurrentlyFlipped = inner.classList.contains('is-flipped');
+
+                    flipCards.forEach(otherCard => {
+                        const otherInner = otherCard.querySelector('.flip-card-inner');
+                        if (otherInner && otherInner !== inner) {
+                            otherInner.classList.remove('is-flipped');
+                        }
+                    });
+
+                    if (isCurrentlyFlipped) {
+                        inner.classList.remove('is-flipped');
+                    } else {
+                        inner.classList.add('is-flipped');
+                    }
+                });
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('#why-us .group.perspective-1000')) {
+                    flipCards.forEach(card => {
+                        const inner = card.querySelector('.flip-card-inner');
+                        if (inner) inner.classList.remove('is-flipped');
+                    });
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>

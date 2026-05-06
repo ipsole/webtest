@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Services | Docdril</title>
+    <meta name="description" content="Premium web development services by Docdril. We build scalable, high-performance web systems designed for modern businesses.">
+    <script src="https://cdn.tailwindcss.com"></script>
+     <style>
+        /* Minimal custom styles to enhance the premium feel */
+        @import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap');
+        
+        body {
+            font-family: 'Satoshi', sans-serif; /* Updated to Satoshi */
+            background-color: #ffffff; /* Clean white */
+            color: #18181b; /* Zinc-900 */
+        }
+
+        /* Subtle selection highlight */
+        ::selection {
+            background-color: #e4e4e7;
+            color: #000000;
+        }
+
+        /* Smooth fade-in for page load */
+        .fade-in {
+            animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+body{
+  padding: 25px;
+}
+.title {
+	color: #5C6AC4;
+}
+    </style>
+</head>
+<body class="antialiased selection:bg-zinc-200 selection:text-black relative">
+
+    <!-- Subtle minimal background gradient (light) -->
+    <div class="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-zinc-50 via-white to-white pointer-events-none"></div>
+
+    <!-- Minimal Header / Nav -->
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-6 md:py-8 flex justify-between items-center fade-in" style="animation-delay: 0.1s;">
+        <div class="text-lg md:text-xl font-medium tracking-tighter text-black">DOCDRIL<span class="text-zinc-400">.</span></div>
+        
+        <!-- Added Back Button -->
+        <a href="../index.html" class="group inline-flex items-center gap-1.5 md:gap-2 text-xs md:text-sm font-medium text-zinc-500 hover:text-black transition-colors">
+            <svg class="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Services
+        </a>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 pb-20 md:pb-32">
+        
+        <!-- 1. Hero Section -->
+        <header class="pt-8 md:pt-16 pb-16 md:pb-32 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center fade-in" style="animation-delay: 0.2s;">
+            <div class="max-w-2xl text-center lg:text-left">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tighter text-black mb-4 md:mb-6 leading-[1.1]">
+                    Web Development <br class="hidden lg:block" />
+                    <span class="text-zinc-400">Services</span>
+                </h1>
+                <p class="text-lg sm:text-xl md:text-2xl text-zinc-500 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
+                    We build scalable, high-performance web systems designed for modern businesses.
+                </p>
+            </div>
+            <!-- Hero Image -->
+            <div class="relative w-full aspect-square md:aspect-[4/3] rounded-2xl md:rounded-3xl overflow-hidden bg-zinc-100 border border-zinc-200 mt-6 lg:mt-0">
+                <!-- Text fallback behind the image -->
+                <div class="absolute inset-0 flex items-center justify-center text-zinc-400 text-xs md:text-sm font-medium z-0">
+                    Put: hero-web-development.webp here
+                </div>
+                <img src="images/hero-web-development.webp" alt="High-Performance Web Development" class="relative z-10 object-cover w-full h-full" onerror="this.style.opacity='0'">
+            </div>
+        </header>
+
+        <!-- 2. What We Do -->
+        <section class="py-16 md:py-24 border-t border-zinc-200 fade-in" style="animation-delay: 0.3s;">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-start md:items-center">
+                <div class="md:col-span-4">
+                    <h2 class="text-xs md:text-sm uppercase tracking-widest text-zinc-400 font-medium md:mt-2">The Architecture of Scale</h2>
+                </div>
+                <div class="md:col-span-8">
+                    <p class="text-xl sm:text-2xl md:text-3xl font-light text-zinc-800 leading-snug mb-8 md:mb-12">
+                        Docdril doesn't just write code; we engineer digital infrastructure. We construct secure, lightning-fast web solutions that prioritize flawless user experience, extreme scalability, and uncompromised performance.
+                    </p>
+                    <!-- Methodology Image -->
+                    <div class="relative w-full aspect-video md:aspect-[21/9] rounded-xl md:rounded-2xl overflow-hidden bg-zinc-100 border border-zinc-200">
+                        <div class="absolute inset-0 flex items-center justify-center text-zinc-400 text-xs md:text-sm font-medium z-0">
+                            Put: dev-methodology.webp here
+                        </div>
+                        <img src="images/dev-methodology.webp" alt="Web Development Methodology" class="relative z-10 object-cover w-full h-full" onerror="this.style.opacity='0'">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Services Grid -->
+        <section class="py-16 md:py-24 border-t border-zinc-200 fade-in" style="animation-delay: 0.4s;">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12">
+                <div class="md:col-span-4">
+                    <h2 class="text-xs md:text-sm uppercase tracking-widest text-zinc-400 font-medium md:mt-2 mb-2 md:mb-0">Our Disciplines</h2>
+                </div>
+                
+                <div class="md:col-span-8">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+                        
+                        <!-- Card 1 -->
+                        <a href="./web-app-development/index.html" class="group block rounded-xl md:rounded-2xl bg-white border border-zinc-200 overflow-hidden hover:border-zinc-300 hover:shadow-2xl hover:shadow-zinc-200/50 transition-all duration-500">
+                            <div class="aspect-video w-full bg-zinc-100 relative overflow-hidden">
+                                <div class="absolute inset-0 flex items-center justify-center text-zinc-400 text-[10px] md:text-xs font-medium z-0">
+                                    service-web-app.webp
+                                </div>
+                                <img src="images/service-web-app.webp" alt="Web App Development" class="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onerror="this.style.opacity='0'">
+                            </div>
+                            <div class="p-6 md:p-8">
+                                <div class="flex justify-between items-center mb-3 md:mb-4">
+                                    <h3 class="text-lg md:text-xl font-medium text-black">Web App Development</h3>
+                                    <svg class="w-4 h-4 md:w-5 md:h-5 text-zinc-400 group-hover:text-black group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                </div>
+                                <p class="text-zinc-500 text-sm font-light">
+                                    Complex, high-performance applications built for robust scale and seamless functionality.
+                                </p>
+                            </div>
+                        </a>
+
+                        <!-- Card 2 -->
+                        <a href="./saas-website-development/index.html" class="group block rounded-xl md:rounded-2xl bg-white border border-zinc-200 overflow-hidden hover:border-zinc-300 hover:shadow-2xl hover:shadow-zinc-200/50 transition-all duration-500">
+                            <div class="aspect-video w-full bg-zinc-100 relative overflow-hidden">
+                                <div class="absolute inset-0 flex items-center justify-center text-zinc-400 text-[10px] md:text-xs font-medium z-0">
+                                    service-saas.webp
+                                </div>
+                                <img src="images/service-saas.webp" alt="SaaS Website Development" class="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onerror="this.style.opacity='0'">
+                            </div>
+                            <div class="p-6 md:p-8">
+                                <div class="flex justify-between items-center mb-3 md:mb-4">
+                                    <h3 class="text-lg md:text-xl font-medium text-black">SaaS Website Development</h3>
+                                    <svg class="w-4 h-4 md:w-5 md:h-5 text-zinc-400 group-hover:text-black group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                </div>
+                                <p class="text-zinc-500 text-sm font-light">
+                                    High-converting, precision-engineered platforms designed strictly for software companies.
+                                </p>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Why It Matters -->
+        <section class="py-16 md:py-24 border-t border-zinc-200 fade-in" style="animation-delay: 0.5s;">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12">
+                <div class="md:col-span-4">
+                    <h2 class="text-xs md:text-sm uppercase tracking-widest text-zinc-400 font-medium md:mt-2">The Digital Infrastructure</h2>
+                </div>
+                <div class="md:col-span-8">
+                    <p class="text-lg sm:text-xl md:text-2xl font-light text-zinc-600 leading-relaxed">
+                        In a landscape where milliseconds dictate conversion rates, your web infrastructure is your most critical asset. We build robust, sophisticated architectures that support rapid growth, command absolute authority, and operate flawlessly under pressure.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Call To Action -->
+        <section class="pt-20 md:pt-32 pb-12 md:pb-16 text-center fade-in" style="animation-delay: 0.6s;">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-black mb-8 md:mb-10 px-4">
+                Build something scalable and powerful.
+            </h2>
+            <a href="../../contact/index.html" class="inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 text-sm font-medium tracking-wide text-white bg-black rounded-full hover:bg-zinc-800 transition-colors duration-300 shadow-lg shadow-black/20">
+                Initiate Project
+            </a>
+        </section>
+
+    </main>
+</body>
+</html>
