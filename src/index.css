@@ -14,8 +14,8 @@
 :root {
     /* Light Mode Gradient Colors */
     --bg-grad-1: #ffffff;
-    --bg-grad-2: #ffffff;
-    --bg-grad-3: #ffffff;
+    --bg-grad-2: #f8fafc; /* very light slate-50 */
+    --bg-grad-3: #f1f5f9; /* slate-100 */
     --line-color: rgba(0, 0, 0, 0.05);
     --glass-border: rgba(230, 230, 230, 0.7);
     --glass-shadow: rgba(0, 0, 0, 0.05);
@@ -25,9 +25,9 @@
 }
 
 .dark {
-    --bg-grad-1: #0f172a; /* slate-900 */
-    --bg-grad-2: #1e293b; /* slate-800 */
-    --bg-grad-3: #0f172a; /* slate-900 */
+    --bg-grad-1: #000000; /* deep black */
+    --bg-grad-2: #0a0a0a; /* slight lift */
+    --bg-grad-3: #111111;
     --line-color: rgba(255, 255, 255, 0.1);
     --glass-border: rgba(255, 255, 255, 0.2);
     --glass-shadow: rgba(255, 255, 255, 0.05);

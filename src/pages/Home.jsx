@@ -333,53 +333,47 @@ export default function Home() {
                             {/* Vertical Stem from Button */}
                             <div className="w-px sm:w-[2px] h-8 sm:h-10 bg-gray-300 dark:bg-zinc-700"></div>
                             
-                            {/* Horizontal Bar with Curves (Hidden on mobile for better stacking) */}
-                            <div className="hidden sm:flex w-full max-w-5xl justify-center items-start h-12 sm:h-16 px-4">
+                            {/* Horizontal Bar with Curves (Always visible to maintain tree flow) */}
+                            <div className="flex w-full max-w-5xl justify-center items-start h-8 sm:h-16 px-2 sm:px-4">
                                 {/* Left Branch (Aligns perfectly with 1/6th of container, the center of col 1) */}
-                                <div className="w-[33.33%] h-full border-t-2 border-l-2 border-gray-300 dark:border-zinc-700 rounded-tl-3xl translate-x-[1px]"></div>
+                                <div className="w-[33.33%] h-full border-t-2 border-l-2 border-gray-300 dark:border-zinc-700 rounded-tl-xl sm:rounded-tl-3xl translate-x-[1px]"></div>
                                 
                                 {/* Center Branch */}
                                 <div className="w-[2px] h-full bg-gray-300 dark:bg-zinc-700 shrink-0"></div>
                                 
                                 {/* Right Branch (Aligns perfectly with 5/6th of container, the center of col 3) */}
-                                <div className="w-[33.33%] h-full border-t-2 border-r-2 border-gray-300 dark:border-zinc-700 rounded-tr-3xl -translate-x-[1px]"></div>
+                                <div className="w-[33.33%] h-full border-t-2 border-r-2 border-gray-300 dark:border-zinc-700 rounded-tr-xl sm:rounded-tr-3xl -translate-x-[1px]"></div>
                             </div>
-                            
-                            {/* Mobile straight line fallback */}
-                            <div className="flex sm:hidden w-px h-8 bg-gray-300 dark:bg-zinc-700"></div>
                         </div>
 
                         {/* The 3 Role Boxes */}
-                        <div className="w-full max-w-5xl mx-auto px-4 relative sm:-mt-2 mb-2 sm:mb-4">
-                            {/* Continuous vertical line for mobile ONLY to connect the boxes */}
-                            <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gray-300 dark:bg-zinc-700 sm:hidden z-0 opacity-80"></div>
-                            
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 relative z-10">
+                        <div className="w-full max-w-5xl mx-auto px-1 sm:px-4 relative sm:-mt-2 mb-2 sm:mb-4">
+                            <div className="grid grid-cols-3 gap-2 sm:gap-6 relative z-10">
                                 {/* Client Box */}
-                                <div className="bg-white dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 rounded-2xl sm:rounded-[1.5rem] p-4 sm:p-6 shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 max-w-[300px] sm:max-w-none w-full mx-auto">
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-2 sm:mb-4 shadow-sm">
-                                        <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                <div className="bg-white dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 rounded-xl sm:rounded-[1.5rem] p-2 sm:p-6 shadow-md sm:shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-lg hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 w-full mx-auto">
+                                    <div className="w-6 h-6 sm:w-12 sm:h-12 rounded-full bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-1 sm:mb-4 shadow-sm">
+                                        <svg className="w-3 h-3 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                     </div>
-                                    <h4 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-1 sm:mb-2">Clients</h4>
-                                    <p className="text-[11px] sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Project delivery, tracking, and seamless onboarding.</p>
+                                    <h4 className="text-[9px] sm:text-base font-bold text-gray-900 dark:text-white mb-0 sm:mb-2 truncate w-full px-1">Clients</h4>
+                                    <p className="hidden sm:block text-[11px] sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Project delivery, tracking, and seamless onboarding.</p>
                                 </div>
                                 
                                 {/* Manager Box */}
-                                <div className="bg-white dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 rounded-2xl sm:rounded-[1.5rem] p-4 sm:p-6 shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 max-w-[300px] sm:max-w-none w-full mx-auto">
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-2 sm:mb-4 shadow-sm">
-                                        <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                                <div className="bg-white dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 rounded-xl sm:rounded-[1.5rem] p-2 sm:p-6 shadow-md sm:shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-lg hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 w-full mx-auto">
+                                    <div className="w-6 h-6 sm:w-12 sm:h-12 rounded-full bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-1 sm:mb-4 shadow-sm">
+                                        <svg className="w-3 h-3 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                                     </div>
-                                    <h4 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-1 sm:mb-2">Managers</h4>
-                                    <p className="text-[11px] sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Team coordination, timeline tracking, and reporting.</p>
+                                    <h4 className="text-[9px] sm:text-base font-bold text-gray-900 dark:text-white mb-0 sm:mb-2 truncate w-full px-1">Managers</h4>
+                                    <p className="hidden sm:block text-[11px] sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Team coordination, timeline tracking, and reporting.</p>
                                 </div>
                                 
                                 {/* Admin Box */}
-                                <div className="bg-white dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 rounded-2xl sm:rounded-[1.5rem] p-4 sm:p-6 shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 max-w-[300px] sm:max-w-none w-full mx-auto">
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-purple-50 dark:bg-purple-900/20 border border-purple-100 dark:border-purple-800 flex items-center justify-center text-purple-600 dark:text-purple-400 mb-2 sm:mb-4 shadow-sm">
-                                        <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                                <div className="bg-white dark:bg-[#0a0a0a] border border-gray-200 dark:border-gray-800 rounded-xl sm:rounded-[1.5rem] p-2 sm:p-6 shadow-md sm:shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-lg hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 w-full mx-auto">
+                                    <div className="w-6 h-6 sm:w-12 sm:h-12 rounded-full bg-purple-50 dark:bg-purple-900/20 border border-purple-100 dark:border-purple-800 flex items-center justify-center text-purple-600 dark:text-purple-400 mb-1 sm:mb-4 shadow-sm">
+                                        <svg className="w-3 h-3 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
                                     </div>
-                                    <h4 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-1 sm:mb-2">Admins</h4>
-                                    <p className="text-[11px] sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Full ecosystem control, analytics, and billing.</p>
+                                    <h4 className="text-[9px] sm:text-base font-bold text-gray-900 dark:text-white mb-0 sm:mb-2 truncate w-full px-1">Admins</h4>
+                                    <p className="hidden sm:block text-[11px] sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Full ecosystem control, analytics, and billing.</p>
                                 </div>
                             </div>
                         </div>
