@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Play, Pause } from 'lucide-react';
+import { Play, Pause, Sparkles, TrendingUp, Cpu } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useModal } from '../context/ModalContext';
 import { useRevealOnScroll } from '../hooks/useRevealOnScroll';
@@ -635,9 +635,7 @@ export default function Home() {
                                 <div className="absolute inset-0 backface-hidden bg-white dark:bg-black/80 dark:bg-black/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/50 dark:border-gray-600 flex flex-col items-center justify-center text-center z-10">
                                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-t-3xl"></div>
                                     <div className="w-12 h-12 md:w-20 md:h-20 mb-3 md:mb-6 rounded-2xl bg-gradient-to-br from-cyan-100 to-blue-100 dark:from-cyan-900 dark:to-blue-900 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
-                                        <svg className="w-6 h-6 md:w-10 md:h-10 text-blue-600 dark:text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.452-2.452L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.452-2.452L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.452 2.452L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.452 2.452Z" />
-                                        </svg>
+                                        <Sparkles className="w-6 h-6 md:w-10 md:h-10 text-blue-600 dark:text-blue-400" strokeWidth={1.5} />
                                     </div>
                                     <h3 className="text-lg md:text-3xl font-bold text-gray-900 dark:text-white mb-1 md:mb-2">Cinema-Grade Quality</h3>
                                     <p className="text-[10px] md:text-xs text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-1 md:mt-4">Tap to Reveal</p>
@@ -657,9 +655,7 @@ export default function Home() {
                                 <div className="absolute inset-0 backface-hidden bg-white dark:bg-black/80 dark:bg-black/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/50 dark:border-gray-600 flex flex-col items-center justify-center text-center z-10">
                                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 to-pink-600 rounded-t-3xl"></div>
                                     <div className="w-12 h-12 md:w-20 md:h-20 mb-3 md:mb-6 rounded-2xl bg-gradient-to-br from-orange-100 to-pink-100 dark:from-orange-900 dark:to-pink-900 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
-                                        <svg className="w-6 h-6 md:w-10 md:h-10 text-pink-600 dark:text-pink-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.5 2.25A.75.75 0 0 0 14.75 3v18a.75.75 0 0 0 1.5 0V3a.75.75 0 0 0-.75-.75Zm-6 0A.75.75 0 0 0 8.75 3v18a.75.75 0 0 0 1.5 0V3a.75.75 0 0 0-.75-.75Zm-6 0A.75.75 0 0 0 2.75 3v18a.75.75 0 0 0 1.5 0V3a.75.75 0 0 0-.75-.75Zm18 0A.75.75 0 0 0 20.75 3v18a.75.75 0 0 0 1.5 0V3a.75.75 0 0 0-.75-.75Z" />
-                                        </svg>
+                                        <TrendingUp className="w-6 h-6 md:w-10 md:h-10 text-pink-600 dark:text-pink-400" strokeWidth={1.5} />
                                     </div>
                                     <h3 className="text-lg md:text-3xl font-bold text-gray-900 dark:text-white mb-1 md:mb-2">Viral-Ready Content</h3>
                                     <p className="text-[10px] md:text-xs text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-1 md:mt-4">Tap to Reveal</p>
@@ -679,9 +675,7 @@ export default function Home() {
                                 <div className="absolute inset-0 backface-hidden bg-white dark:bg-black/80 dark:bg-black/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/50 dark:border-gray-600 flex flex-col items-center justify-center text-center z-10">
                                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-indigo-600 rounded-t-3xl"></div>
                                     <div className="w-12 h-12 md:w-20 md:h-20 mb-3 md:mb-6 rounded-2xl bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-purple-900 dark:to-indigo-900 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
-                                        <svg className="w-6 h-6 md:w-10 md:h-10 text-indigo-600 dark:text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9.429 7.026c.287-.84.84-1.637 1.545-2.296C12.448 3.015 14.595 2.25 16.75 2.25a7.5 7.5 0 0 1 0 15c-2.155 0-4.302-.765-6.776-3.778-1.574-1.93-2.37-4.14-2.245-6.074.08-.667.436-1.378.892-1.895Zm0 0L19.5 7.125m-1.5-4.875h3m-1.5 1.5v-3" />
-                                        </svg>
+                                        <Cpu className="w-6 h-6 md:w-10 md:h-10 text-indigo-600 dark:text-indigo-400" strokeWidth={1.5} />
                                     </div>
                                     <h3 className="text-lg md:text-3xl font-bold text-gray-900 dark:text-white mb-1 md:mb-2">AI & Future Integration</h3>
                                     <p className="text-[10px] md:text-xs text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-1 md:mt-4">Tap to Reveal</p>
