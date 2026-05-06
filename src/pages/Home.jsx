@@ -7,6 +7,21 @@ import { useRevealOnScroll } from '../hooks/useRevealOnScroll';
 export default function Home() {
   const [robotBubbleText, setRobotBubbleText] = useState('');
   const [isTypingCursor, setIsTypingCursor] = useState(true);
+  const laptopContainerRef = useRef(null);
+  const [iframeScale, setIframeScale] = useState(1);
+
+  useEffect(() => {
+      const updateScale = () => {
+          if (laptopContainerRef.current) {
+              const width = laptopContainerRef.current.offsetWidth;
+              // Target desktop width is roughly 1280px for a clean viewport
+              setIframeScale(width / 1280);
+          }
+      };
+      updateScale();
+      window.addEventListener('resize', updateScale);
+      return () => window.removeEventListener('resize', updateScale);
+  }, []);
 
   useEffect(() => { // Robot bubble
     const messages = ["Hi, folks!", "I'm Pluto.", "An AI Agent."];
@@ -420,8 +435,20 @@ export default function Home() {
                                     <div className="mx-auto bg-white dark:bg-black rounded-md px-4 sm:px-24 py-0.5 sm:py-1 text-[8px] sm:text-[10px] text-gray-400 font-mono tracking-wide">os.docdril.com</div>
                                 </div>
                                 {/* Iframe Content */}
-                                <div className="flex-grow relative w-full bg-white dark:bg-black pointer-events-none">
-                                    <iframe src="https://os.docdril.com" className="absolute inset-0 w-full h-full border-0 pointer-events-none" title="Docdril OS Live Preview" loading="lazy"></iframe>
+                                <div ref={laptopContainerRef} className="flex-grow relative w-full bg-white dark:bg-black pointer-events-none overflow-hidden">
+                                    <iframe 
+                                        src="https://os.docdril.com" 
+                                        style={{
+                                            width: '1280px',
+                                            height: iframeScale > 0 ? `${100 / iframeScale}%` : '100%',
+                                            transform: `scale(${iframeScale})`,
+                                            transformOrigin: 'top left'
+                                        }}
+                                        className="absolute top-0 left-0 border-0 pointer-events-none" 
+                                        title="Docdril OS Live Preview" 
+                                        loading="lazy"
+                                        scrolling="no"
+                                    ></iframe>
                                 </div>
                             </div>
                             {/* Laptop Base */}
