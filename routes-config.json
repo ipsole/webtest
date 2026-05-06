@@ -1,0 +1,202 @@
+[
+  {
+    "path": "/services",
+    "componentName": "Services",
+    "importPath": "./pages/Services"
+  },
+  {
+    "path": "/services/web-development",
+    "componentName": "ServicesWebDevelopment",
+    "importPath": "./pages/ServicesWebDevelopment"
+  },
+  {
+    "path": "/services/web-development/web-app-development",
+    "componentName": "ServicesWebDevelopmentWebAppDevelopment",
+    "importPath": "./pages/ServicesWebDevelopmentWebAppDevelopment"
+  },
+  {
+    "path": "/services/web-development/web-app-development/contact",
+    "componentName": "ServicesWebDevelopmentWebAppDevelopmentContact",
+    "importPath": "./pages/ServicesWebDevelopmentWebAppDevelopmentContact"
+  },
+  {
+    "path": "/services/web-development/saas-website-development",
+    "componentName": "ServicesWebDevelopmentSaasWebsiteDevelopment",
+    "importPath": "./pages/ServicesWebDevelopmentSaasWebsiteDevelopment"
+  },
+  {
+    "path": "/services/web-development/saas-website-development/contact",
+    "componentName": "ServicesWebDevelopmentSaasWebsiteDevelopmentContact",
+    "importPath": "./pages/ServicesWebDevelopmentSaasWebsiteDevelopmentContact"
+  },
+  {
+    "path": "/services/web-development/contact",
+    "componentName": "ServicesWebDevelopmentContact",
+    "importPath": "./pages/ServicesWebDevelopmentContact"
+  },
+  {
+    "path": "/services/content-creation",
+    "componentName": "ServicesContentCreation",
+    "importPath": "./pages/ServicesContentCreation"
+  },
+  {
+    "path": "/services/content-creation/short-form-video-editing",
+    "componentName": "ServicesContentCreationShortFormVideoEditing",
+    "importPath": "./pages/ServicesContentCreationShortFormVideoEditing"
+  },
+  {
+    "path": "/services/content-creation/short-form-video-editing/contact",
+    "componentName": "ServicesContentCreationShortFormVideoEditingContact",
+    "importPath": "./pages/ServicesContentCreationShortFormVideoEditingContact"
+  },
+  {
+    "path": "/services/content-creation/long-form-video-editing",
+    "componentName": "ServicesContentCreationLongFormVideoEditing",
+    "importPath": "./pages/ServicesContentCreationLongFormVideoEditing"
+  },
+  {
+    "path": "/services/content-creation/long-form-video-editing/contact",
+    "componentName": "ServicesContentCreationLongFormVideoEditingContact",
+    "importPath": "./pages/ServicesContentCreationLongFormVideoEditingContact"
+  },
+  {
+    "path": "/services/content-creation/contact",
+    "componentName": "ServicesContentCreationContact",
+    "importPath": "./pages/ServicesContentCreationContact"
+  },
+  {
+    "path": "/services/content-creation/beat-making",
+    "componentName": "ServicesContentCreationBeatMaking",
+    "importPath": "./pages/ServicesContentCreationBeatMaking"
+  },
+  {
+    "path": "/services/content-creation/beat-making/contact",
+    "componentName": "ServicesContentCreationBeatMakingContact",
+    "importPath": "./pages/ServicesContentCreationBeatMakingContact"
+  },
+  {
+    "path": "/services/content-creation/ai-video-production",
+    "componentName": "ServicesContentCreationAiVideoProduction",
+    "importPath": "./pages/ServicesContentCreationAiVideoProduction"
+  },
+  {
+    "path": "/services/content-creation/ai-video-production/contact",
+    "componentName": "ServicesContentCreationAiVideoProductionContact",
+    "importPath": "./pages/ServicesContentCreationAiVideoProductionContact"
+  },
+  {
+    "path": "/services/contact",
+    "componentName": "ServicesContact",
+    "importPath": "./pages/ServicesContact"
+  },
+  {
+    "path": "/services/branding-growth",
+    "componentName": "ServicesBrandingGrowth",
+    "importPath": "./pages/ServicesBrandingGrowth"
+  },
+  {
+    "path": "/services/branding-growth/social-media-management",
+    "componentName": "ServicesBrandingGrowthSocialMediaManagement",
+    "importPath": "./pages/ServicesBrandingGrowthSocialMediaManagement"
+  },
+  {
+    "path": "/services/branding-growth/social-media-management/contact",
+    "componentName": "ServicesBrandingGrowthSocialMediaManagementContact",
+    "importPath": "./pages/ServicesBrandingGrowthSocialMediaManagementContact"
+  },
+  {
+    "path": "/services/branding-growth/pitch-deck-design",
+    "componentName": "ServicesBrandingGrowthPitchDeckDesign",
+    "importPath": "./pages/ServicesBrandingGrowthPitchDeckDesign"
+  },
+  {
+    "path": "/services/branding-growth/pitch-deck-design/contact",
+    "componentName": "ServicesBrandingGrowthPitchDeckDesignContact",
+    "importPath": "./pages/ServicesBrandingGrowthPitchDeckDesignContact"
+  },
+  {
+    "path": "/services/branding-growth/graphic-design-services",
+    "componentName": "ServicesBrandingGrowthGraphicDesignServices",
+    "importPath": "./pages/ServicesBrandingGrowthGraphicDesignServices"
+  },
+  {
+    "path": "/services/branding-growth/graphic-design-services/contact",
+    "componentName": "ServicesBrandingGrowthGraphicDesignServicesContact",
+    "importPath": "./pages/ServicesBrandingGrowthGraphicDesignServicesContact"
+  },
+  {
+    "path": "/services/branding-growth/contact",
+    "componentName": "ServicesBrandingGrowthContact",
+    "importPath": "./pages/ServicesBrandingGrowthContact"
+  },
+  {
+    "path": "/services/branding-growth/consultancy-services",
+    "componentName": "ServicesBrandingGrowthConsultancyServices",
+    "importPath": "./pages/ServicesBrandingGrowthConsultancyServices"
+  },
+  {
+    "path": "/services/branding-growth/consultancy-services/contact",
+    "componentName": "ServicesBrandingGrowthConsultancyServicesContact",
+    "importPath": "./pages/ServicesBrandingGrowthConsultancyServicesContact"
+  },
+  {
+    "path": "/services/branding-growth/brand-identity-design",
+    "componentName": "ServicesBrandingGrowthBrandIdentityDesign",
+    "importPath": "./pages/ServicesBrandingGrowthBrandIdentityDesign"
+  },
+  {
+    "path": "/services/branding-growth/brand-identity-design/contact",
+    "componentName": "ServicesBrandingGrowthBrandIdentityDesignContact",
+    "importPath": "./pages/ServicesBrandingGrowthBrandIdentityDesignContact"
+  },
+  {
+    "path": "/services/ai-automation",
+    "componentName": "ServicesAiAutomation",
+    "importPath": "./pages/ServicesAiAutomation"
+  },
+  {
+    "path": "/services/ai-automation/contact",
+    "componentName": "ServicesAiAutomationContact",
+    "importPath": "./pages/ServicesAiAutomationContact"
+  },
+  {
+    "path": "/services/ai-automation/automation-services",
+    "componentName": "ServicesAiAutomationAutomationServices",
+    "importPath": "./pages/ServicesAiAutomationAutomationServices"
+  },
+  {
+    "path": "/services/ai-automation/automation-services/contact",
+    "componentName": "ServicesAiAutomationAutomationServicesContact",
+    "importPath": "./pages/ServicesAiAutomationAutomationServicesContact"
+  },
+  {
+    "path": "/services/ai-automation/ai-agents",
+    "componentName": "ServicesAiAutomationAiAgents",
+    "importPath": "./pages/ServicesAiAutomationAiAgents"
+  },
+  {
+    "path": "/services/ai-automation/ai-agents/contact",
+    "componentName": "ServicesAiAutomationAiAgentsContact",
+    "importPath": "./pages/ServicesAiAutomationAiAgentsContact"
+  },
+  {
+    "path": "/policy",
+    "componentName": "Policy",
+    "importPath": "./pages/Policy"
+  },
+  {
+    "path": "/enquiry",
+    "componentName": "Enquiry",
+    "importPath": "./pages/Enquiry"
+  },
+  {
+    "path": "/contact",
+    "componentName": "Contact",
+    "importPath": "./pages/Contact"
+  },
+  {
+    "path": "/about",
+    "componentName": "About",
+    "importPath": "./pages/About"
+  }
+]

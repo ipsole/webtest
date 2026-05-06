@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docdril™ | Agency Policies & Terms</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* Refined glass effect for light theme */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-600 antialiased selection:bg-blue-600 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 border-b border-slate-200 glass-panel">
+        <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <!-- Logo Image -->
+                <img src="https://uploads.onecompiler.io/445by7jfj/448j2psef/docdril%20logo.png" alt="Docdril Logo" class="w-8 h-8 object-contain">
+                <span class="font-bold text-slate-900 tracking-tight text-lg">Docdril™</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="text-xs font-semibold px-3 py-1 rounded-full border border-slate-200 bg-slate-50 text-slate-600 uppercase tracking-wide">
+                    Official Policy
+                </div>
+                <a href="https://docdril.com" onclick="handleBack(event)" class="group flex items-center gap-1 text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors pl-2 border-l border-slate-200">
+                    <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform"></i>
+                    Back
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Hero -->
+    <header class="pt-32 pb-12 px-6 max-w-4xl mx-auto text-center border-b border-slate-100">
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Transparency, Trust, and <br/><span class="text-blue-700">Mutual Growth</span></h1>
+        <p class="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            At Docdril™, we believe in ethical partnerships. This document outlines how we protect your data, manage payments, and ensure a seamless creative workflow.
+        </p>
+        <div class="mt-8 text-sm font-medium text-slate-500 bg-slate-50 inline-block px-4 py-2 rounded-full border border-slate-200">
+            Last Updated: <span id="current-date"></span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-6 py-16 space-y-16">
+
+        <!-- 1. The Core Engagement Model -->
+        <section class="group">
+            <div class="flex items-start gap-5">
+                <div class="p-3 rounded-lg bg-blue-50 text-blue-700 mt-1 border border-blue-100 shadow-sm">
+                    <i data-lucide="handshake" class="w-6 h-6"></i>
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">1. Engagement & Trust Framework</h2>
+                    <div class="prose prose-slate text-sm leading-7 text-slate-600">
+                        <p class="mb-4">
+                            We prioritize speed and efficiency. While we offer formal <strong>Non-Disclosure Agreements (NDAs)</strong> and contracts for clients who require them, our standard workflow is built on mutual trust to avoid bureaucratic delays.
+                        </p>
+                        <ul class="list-disc pl-5 space-y-2 marker:text-blue-700">
+                            <li><strong class="text-slate-800">Paid Trials:</strong> All samples created are treated as "Paid Trials." These are authentic works based on your specific requirements. Once approved, we proceed to standard bulk pricing.</li>
+                            <li><strong class="text-slate-800">Seamless Experience:</strong> Whether contract-based or trust-based, our commitment to quality and confidentiality remains absolute.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <hr class="border-slate-200">
+
+        <!-- 2. Data Privacy & Security -->
+        <section class="group">
+            <div class="flex items-start gap-5">
+                <div class="p-3 rounded-lg bg-emerald-50 text-emerald-700 mt-1 border border-emerald-100 shadow-sm">
+                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-emerald-700 transition-colors">2. Data Confidentiality & Deletion</h2>
+                    <div class="prose prose-slate text-sm leading-7 text-slate-600">
+                        <p class="mb-4">
+                            Your assets are safest with us. We strictly adhere to a <strong>"Zero Retention Policy"</strong> post-project.
+                        </p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-5 mb-4 shadow-sm">
+                            <h3 class="text-slate-900 font-semibold text-xs uppercase tracking-wider mb-3">The Protocol</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-3">
+                                    <div class="mt-1 bg-white rounded-full p-0.5 shadow-sm border border-emerald-100">
+                                        <i data-lucide="check" class="w-3 h-3 text-emerald-600"></i>
+                                    </div>
+                                    <span>Docdril™ does <strong>not</strong> store client data or assets after handover.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <div class="mt-1 bg-white rounded-full p-0.5 shadow-sm border border-emerald-100">
+                                        <i data-lucide="check" class="w-3 h-3 text-emerald-600"></i>
+                                    </div>
+                                    <span>All data is permanently deleted instantly upon client confirmation of receipt.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <div class="mt-1 bg-white rounded-full p-0.5 shadow-sm border border-emerald-100">
+                                        <i data-lucide="check" class="w-3 h-3 text-emerald-600"></i>
+                                    </div>
+                                    <span>We are not accountable for data usage unless explicitly conditioned for collaboration or marketing usage.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <hr class="border-slate-200">
+
+        <!-- 3. Payments & Deliverables -->
+        <section class="group">
+            <div class="flex items-start gap-5">
+                <div class="p-3 rounded-lg bg-purple-50 text-purple-700 mt-1 border border-purple-100 shadow-sm">
+                    <i data-lucide="credit-card" class="w-6 h-6"></i>
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-purple-700 transition-colors">3. Payment & Delivery Structure</h2>
+                    <div class="prose prose-slate text-sm leading-7 text-slate-600">
+                        <p class="mb-4">
+                            To ensure safety for both parties, we utilize a secure watermark workflow and a clear advance structure defined by Docdril™ officials based on order characteristics.
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-4 mb-5">
+                            <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm hover:border-purple-200 transition-colors">
+                                <h4 class="text-slate-900 font-semibold mb-1">New Clients</h4>
+                                <p class="text-slate-500">20% Advance required to commence work.</p>
+                            </div>
+                            <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm hover:border-purple-200 transition-colors">
+                                <h4 class="text-slate-900 font-semibold mb-1">Loyal Partners</h4>
+                                <p class="text-slate-500">15% Advance for recurring/bulk orders.</p>
+                            </div>
+                        </div>
+                        <p class="bg-purple-50 text-purple-900 p-4 rounded-lg text-sm border-l-4 border-purple-600">
+                            <strong>The Watermark Guarantee:</strong> Drafts are delivered with a security watermark. The final, clean project files are handed over immediately once full payment is received.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <hr class="border-slate-200">
+
+        <!-- 4. Revisions: Human vs AI -->
+        <section class="group">
+            <div class="flex items-start gap-5">
+                <div class="p-3 rounded-lg bg-orange-50 text-orange-700 mt-1 border border-orange-100 shadow-sm">
+                    <i data-lucide="layers" class="w-6 h-6"></i>
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-orange-700 transition-colors">4. Revisions & Vision</h2>
+                    <div class="prose prose-slate text-sm leading-7 text-slate-600">
+                        <p class="mb-4">
+                            Prices fluctuate based on the complexity and effort required. We conduct detailed <strong>Online Vision Meets</strong> before starting work to align with your goals and minimize revisions.
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                                <strong class="text-slate-900 block mb-1">Human-Edited Projects</strong>
+                                We offer unlimited revisions (within reasonable scope) to perfect the creative output, provided the initial brief has not completely changed.
+                            </li>
+                            <li class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                                <strong class="text-slate-900 block mb-1">AI-Generated Projects</strong>
+                                While AI services may be cheaper initially, <strong class="text-orange-700">revisions are paid</strong>. AI regeneration incurs significant computing costs, so clients must be clear on requirements to minimize costs.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <hr class="border-slate-200">
+
+        <!-- 5. Timelines & Ethics -->
+        <section class="group">
+            <div class="flex items-start gap-5">
+                <div class="p-3 rounded-lg bg-rose-50 text-rose-700 mt-1 border border-rose-100 shadow-sm">
+                    <i data-lucide="clock" class="w-6 h-6"></i>
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-rose-700 transition-colors">5. Timelines, Refunds & Ethics</h2>
+                    <div class="prose prose-slate text-sm leading-7 text-slate-600">
+                        <p class="mb-4">
+                            <strong>Order Acceptance Buffer:</strong> Upon receiving an inquiry, we take up to <strong>3 hours</strong> to confirm acceptance and feasibility. Work commences only after this confirmation.
+                        </p>
+                        <p class="mb-4">
+                            <strong>Refund Policy:</strong> If we fail to deliver the agreed output on time, we will request a grace period. However, if the client prefers, we process a full refund. We value transparency over holding payments.
+                        </p>
+                        <p class="text-slate-600 bg-slate-50 p-4 rounded border border-slate-200">
+                            <strong>Compliance:</strong> Docdril™ strictly follows all government regulations. We do not practice or recommend unethical tactics (black-hat editing, manipulation, etc.). We are committed to clean, legal, and high-quality growth.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 bg-slate-50 py-12">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <!-- Footer Logo Image -->
+            <img src="https://uploads.onecompiler.io/445by7jfj/448j2psef/docdril%20logo.png" alt="Docdril Logo" class="w-10 h-10 mx-auto mb-4 object-contain">
+            
+            <p class="text-slate-500 text-sm mb-6">
+                © <span id="year"></span> Docdril™. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Handle Back Button
+        function handleBack(e) {
+            e.preventDefault();
+            // If there's a referring page in the history, go back to it
+            if (document.referrer !== "") {
+                window.history.back();
+            } else {
+                // Otherwise fallback to docdril.com
+                window.location.href = 'https://docdril.com';
+            }
+        }
+
+        // Set Date
+        const date = new Date();
+        document.getElementById('current-date').textContent = date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        document.getElementById('year').textContent = date.getFullYear();
+    </script>
+</body>
+</html>
