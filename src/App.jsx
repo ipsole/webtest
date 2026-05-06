@@ -44,7 +44,7 @@ import Policy from './pages/Policy';
 import Enquiry from './pages/Enquiry';
 import Contact from './pages/Contact';
 import About from './pages/About';
-import FloatingBackground from './components/FloatingBackground';
+
 import CustomCursor from './components/CustomCursor';
 
 function App() {
@@ -52,7 +52,7 @@ function App() {
     <ModalProvider>
       <Router>
         <div className="flex flex-col min-h-screen bg-white text-gray-900 antialiased dark:bg-black dark:text-gray-100 transition-colors duration-300 relative z-0">
-          <FloatingBackground />
+
           <CustomCursor />
           <Header />
           <Routes>
