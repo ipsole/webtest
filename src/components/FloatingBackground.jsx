@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function FloatingBackground() {
     return (
-        <div className="fixed inset-0 w-full h-full pointer-events-none z-[0] overflow-hidden">
+        <div className="fixed inset-0 w-full h-full pointer-events-none z-[-1] overflow-hidden">
             <style>
                 {`
                 @keyframes float-slow-1 {
