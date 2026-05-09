@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useRef, useState } from 'react';
 import { useModal } from '../context/ModalContext';
 import { X, RefreshCw, Layers } from 'lucide-react';

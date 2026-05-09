@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useRef, useState } from 'react';
 
 export default function CustomCursor() {
@@ -58,19 +59,19 @@ export default function CustomCursor() {
 
     // Animation loop — dot follows instantly, ring follows with elastic delay
     const animate = () => {
-      // Dot: immediate follow (lerp 1.0) for zero lag
+      // Dot: immediate follow (lerp 1.0) for zero lag like a hardware cursor
       dotPos.current.x += (mouse.current.x - dotPos.current.x) * 1.0;
       dotPos.current.y += (mouse.current.y - dotPos.current.y) * 1.0;
 
-      // Ring: faster elastic follow (lerp 0.35)
-      ringPos.current.x += (mouse.current.x - ringPos.current.x) * 0.35;
-      ringPos.current.y += (mouse.current.y - ringPos.current.y) * 0.35;
+      // Ring: extremely fast follow (lerp 0.85) to remove sluggishness
+      ringPos.current.x += (mouse.current.x - ringPos.current.x) * 0.85;
+      ringPos.current.y += (mouse.current.y - ringPos.current.y) * 0.85;
 
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate(${dotPos.current.x}px, ${dotPos.current.y}px) translate(-50%, -50%)`;
+        dotRef.current.style.transform = `translate3d(${dotPos.current.x}px, ${dotPos.current.y}px, 0) translate3d(-50%, -50%, 0)`;
       }
       if (ringRef.current) {
-        ringRef.current.style.transform = `translate(${ringPos.current.x}px, ${ringPos.current.y}px) translate(-50%, -50%)`;
+        ringRef.current.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0) translate3d(-50%, -50%, 0)`;
       }
 
       rafId.current = requestAnimationFrame(animate);
