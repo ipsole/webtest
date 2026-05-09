@@ -901,6 +901,73 @@ export default function Home() {
                 </div>
             </section>
 
+            {/*  7. Pricing / Project Tiers  */}
+            <section id="pricing" className="w-full py-20 md:py-32 bg-transparent relative z-20">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-12 md:mb-20">
+                        <h2 className="reveal-on-scroll text-3xl sm:text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+                            How We <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600 dark:from-violet-400 dark:to-purple-400">Structure Projects</span>
+                        </h2>
+                        <p className="reveal-on-scroll mt-4 text-sm sm:text-lg text-gray-500 dark:text-gray-400 font-medium max-w-2xl mx-auto">Every engagement is fully custom. Here's a guide to the three ways we typically work together.</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center max-w-6xl mx-auto">
+
+                        {/* Tier 1 — One-Time Projects */}
+                        <div className="reveal-on-scroll flex flex-col p-8 bg-white dark:bg-[#0a0a0a] rounded-3xl border border-gray-200 dark:border-gray-800 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 transition-all duration-300">
+                            <div className="w-12 h-12 rounded-2xl bg-violet-50 dark:bg-violet-900/20 flex items-center justify-center text-violet-600 dark:text-violet-400 mb-6">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">One-Time Projects</h3>
+                            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed flex-grow">Perfect for a single deliverable — a launch video, a new website, a brand kit. We scope, build, and deliver with no long-term commitment required.</p>
+                            <ul className="mt-6 space-y-2">
+                                {["Fixed scope & timeline", "20% advance to begin", "Remaining on delivery", "Revision rounds included"].map(f => (
+                                    <li key={f} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-violet-500 shrink-0"></span>{f}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Tier 2 — Retainer (Featured) */}
+                        <div className="reveal-on-scroll flex flex-col p-8 bg-gray-900 dark:bg-white rounded-3xl border border-gray-900 dark:border-white shadow-2xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
+                            <div className="absolute top-4 right-4 px-3 py-1 bg-white/10 dark:bg-black/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-white dark:text-gray-900">Most Popular</div>
+                            <div className="w-12 h-12 rounded-2xl bg-white/10 dark:bg-black/10 flex items-center justify-center text-white dark:text-gray-900 mb-6">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                            </div>
+                            <h3 className="text-xl font-bold text-white dark:text-gray-900 mb-2">Ongoing Retainer</h3>
+                            <p className="text-sm text-white/70 dark:text-gray-600 leading-relaxed flex-grow">For brands that need a consistent creative partner. We handle your content, web updates, and automation maintenance on a monthly basis.</p>
+                            <ul className="mt-6 space-y-2">
+                                {["Monthly content calendar", "Priority turnaround", "Dedicated account manager", "Discounted monthly rate"].map(f => (
+                                    <li key={f} className="flex items-center gap-2 text-sm text-white/80 dark:text-gray-700">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-white dark:bg-gray-900 shrink-0"></span>{f}
+                                    </li>
+                                ))}
+                            </ul>
+                            <Link href="/contact" className="mt-8 text-center py-3 px-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-full font-bold text-sm hover:opacity-90 transition-opacity">Get a Retainer Quote</Link>
+                        </div>
+
+                        {/* Tier 3 — Custom / Enterprise */}
+                        <div className="reveal-on-scroll flex flex-col p-8 bg-white dark:bg-[#0a0a0a] rounded-3xl border border-gray-200 dark:border-gray-800 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 transition-all duration-300">
+                            <div className="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center text-amber-600 dark:text-amber-400 mb-6">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Custom Enterprise</h3>
+                            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed flex-grow">For large organizations with multi-department needs — full-suite content production, custom SaaS builds, and company-wide AI automation rollouts.</p>
+                            <ul className="mt-6 space-y-2">
+                                {["Multi-service bundles", "SLA & contract terms", "Team training included", "Custom payment schedules"].map(f => (
+                                    <li key={f} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>{f}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
             {/*  7. Get in Touch  */}
             <section id="get-in-touch" className="w-full py-16 md:py-24 bg-transparent relative z-20">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1079,72 +1146,6 @@ export default function Home() {
                                 </div>
                             </div>
                         ))}
-                    </div>
-                </div>
-            </section>
-
-            {/*  7. Pricing / Project Tiers  */}
-            <section id="pricing" className="w-full py-20 md:py-32 bg-transparent relative z-20">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-12 md:mb-20">
-                        <h2 className="reveal-on-scroll text-3xl sm:text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-                            How We <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600 dark:from-violet-400 dark:to-purple-400">Structure Projects</span>
-                        </h2>
-                        <p className="reveal-on-scroll mt-4 text-sm sm:text-lg text-gray-500 dark:text-gray-400 font-medium max-w-2xl mx-auto">Every engagement is fully custom. Here's a guide to the three ways we typically work together.</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center max-w-6xl mx-auto">
-
-                        {/* Tier 1 — One-Time Projects */}
-                        <div className="reveal-on-scroll flex flex-col p-8 bg-white dark:bg-[#0a0a0a] rounded-3xl border border-gray-200 dark:border-gray-800 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 transition-all duration-300">
-                            <div className="w-12 h-12 rounded-2xl bg-violet-50 dark:bg-violet-900/20 flex items-center justify-center text-violet-600 dark:text-violet-400 mb-6">
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
-                            </div>
-                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">One-Time Projects</h3>
-                            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed flex-grow">Perfect for a single deliverable — a launch video, a new website, a brand kit. We scope, build, and deliver with no long-term commitment required.</p>
-                            <ul className="mt-6 space-y-2">
-                                {["Fixed scope & timeline", "20% advance to begin", "Remaining on delivery", "Revision rounds included"].map(f => (
-                                    <li key={f} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-violet-500 shrink-0"></span>{f}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Tier 2 — Retainer (Featured) */}
-                        <div className="reveal-on-scroll flex flex-col p-8 bg-gray-900 dark:bg-white rounded-3xl border border-gray-900 dark:border-white shadow-2xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
-                            <div className="absolute top-4 right-4 px-3 py-1 bg-white/10 dark:bg-black/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-white dark:text-gray-900">Most Popular</div>
-                            <div className="w-12 h-12 rounded-2xl bg-white/10 dark:bg-black/10 flex items-center justify-center text-white dark:text-gray-900 mb-6">
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                            </div>
-                            <h3 className="text-xl font-bold text-white dark:text-gray-900 mb-2">Ongoing Retainer</h3>
-                            <p className="text-sm text-white/70 dark:text-gray-600 leading-relaxed flex-grow">For brands that need a consistent creative partner. We handle your content, web updates, and automation maintenance on a monthly basis.</p>
-                            <ul className="mt-6 space-y-2">
-                                {["Monthly content calendar", "Priority turnaround", "Dedicated account manager", "Discounted monthly rate"].map(f => (
-                                    <li key={f} className="flex items-center gap-2 text-sm text-white/80 dark:text-gray-700">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-white dark:bg-gray-900 shrink-0"></span>{f}
-                                    </li>
-                                ))}
-                            </ul>
-                            <Link href="/contact" className="mt-8 text-center py-3 px-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-full font-bold text-sm hover:opacity-90 transition-opacity">Get a Retainer Quote</Link>
-                        </div>
-
-                        {/* Tier 3 — Custom / Enterprise */}
-                        <div className="reveal-on-scroll flex flex-col p-8 bg-white dark:bg-[#0a0a0a] rounded-3xl border border-gray-200 dark:border-gray-800 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 transition-all duration-300">
-                            <div className="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center text-amber-600 dark:text-amber-400 mb-6">
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                            </div>
-                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Custom Enterprise</h3>
-                            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed flex-grow">For large organizations with multi-department needs — full-suite content production, custom SaaS builds, and company-wide AI automation rollouts.</p>
-                            <ul className="mt-6 space-y-2">
-                                {["Multi-service bundles", "SLA & contract terms", "Team training included", "Custom payment schedules"].map(f => (
-                                    <li key={f} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>{f}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
                     </div>
                 </div>
             </section>
