@@ -8,6 +8,7 @@ export function ModalProvider({ children }) {
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
   const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
   const [isAppPreviewOpen, setIsAppPreviewOpen] = useState(false);
+  const [isExploreOpen, setIsExploreOpen] = useState(false);
   
   // Info Modal state
   const [infoModal, setInfoModal] = useState({ isOpen: false, type: '', title: '', text: '' });
@@ -21,6 +22,7 @@ export function ModalProvider({ children }) {
       if (e.key === 'Escape') {
         setIsVideoModalOpen(false);
         setIsAppPreviewOpen(false);
+        setIsExploreOpen(false);
         setInfoModal({ ...infoModal, isOpen: false });
         setIsMouseLoopPaused(false);
       }
@@ -35,6 +37,7 @@ export function ModalProvider({ children }) {
       isChatbotOpen, setIsChatbotOpen,
       isPortfolioOpen, setIsPortfolioOpen,
       isAppPreviewOpen, setIsAppPreviewOpen,
+      isExploreOpen, setIsExploreOpen,
       infoModal, setInfoModal,
       isMouseLoopPaused, setIsMouseLoopPaused
     }}>

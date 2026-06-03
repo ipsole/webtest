@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="w-full bg-white dark:bg-[#0a0a0a] border-t border-gray-200 dark:border-white/10 pt-16 pb-8 relative z-20 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-12 mb-16">
                 
                 {/* Brand & Newsletter */}
                 <div className="flex flex-col">
@@ -32,16 +32,29 @@ export default function Footer() {
                     </ul>
                 </div>
 
+                {/* Ecosystem & Solutions */}
+                <div className="flex flex-col">
+                    <h4 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-6">Ecosystem</h4>
+                    <ul className="flex flex-col gap-3 text-sm text-gray-500 dark:text-gray-400">
+                        <li><Link href="/ecosystem/ai-workflows" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">AI Workflows</Link></li>
+                        <li><Link href="/ecosystem/make-automation" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Make.com Automation</Link></li>
+                        <li><Link href="/ecosystem/zapier-automation" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Zapier Systems</Link></li>
+                        <li><Link href="/solutions/automated-client-onboarding" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Onboarding Pipelines</Link></li>
+                        <li><Link href="/vs/designjoy-alternative" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">vs. Designjoy</Link></li>
+                    </ul>
+                </div>
+
                 {/* Company */}
                 <div className="flex flex-col">
                     <h4 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-6">Company</h4>
                     <ul className="flex flex-col gap-3 text-sm text-gray-500 dark:text-gray-400">
                         <li><Link href="/about" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About Us</Link></li>
+                        <li><Link href="/how-it-works" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">How It Works</Link></li>
                         <li><Link href="/pricing" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Pricing</Link></li>
                         <li><Link href="/careers" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Careers</Link></li>
-                        <li><Link href="/blogs" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Blogs</Link></li>
+                        <li><Link href="/faqs" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">FAQs</Link></li>
+                        <li><Link href="/status" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">System Status</Link></li>
                         <li><Link href="/contact" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</Link></li>
-                        <li><Link href="/feedback" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center gap-2">Feedback Form <span className="bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 text-[10px] font-bold px-2 py-0.5 rounded-full">New</span></Link></li>
                     </ul>
                 </div>
 
@@ -49,8 +62,8 @@ export default function Footer() {
                 <div className="flex flex-col">
                     <h4 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-6">Legal</h4>
                     <ul className="flex flex-col gap-3 text-sm text-gray-500 dark:text-gray-400">
-                        <li><Link href="/policy" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Privacy Policy</Link></li>
-                        <li><Link href="/terms-of-service" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Terms of Service</Link></li>
+                        <li><Link href="/privacy" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Privacy Policy</Link></li>
+                        <li><Link href="/terms" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Terms of Service</Link></li>
                         <li><Link href="/cookie-policy" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Cookie Policy</Link></li>
                         <li><Link href="/refund-policy" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Refund Policy</Link></li>
                     </ul>

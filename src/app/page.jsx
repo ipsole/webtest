@@ -24,6 +24,19 @@ export default function Home() {
       return () => window.removeEventListener('resize', updateScale);
   }, []);
 
+  const [windowSize, setWindowSize] = useState({ width: 1200, height: 800 });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const handleResize = () => {
+        setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+      };
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
+
   useEffect(() => { // Robot bubble
     const messages = ["Hi, folks!", "I'm Pluto.", "An AI Agent."];
     let msgIndex = 0;
@@ -180,6 +193,25 @@ export default function Home() {
     setMousePos({ x: e.clientX, y: e.clientY });
   };
 
+  const handleTouchStart = (e, idx) => {
+    const touch = e.touches[0];
+    if (touch) {
+      setHoveredExpertise(idx);
+      setMousePos({ x: touch.clientX, y: touch.clientY });
+    }
+  };
+
+  const handleTouchMove = (e, idx) => {
+    const touch = e.touches[0];
+    if (touch) {
+      setMousePos({ x: touch.clientX, y: touch.clientY });
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setHoveredExpertise(null);
+  };
+
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const toggleAudio = () => {
@@ -195,14 +227,29 @@ export default function Home() {
     setInfoModal({ isOpen: true, title, text: desc, type: id });
   };
 
+  // Target width is 480px on desktop, but scales down dynamically with 16px margins on small viewports
+  const cardWidth = Math.min(480, windowSize.width - 32);
+  const cardHeight = cardWidth * (9 / 16);
+
+  // Position clamping: prevent floating image card from going off screen
+  let cardX = mousePos.x - cardWidth / 2;
+  // Offset card vertically so it floats nicely above user's finger/mouse and isn't obscured
+  let cardY = mousePos.y - cardHeight - 20;
+
+  // Clamp boundaries to prevent any portion of the card from being cut off
+  cardX = Math.max(16, Math.min(cardX, windowSize.width - cardWidth - 16));
+  cardY = Math.max(80, Math.min(cardY, windowSize.height - cardHeight - 16));
+
   return (
     <main className="flex-grow pt-24 relative overflow-x-hidden">
         {/* Floating Reveal Image Container */}
         <div 
-            className="fixed top-0 left-0 w-[480px] h-[270px] pointer-events-none z-[100] transition-all duration-[400ms] ease-out flex items-center justify-center overflow-hidden rounded-2xl shadow-2xl bg-gray-900/10 backdrop-blur-sm"
+            className="fixed top-0 left-0 pointer-events-none z-[100] transition-all duration-[200ms] ease-out flex items-center justify-center overflow-hidden rounded-2xl shadow-2xl bg-gray-900/10 backdrop-blur-sm"
             style={{ 
+                width: `${cardWidth}px`,
+                height: `${cardHeight}px`,
                 opacity: hoveredExpertise !== null ? 1 : 0, 
-                transform: `translate(${mousePos.x - 240}px, ${mousePos.y - 135}px) scale(${hoveredExpertise !== null ? 1 : 0.8})`
+                transform: `translate(${cardX}px, ${cardY}px) scale(${hoveredExpertise !== null ? 1 : 0.8})`
             }}
         >
             {expertiseItems.map((item, idx) => (
@@ -524,6 +571,7 @@ export default function Home() {
                 className="w-full py-12 md:py-20 bg-transparent relative z-20 overflow-hidden"
                 onMouseMove={handleMouseMove}
                 onMouseLeave={() => setHoveredExpertise(null)}
+                onTouchCancel={handleTouchEnd}
             >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col border-t border-gray-200 dark:border-gray-800">
@@ -532,6 +580,9 @@ export default function Home() {
                                 key={idx}
                                 className="group flex items-center justify-between border-b border-gray-200 dark:border-gray-800 py-6 sm:py-10 cursor-default relative"
                                 onMouseEnter={() => setHoveredExpertise(idx)}
+                                onTouchStart={(e) => handleTouchStart(e, idx)}
+                                onTouchMove={(e) => handleTouchMove(e, idx)}
+                                onTouchEnd={handleTouchEnd}
                             >
                                 <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-gray-900 dark:text-white uppercase tracking-tighter transition-all duration-300 group-hover:pl-4 sm:group-hover:pl-8 group-hover:text-blue-600 dark:group-hover:text-blue-400">
                                     {item.title}

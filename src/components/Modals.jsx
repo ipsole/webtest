@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useModal } from '../context/ModalContext';
 import { X, RefreshCw, Layers } from 'lucide-react';
+import ExploreSidebar from './ExploreSidebar';
 
 export default function Modals() {
   const {
@@ -213,6 +214,8 @@ export default function Modals() {
           </button>
         </div>
       </div>
+
+      <ExploreSidebar />
     </>
   );
 }

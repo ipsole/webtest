@@ -4,7 +4,6 @@ import { AuthProvider } from '../context/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Modals from '../components/Modals';
-import CustomCursor from '../components/CustomCursor';
 
 export const metadata = {
   title: 'Docdril OS',
@@ -17,7 +16,6 @@ export default function RootLayout({ children }) {
       <body className="flex flex-col min-h-screen bg-white text-gray-900 antialiased dark:bg-black dark:text-gray-100 transition-colors duration-300 relative z-0">
         <AuthProvider>
           <ModalProvider>
-            <CustomCursor />
             <Header />
             {children}
             <Footer />
