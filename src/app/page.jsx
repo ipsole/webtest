@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Sparkles, TrendingUp, Cpu } from 'lucide-react';
+import { Play, Pause } from 'lucide-react';
 import Link from 'next/link';
 import { useModal } from '../context/ModalContext';
 import { useRevealOnScroll } from '../hooks/useRevealOnScroll';
@@ -417,30 +417,30 @@ export default function Home() {
                         </div>
 
                         {/* The 3 Role Boxes */}
-                        <div className="w-full max-w-5xl mx-auto px-1 sm:px-4 relative sm:-mt-2 mb-2 sm:mb-4">
+                        <div className="w-full max-w-5xl mx-auto px-1 sm:px-4 relative mb-2 sm:mb-4">
                             <div className="grid grid-cols-3 gap-2 sm:gap-6 relative z-10">
                                 {/* Client Box */}
-                                <div className="bg-white/70 dark:bg-black/60 backdrop-blur-xl border border-gray-200/80 dark:border-gray-800 rounded-xl sm:rounded-[1.5rem] p-2 sm:p-6 shadow-md sm:shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-lg hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 w-full mx-auto">
-                                    <div className="w-6 h-6 sm:w-12 sm:h-12 rounded-full bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-1 sm:mb-4 shadow-sm">
-                                        <svg className="w-3 h-3 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                <div className="bg-white/70 dark:bg-black/60 backdrop-blur-xl border border-gray-200/80 dark:border-gray-800 rounded-xl sm:rounded-[1.5rem] p-2 sm:p-6 shadow-md sm:shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-lg hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 w-full mx-auto group">
+                                    <div className="w-20 h-20 sm:w-40 sm:h-40 -mt-10 sm:-mt-20 mb-1 sm:mb-2 select-none relative z-20">
+                                        <img src="/app/1.png" alt="Clients Illustration" className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" />
                                     </div>
                                     <h4 className="text-[9px] sm:text-base font-bold text-gray-900 dark:text-white mb-0 sm:mb-2 truncate w-full px-1">Clients</h4>
                                     <p className="hidden sm:block text-[11px] sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Project delivery, tracking, and seamless onboarding.</p>
                                 </div>
                                 
                                 {/* Manager Box */}
-                                <div className="bg-white/70 dark:bg-black/60 backdrop-blur-xl border border-gray-200/80 dark:border-gray-800 rounded-xl sm:rounded-[1.5rem] p-2 sm:p-6 shadow-md sm:shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-lg hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 w-full mx-auto">
-                                    <div className="w-6 h-6 sm:w-12 sm:h-12 rounded-full bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-1 sm:mb-4 shadow-sm">
-                                        <svg className="w-3 h-3 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                                <div className="bg-white/70 dark:bg-black/60 backdrop-blur-xl border border-gray-200/80 dark:border-gray-800 rounded-xl sm:rounded-[1.5rem] p-2 sm:p-6 shadow-md sm:shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-lg hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 w-full mx-auto group">
+                                    <div className="w-20 h-20 sm:w-40 sm:h-40 -mt-10 sm:-mt-20 mb-1 sm:mb-2 select-none relative z-20">
+                                        <img src="/app/2.png" alt="Managers Illustration" className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" />
                                     </div>
                                     <h4 className="text-[9px] sm:text-base font-bold text-gray-900 dark:text-white mb-0 sm:mb-2 truncate w-full px-1">Managers</h4>
                                     <p className="hidden sm:block text-[11px] sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Team coordination, timeline tracking, and reporting.</p>
                                 </div>
                                 
                                 {/* Admin Box */}
-                                <div className="bg-white/70 dark:bg-black/60 backdrop-blur-xl border border-gray-200/80 dark:border-gray-800 rounded-xl sm:rounded-[1.5rem] p-2 sm:p-6 shadow-md sm:shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-lg hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 w-full mx-auto">
-                                    <div className="w-6 h-6 sm:w-12 sm:h-12 rounded-full bg-purple-50 dark:bg-purple-900/20 border border-purple-100 dark:border-purple-800 flex items-center justify-center text-purple-600 dark:text-purple-400 mb-1 sm:mb-4 shadow-sm">
-                                        <svg className="w-3 h-3 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                                <div className="bg-white/70 dark:bg-black/60 backdrop-blur-xl border border-gray-200/80 dark:border-gray-800 rounded-xl sm:rounded-[1.5rem] p-2 sm:p-6 shadow-md sm:shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-lg hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 w-full mx-auto group">
+                                    <div className="w-20 h-20 sm:w-40 sm:h-40 -mt-10 sm:-mt-20 mb-1 sm:mb-2 select-none relative z-20">
+                                        <img src="/app/3.png" alt="Admins Illustration" className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" />
                                     </div>
                                     <h4 className="text-[9px] sm:text-base font-bold text-gray-900 dark:text-white mb-0 sm:mb-2 truncate w-full px-1">Admins</h4>
                                     <p className="hidden sm:block text-[11px] sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Full ecosystem control, analytics, and billing.</p>
@@ -544,20 +544,20 @@ export default function Home() {
                     </div>
 
                     {/* Bento Cards */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-20 sm:gap-8 max-w-5xl mx-auto pt-10 sm:pt-16">
                         {/*  Card 1: Creative  */}
-                        <div className="reveal-on-scroll relative bg-white dark:bg-[#0a0a0a] rounded-[2rem] p-8 sm:p-10 border border-gray-100 dark:border-gray-700/60 shadow-[0_4px_20px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300">
-                            <div className="w-12 h-12 rounded-2xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 flex items-center justify-center text-gray-900 dark:text-white mb-6 shadow-sm">
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+                        <div className="reveal-on-scroll relative bg-white dark:bg-[#0a0a0a] rounded-[2rem] p-8 sm:p-10 border border-gray-100 dark:border-gray-700/60 shadow-[0_4px_20px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 group">
+                            <div className="w-full h-40 sm:h-56 -mt-16 sm:-mt-24 mb-6 select-none flex items-center justify-center relative z-20">
+                                <img src="/creativetech/1.png" alt="Creative Media Illustration" className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" />
                             </div>
                             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Creative Media</h3>
                             <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed font-medium">Expert video editing, dynamic motion graphics, custom branding, and original song making to give your brand an unforgettable identity.</p>
                         </div>
                         
                         {/*  Card 2: Tech (Offset downwards on larger screens)  */}
-                        <div className="reveal-on-scroll sm:translate-y-8 relative bg-white dark:bg-[#0a0a0a] rounded-[2rem] p-8 sm:p-10 border border-gray-100 dark:border-gray-700/60 shadow-[0_4px_20px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300">
-                            <div className="w-12 h-12 rounded-2xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 flex items-center justify-center text-gray-900 dark:text-white mb-6 shadow-sm">
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <div className="reveal-on-scroll sm:translate-y-8 relative bg-white dark:bg-[#0a0a0a] rounded-[2rem] p-8 sm:p-10 border border-gray-100 dark:border-gray-700/60 shadow-[0_4px_20px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 group">
+                            <div className="w-full h-40 sm:h-56 -mt-16 sm:-mt-24 mb-6 select-none flex items-center justify-center relative z-20">
+                                <img src="/creativetech/2.png" alt="Tech & Automation Illustration" className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" />
                             </div>
                             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Tech & Automation</h3>
                             <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed font-medium">Full-stack web and app design, custom SaaS website development, and smart AI automations designed to streamline your operations.</p>
@@ -620,8 +620,8 @@ export default function Home() {
                                 {/*  Subtle background glow  */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 to-transparent dark:from-blue-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                                 
-                                <div className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 text-blue-600 dark:text-blue-400">
-                                    <svg className="w-6 h-6 sm:w-8 sm:h-8 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                <div className="w-full h-40 sm:h-48 mb-6 select-none flex items-center justify-center relative z-10">
+                                    <img src="/menu/1.png" alt="Content Creation Illustration" className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" />
                                 </div>
                                 
                                 <h3 className="font-bold text-xl sm:text-2xl text-gray-900 dark:text-white mb-3 relative z-10">Content Creation</h3>
@@ -641,8 +641,8 @@ export default function Home() {
                             <div className="relative h-full bg-white dark:bg-gray-900 rounded-[1.5rem] sm:rounded-[2rem] border border-gray-100 dark:border-gray-800 p-6 sm:p-10 flex flex-col hover:-translate-y-1.5 transition-all duration-500 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 to-transparent dark:from-amber-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                                 
-                                <div className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 text-amber-600 dark:text-amber-400">
-                                    <svg className="w-6 h-6 sm:w-8 sm:h-8 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                <div className="w-full h-40 sm:h-48 mb-6 select-none flex items-center justify-center relative z-10">
+                                    <img src="/menu/2.png" alt="AI Solutions Illustration" className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" />
                                 </div>
                                 
                                 <h3 className="font-bold text-xl sm:text-2xl text-gray-900 dark:text-white mb-3 relative z-10">AI Solutions</h3>
@@ -662,8 +662,8 @@ export default function Home() {
                             <div className="relative h-full bg-white dark:bg-gray-900 rounded-[1.5rem] sm:rounded-[2rem] border border-gray-100 dark:border-gray-800 p-6 sm:p-10 flex flex-col hover:-translate-y-1.5 transition-all duration-500 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/80 to-transparent dark:from-emerald-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                                 
-                                <div className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-emerald-50 dark:bg-emerald-900/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 text-emerald-600 dark:text-emerald-400">
-                                    <svg className="w-6 h-6 sm:w-8 sm:h-8 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                                <div className="w-full h-40 sm:h-48 mb-6 select-none flex items-center justify-center relative z-10">
+                                    <img src="/menu/3.png" alt="Web Development Illustration" className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" />
                                 </div>
                                 
                                 <h3 className="font-bold text-xl sm:text-2xl text-gray-900 dark:text-white mb-3 relative z-10">Web Development</h3>
@@ -683,8 +683,8 @@ export default function Home() {
                             <div className="relative h-full bg-white dark:bg-gray-900 rounded-[1.5rem] sm:rounded-[2rem] border border-gray-100 dark:border-gray-800 p-6 sm:p-10 flex flex-col hover:-translate-y-1.5 transition-all duration-500 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-br from-violet-50/80 to-transparent dark:from-violet-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                                 
-                                <div className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-violet-50 dark:bg-violet-900/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 text-violet-600 dark:text-violet-400">
-                                    <svg className="w-6 h-6 sm:w-8 sm:h-8 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+                                <div className="w-full h-40 sm:h-48 mb-6 select-none flex items-center justify-center relative z-10">
+                                    <img src="/menu/4.png" alt="Branding Illustration" className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" />
                                 </div>
                                 
                                 <h3 className="font-bold text-xl sm:text-2xl text-gray-900 dark:text-white mb-3 relative z-10">Branding</h3>
@@ -741,8 +741,8 @@ export default function Home() {
                                 {/*  Front Face  */}
                                 <div className="absolute inset-0 backface-hidden bg-white dark:bg-black/80 dark:bg-black/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/50 dark:border-gray-600 flex flex-col items-center justify-center text-center z-10">
                                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-t-3xl"></div>
-                                    <div className="w-12 h-12 md:w-20 md:h-20 mb-3 md:mb-6 rounded-2xl bg-gradient-to-br from-cyan-100 to-blue-100 dark:from-cyan-900 dark:to-blue-900 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
-                                        <Sparkles className="w-6 h-6 md:w-10 md:h-10 text-blue-600 dark:text-blue-400" strokeWidth={1.5} />
+                                    <div className="w-24 h-24 md:w-44 md:h-44 mb-3 md:mb-6 select-none flex items-center justify-center relative z-10 transform group-hover:scale-110 transition-transform duration-500">
+                                        <img src="/whyus/1.png" alt="Cinema-Grade Quality Illustration" className="w-full h-full object-contain" />
                                     </div>
                                     <h3 className="text-lg md:text-3xl font-bold text-gray-900 dark:text-white mb-1 md:mb-2">Cinema-Grade Quality</h3>
                                     <p className="text-[10px] md:text-xs text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-1 md:mt-4">Tap to Reveal</p>
@@ -761,8 +761,8 @@ export default function Home() {
                                 {/*  Front Face  */}
                                 <div className="absolute inset-0 backface-hidden bg-white dark:bg-black/80 dark:bg-black/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/50 dark:border-gray-600 flex flex-col items-center justify-center text-center z-10">
                                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 to-pink-600 rounded-t-3xl"></div>
-                                    <div className="w-12 h-12 md:w-20 md:h-20 mb-3 md:mb-6 rounded-2xl bg-gradient-to-br from-orange-100 to-pink-100 dark:from-orange-900 dark:to-pink-900 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
-                                        <TrendingUp className="w-6 h-6 md:w-10 md:h-10 text-pink-600 dark:text-pink-400" strokeWidth={1.5} />
+                                    <div className="w-24 h-24 md:w-44 md:h-44 mb-3 md:mb-6 select-none flex items-center justify-center relative z-10 transform group-hover:scale-110 transition-transform duration-500">
+                                        <img src="/whyus/2.png" alt="Viral-Ready Content Illustration" className="w-full h-full object-contain" />
                                     </div>
                                     <h3 className="text-lg md:text-3xl font-bold text-gray-900 dark:text-white mb-1 md:mb-2">Viral-Ready Content</h3>
                                     <p className="text-[10px] md:text-xs text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-1 md:mt-4">Tap to Reveal</p>
@@ -781,8 +781,8 @@ export default function Home() {
                                 {/*  Front Face  */}
                                 <div className="absolute inset-0 backface-hidden bg-white dark:bg-black/80 dark:bg-black/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/50 dark:border-gray-600 flex flex-col items-center justify-center text-center z-10">
                                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-indigo-600 rounded-t-3xl"></div>
-                                    <div className="w-12 h-12 md:w-20 md:h-20 mb-3 md:mb-6 rounded-2xl bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-purple-900 dark:to-indigo-900 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
-                                        <Cpu className="w-6 h-6 md:w-10 md:h-10 text-indigo-600 dark:text-indigo-400" strokeWidth={1.5} />
+                                    <div className="w-24 h-24 md:w-44 md:h-44 mb-3 md:mb-6 select-none flex items-center justify-center relative z-10 transform group-hover:scale-110 transition-transform duration-500">
+                                        <img src="/whyus/3.png" alt="AI & Future Integration Illustration" className="w-full h-full object-contain" />
                                     </div>
                                     <h3 className="text-lg md:text-3xl font-bold text-gray-900 dark:text-white mb-1 md:mb-2">AI & Future Integration</h3>
                                     <p className="text-[10px] md:text-xs text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-1 md:mt-4">Tap to Reveal</p>

@@ -121,8 +121,8 @@ export default function RelatedContent() {
     <section className="mt-16 sm:mt-24 pt-12 border-t border-gray-100 dark:border-zinc-800/60 w-full relative z-20">
       <div className="flex flex-col mb-8 text-left">
         <div className="flex items-center gap-2 mb-2">
-          <IconComponent className="w-5 h-5 text-[#4B4EFC] dark:text-[#6c6efc]" />
-          <span className="text-[10px] font-bold text-[#4B4EFC] dark:text-[#818cf8] uppercase tracking-widest">{currentCategory.name} Recommendations</span>
+          <IconComponent className="w-5 h-5 text-black dark:text-white" />
+          <span className="text-[10px] font-bold text-black dark:text-zinc-300 uppercase tracking-widest">{currentCategory.name} Recommendations</span>
         </div>
         <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white tracking-tight leading-none mb-1">
           {currentCategory.title}
@@ -137,17 +137,17 @@ export default function RelatedContent() {
           <Link
             key={item.path}
             href={item.path}
-            className="group p-5 bg-white/40 dark:bg-zinc-900/30 rounded-2xl border border-gray-200/50 dark:border-zinc-800/50 shadow-[0_2px_8px_rgba(0,0,0,0.01)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between hover:border-[#4B4EFC]/30 dark:hover:border-[#6c6efc]/30 hover:bg-white/80 dark:hover:bg-zinc-900/60"
+            className="group p-5 bg-white/40 dark:bg-zinc-900/30 rounded-2xl border border-gray-200/50 dark:border-zinc-800/50 shadow-[0_2px_8px_rgba(0,0,0,0.01)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between hover:border-black/30 dark:hover:border-white/30 hover:bg-white/80 dark:hover:bg-zinc-900/60"
           >
             <div>
-              <h4 className="font-bold text-gray-900 dark:text-white group-hover:text-[#4B4EFC] dark:group-hover:text-[#818cf8] transition-colors text-sm sm:text-base tracking-tight mb-1">
+              <h4 className="font-bold text-gray-900 dark:text-white group-hover:text-black dark:group-hover:text-white transition-colors text-sm sm:text-base tracking-tight mb-1">
                 {item.name}
               </h4>
               <p className="text-xs text-gray-500 dark:text-zinc-400 leading-relaxed font-medium">
                 {item.desc}
               </p>
             </div>
-            <span className="flex items-center gap-1 text-[10px] font-bold text-[#4B4EFC] dark:text-[#818cf8] mt-4 group-hover:translate-x-1 transition-transform">
+            <span className="flex items-center gap-1 text-[10px] font-bold text-black dark:text-zinc-300 mt-4 group-hover:translate-x-1 transition-transform">
               Visit Page <ArrowRight className="w-3.5 h-3.5" />
             </span>
           </Link>

@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="w-full bg-white dark:bg-[#0a0a0a] border-t border-gray-200 dark:border-white/10 pt-16 pb-8 relative z-20 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-12 mb-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-12 mb-16">
                 
                 {/* Brand & Newsletter */}
                 <div className="flex flex-col">
@@ -66,6 +66,20 @@ export default function Footer() {
                         <li><Link href="/terms" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Terms of Service</Link></li>
                         <li><Link href="/cookie-policy" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Cookie Policy</Link></li>
                         <li><Link href="/refund-policy" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Refund Policy</Link></li>
+                    </ul>
+                </div>
+
+                {/* Social */}
+                <div className="flex flex-col">
+                    <h4 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-6">Social</h4>
+                    <ul className="flex flex-col gap-3 text-sm text-gray-500 dark:text-gray-400">
+                        <li><a href="https://www.linkedin.com/company/docdril/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BMtYAjo9UQRSkchadjGCpLA%3D%3D" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">LinkedIn</a></li>
+                        <li><a href="https://www.instagram.com/docdril/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Instagram</a></li>
+                        <li><a href="https://www.facebook.com/docdril" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Facebook</a></li>
+                        <li><a href="https://www.youtube.com/@Docdril" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">YouTube</a></li>
+                        <li><a href="https://x.com/docdril" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">X (Twitter)</a></li>
+                        <li><a href="https://in.pinterest.com/docdril/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Pinterest</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Vb6MycQ77qVPVBqp2y44" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">WhatsApp Channel</a></li>
                     </ul>
                 </div>
             </div>
