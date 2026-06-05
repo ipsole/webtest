@@ -278,8 +278,7 @@
                 image: "https://uploads.onecompiler.io/445by7jfj/448sznub6/piyush.jpg",
                 quote: "Video editing must be rooted in deep psychological strategy.",
                 bio: "Piyush Chaudhary is the visionary behind Docdril. He developed the \"Atomic Editing\" vision and drives the core philosophy that video editing must be rooted in deep psychological strategy to maximize client ROI and build lasting brand authority.",
-                linkedin: "https://www.linkedin.com/in/ipsole/",
-                instagram: "https://www.instagram.com/cozicupid/"
+                linkedin: "https://www.linkedin.com/in/ipsole/"
             },
             {
                 name: "Arushi Bhansali",
@@ -288,8 +287,7 @@
                 image: "https://uploads.onecompiler.io/445by7jfj/448sznub6/arushi.jpg",
                 quote: "Excellence is not an act, but a habit of execution.",
                 bio: "Arushi Bhansali expertly oversees the strategic direction and operational execution. She ensures that Docdril’s commitment to premium, high-quality deliverables and streamlined client success is consistently met.",
-                linkedin: "https://www.linkedin.com/in/arushi-bhansali-b1a53b277/",
-                instagram: "https://www.instagram.com/aruzie_/"
+                linkedin: "https://www.linkedin.com/in/arushi-bhansali-b1a53b277/"
             }
         ];
 
@@ -329,12 +327,16 @@
                         />
                         <!-- UPDATED: Responsive scaling for position, padding and icon size -->
                         <div class="absolute bottom-4 left-4 sm:bottom-5 sm:left-5 lg:bottom-6 lg:left-6 z-20 flex gap-2 sm:gap-3">
+                            ${founder.linkedin ? `
                             <a href="${founder.linkedin}" target="_blank" class="p-1.5 sm:p-2 lg:p-2.5 bg-white/90 backdrop-blur-md text-gray-700 hover:text-blue-600 rounded-full transition-colors shadow-lg shadow-black/10 flex items-center justify-center hover:scale-110 border border-white/50">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                             </a>
+                            ` : ''}
+                            ${founder.instagram ? `
                             <a href="${founder.instagram}" target="_blank" class="p-1.5 sm:p-2 lg:p-2.5 bg-white/90 backdrop-blur-md text-gray-700 hover:text-pink-600 rounded-full transition-colors shadow-lg shadow-black/10 flex items-center justify-center hover:scale-110 border border-white/50">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                             </a>
+                            ` : ''}
                         </div>
                     </div>
                     <div class="p-3 sm:p-6 lg:p-8 flex flex-col flex-grow text-center">
