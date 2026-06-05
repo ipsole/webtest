@@ -30,7 +30,7 @@ export default function ServicesContentCreation() {
                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-xs md:text-sm font-medium z-0">
                     Put: hero-showreel.webp here
                 </div>
-                <img src="/services/content-creation/images/hero-showreel.webp" alt="Cinematic Content Creation" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
+                <img src="/contentcreation/hero-showreel.webp" alt="Cinematic Content Creation" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
             </div>
         </header>
 
@@ -49,7 +49,7 @@ export default function ServicesContentCreation() {
                         <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-xs md:text-sm font-medium z-0">
                             Put: agency-methodology.webp here
                         </div>
-                        <img src="/services/content-creation/images/agency-methodology.webp" alt="Our Methodology" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
+                        <img src="/contentcreation/agency-methodology.webp" alt="Our Methodology" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@ export default function ServicesContentCreation() {
                                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-[10px] md:text-xs font-medium z-0">
                                     service-short-form.webp
                                 </div>
-                                <img src="/services/content-creation/images/service-short-form.webp" alt="Short-Form Video" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
+                                <img src="/contentcreation/service-short-form.webp" alt="Short-Form Video" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
                             </div>
                             <div className="p-6 md:p-8">
                                 <div className="flex justify-between items-center mb-3 md:mb-4">
@@ -92,7 +92,7 @@ export default function ServicesContentCreation() {
                                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-[10px] md:text-xs font-medium z-0">
                                     service-long-form.webp
                                 </div>
-                                <img src="/services/content-creation/images/service-long-form.webp" alt="Long-Form Video" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
+                                <img src="/contentcreation/service-long-form.webp" alt="Long-Form Video" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
                             </div>
                             <div className="p-6 md:p-8">
                                 <div className="flex justify-between items-center mb-3 md:mb-4">
@@ -113,7 +113,7 @@ export default function ServicesContentCreation() {
                                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-[10px] md:text-xs font-medium z-0">
                                     service-ai.webp
                                 </div>
-                                <img src="/services/content-creation/images/service-ai.webp" alt="AI Production" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
+                                <img src="/contentcreation/service-ai.webp" alt="AI Production" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
                             </div>
                             <div className="p-6 md:p-8">
                                 <div className="flex justify-between items-center mb-3 md:mb-4">
@@ -134,7 +134,7 @@ export default function ServicesContentCreation() {
                                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-[10px] md:text-xs font-medium z-0">
                                     service-beat.webp
                                 </div>
-                                <img src="/services/content-creation/images/service-beat.webp" alt="Beat Making" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
+                                <img src="/contentcreation/service-beat.webp" alt="Beat Making" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
                             </div>
                             <div className="p-6 md:p-8">
                                 <div className="flex justify-between items-center mb-3 md:mb-4">

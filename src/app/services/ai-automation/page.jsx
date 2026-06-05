@@ -30,7 +30,7 @@ export default function ServicesAiAutomation() {
                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-xs md:text-sm font-medium z-0">
                     Put: hero-ai-automation.webp here
                 </div>
-                <img src="/services/ai-automation/images/hero-ai-automation.webp" alt="Intelligent AI and Automation Systems" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
+                <img src="/automation/hero-ai-automation.webp" alt="Intelligent AI and Automation Systems" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
             </div>
         </header>
 
@@ -49,7 +49,7 @@ export default function ServicesAiAutomation() {
                         <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-xs md:text-sm font-medium z-0">
                             Put: ai-methodology.webp here
                         </div>
-                        <img src="/services/ai-automation/images/ai-methodology.webp" alt="AI Integration Methodology" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
+                        <img src="/automation/ai-methodology.webp" alt="AI Integration Methodology" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@ export default function ServicesAiAutomation() {
                                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-[10px] md:text-xs font-medium z-0">
                                     service-ai-agents.webp
                                 </div>
-                                <img src="/services/ai-automation/images/service-ai-agents.webp" alt="AI Agents" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
+                                <img src="/automation/service-ai-agents.webp" alt="AI Agents" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
                             </div>
                             <div className="p-6 md:p-8">
                                 <div className="flex justify-between items-center mb-3 md:mb-4">
@@ -92,7 +92,7 @@ export default function ServicesAiAutomation() {
                                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-[10px] md:text-xs font-medium z-0">
                                     service-automation.webp
                                 </div>
-                                <img src="/services/ai-automation/images/service-automation.webp" alt="Automation Services" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
+                                <img src="/automation/service-automation.webp" alt="Automation Services" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
                             </div>
                             <div className="p-6 md:p-8">
                                 <div className="flex justify-between items-center mb-3 md:mb-4">

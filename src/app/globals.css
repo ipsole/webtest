@@ -36,6 +36,11 @@
     --cursor-ring-hover-border: rgba(255,255,255,0.6);
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 * {
     -webkit-tap-highlight-color: transparent !important;
     -webkit-focus-ring-color: transparent !important;
@@ -468,7 +473,7 @@ a.rounded-3xl:active {
     width: calc(100% - 2rem);
     max-width: 64rem; /* max-w-5xl equivalent */
     margin: 7rem auto 4rem;
-    padding: 2.5rem 1.5rem;
+    padding: 2.5rem 1rem;
     background-color: rgba(255, 255, 255, 0.6);
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 2rem;
@@ -477,12 +482,46 @@ a.rounded-3xl:active {
     -webkit-backdrop-filter: blur(20px);
     animation: portfolioFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .dark .seo-page {
     background-color: rgba(10, 10, 10, 0.4);
     border-color: rgba(255, 255, 255, 0.08);
     box-shadow: 0 20px 50px -12px rgba(0,0,0,0.5);
+}
+
+/* Disable backdrop filters, backgrounds, borders, and shadows when sitemap is open to prevent white corner refraction glow artifacts */
+body.sitemap-open {
+    overflow: hidden !important;
+    height: 100% !important;
+}
+
+body.sitemap-open .seo-page,
+body.sitemap-open header nav {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Sitemap explorer folder row tap and highlight overrides */
+.sitemap-folder-row {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+    outline: none !important;
+    user-select: none;
+    touch-action: manipulation; /* Disables double-tap zoom delay and prevents dynamic address-bar viewport resizing */
+}
+.sitemap-folder-row:focus,
+.sitemap-folder-row:active {
+    outline: none !important;
+    background-color: rgba(243, 244, 246, 0.7) !important;
+}
+.dark .sitemap-folder-row:focus,
+.dark .sitemap-folder-row:active {
+    background-color: rgba(39, 39, 42, 0.6) !important;
 }
 
 

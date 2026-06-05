@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from 'react';
-import { Play, Pause } from 'lucide-react';
+import { Play, Pause, LayoutGrid, MessageSquare, Wallet } from 'lucide-react';
 import Link from 'next/link';
 import { useModal } from '../context/ModalContext';
 import { useRevealOnScroll } from '../hooks/useRevealOnScroll';
@@ -165,9 +165,21 @@ export default function Home() {
   const [hoveredWorkStep, setHoveredWorkStep] = useState(null);
 
   const appFeatures = [
-    { title: "Client Project Delivery & Management", desc: "Seamlessly add projects, track process, output, and delivery all in one centralized hub." },
-    { title: "Built-in Communication", desc: "Features integrated queries, chat functions, and timestamped comments for better assistance and precise revisions." },
-    { title: "Integrated Wallet & Payments", desc: "Onboard projects smoothly. Start with an advance or pay in full upfront, then settle any remaining balance at the end for a seamless experience." }
+    { 
+      title: "Client Project Delivery & Management", 
+      desc: "Seamlessly add projects, track process, output, and delivery all in one centralized hub.",
+      icon: <LayoutGrid className="w-5 h-5 text-black dark:text-white" />
+    },
+    { 
+      title: "Built-in Communication", 
+      desc: "Features integrated queries, chat functions, and timestamped comments for better assistance and precise revisions.",
+      icon: <MessageSquare className="w-5 h-5 text-black dark:text-white" />
+    },
+    { 
+      title: "Integrated Wallet & Payments", 
+      desc: "Onboard projects smoothly. Start with an advance or pay in full upfront, then settle any remaining balance at the end for a seamless experience.",
+      icon: <Wallet className="w-5 h-5 text-black dark:text-white" />
+    }
   ];
 
   const [activeAppFeatureIndex, setActiveAppFeatureIndex] = useState(0);
@@ -420,29 +432,29 @@ export default function Home() {
                         <div className="w-full max-w-5xl mx-auto px-1 sm:px-4 relative mb-2 sm:mb-4">
                             <div className="grid grid-cols-3 gap-2 sm:gap-6 relative z-10">
                                 {/* Client Box */}
-                                <div className="bg-white/70 dark:bg-black/60 backdrop-blur-xl border border-gray-200/80 dark:border-gray-800 rounded-xl sm:rounded-[1.5rem] p-2 sm:p-6 shadow-md sm:shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-lg hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 w-full mx-auto group">
-                                    <div className="w-20 h-20 sm:w-40 sm:h-40 -mt-10 sm:-mt-20 mb-1 sm:mb-2 select-none relative z-20">
+                                <div className="bg-white/70 dark:bg-black/60 backdrop-blur-xl border border-gray-200/80 dark:border-gray-800 rounded-xl sm:rounded-[1.5rem] pt-2 pb-5 px-1 sm:p-6 shadow-md sm:shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-lg hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 w-full mx-auto group">
+                                    <div className="w-20 h-20 sm:w-40 sm:h-40 -mt-10 sm:-mt-20 mb-2 sm:mb-2 select-none relative z-20">
                                         <img src="/app/1.png" alt="Clients Illustration" className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" />
                                     </div>
-                                    <h4 className="text-[9px] sm:text-base font-bold text-gray-900 dark:text-white mb-0 sm:mb-2 truncate w-full px-1">Clients</h4>
+                                    <h4 className="text-xs sm:text-base font-bold text-gray-900 dark:text-white mb-0 sm:mb-2 truncate w-full px-1">Clients</h4>
                                     <p className="hidden sm:block text-[11px] sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Project delivery, tracking, and seamless onboarding.</p>
                                 </div>
                                 
                                 {/* Manager Box */}
-                                <div className="bg-white/70 dark:bg-black/60 backdrop-blur-xl border border-gray-200/80 dark:border-gray-800 rounded-xl sm:rounded-[1.5rem] p-2 sm:p-6 shadow-md sm:shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-lg hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 w-full mx-auto group">
-                                    <div className="w-20 h-20 sm:w-40 sm:h-40 -mt-10 sm:-mt-20 mb-1 sm:mb-2 select-none relative z-20">
+                                <div className="bg-white/70 dark:bg-black/60 backdrop-blur-xl border border-gray-200/80 dark:border-gray-800 rounded-xl sm:rounded-[1.5rem] pt-2 pb-5 px-1 sm:p-6 shadow-md sm:shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-lg hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 w-full mx-auto group">
+                                    <div className="w-20 h-20 sm:w-40 sm:h-40 -mt-10 sm:-mt-20 mb-2 sm:mb-2 select-none relative z-20">
                                         <img src="/app/2.png" alt="Managers Illustration" className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" />
                                     </div>
-                                    <h4 className="text-[9px] sm:text-base font-bold text-gray-900 dark:text-white mb-0 sm:mb-2 truncate w-full px-1">Managers</h4>
+                                    <h4 className="text-xs sm:text-base font-bold text-gray-900 dark:text-white mb-0 sm:mb-2 truncate w-full px-1">Managers</h4>
                                     <p className="hidden sm:block text-[11px] sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Team coordination, timeline tracking, and reporting.</p>
                                 </div>
                                 
                                 {/* Admin Box */}
-                                <div className="bg-white/70 dark:bg-black/60 backdrop-blur-xl border border-gray-200/80 dark:border-gray-800 rounded-xl sm:rounded-[1.5rem] p-2 sm:p-6 shadow-md sm:shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-lg hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 w-full mx-auto group">
-                                    <div className="w-20 h-20 sm:w-40 sm:h-40 -mt-10 sm:-mt-20 mb-1 sm:mb-2 select-none relative z-20">
+                                <div className="bg-white/70 dark:bg-black/60 backdrop-blur-xl border border-gray-200/80 dark:border-gray-800 rounded-xl sm:rounded-[1.5rem] pt-2 pb-5 px-1 sm:p-6 shadow-md sm:shadow-xl shadow-black/5 dark:shadow-white/5 text-center flex flex-col items-center hover:-translate-y-1 hover:shadow-lg hover:shadow-black/15 dark:hover:shadow-white/10 transition-all duration-300 cursor-default relative z-10 w-full mx-auto group">
+                                    <div className="w-20 h-20 sm:w-40 sm:h-40 -mt-10 sm:-mt-20 mb-2 sm:mb-2 select-none relative z-20">
                                         <img src="/app/3.png" alt="Admins Illustration" className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" />
                                     </div>
-                                    <h4 className="text-[9px] sm:text-base font-bold text-gray-900 dark:text-white mb-0 sm:mb-2 truncate w-full px-1">Admins</h4>
+                                    <h4 className="text-xs sm:text-base font-bold text-gray-900 dark:text-white mb-0 sm:mb-2 truncate w-full px-1">Admins</h4>
                                     <p className="hidden sm:block text-[11px] sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Full ecosystem control, analytics, and billing.</p>
                                 </div>
                             </div>
@@ -452,24 +464,34 @@ export default function Home() {
                         <div className="w-px sm:w-[2px] h-6 sm:h-10 bg-gray-300 dark:bg-zinc-700 opacity-80 z-0 mb-0"></div>
 
                         {/*  App Info Details (Carousel)  */}
-                        <div className="w-full max-w-2xl mx-auto relative z-10 bg-white dark:bg-[#0a0a0a] border border-gray-100 dark:border-gray-800 rounded-[1.5rem] p-6 sm:p-8 text-left shadow-xl shadow-black/5 dark:shadow-white/5">
-                            <h3 className="text-sm sm:text-base md:text-lg font-black text-gray-900 dark:text-white uppercase tracking-[0.15em] mb-6 flex items-center gap-3 drop-shadow-sm">
-                                <span className="relative flex h-3 w-3 sm:h-3.5 sm:w-3.5">
+                        <div className="w-full max-w-2xl mx-auto relative z-10 bg-gradient-to-br from-white via-slate-50/80 to-white dark:from-zinc-900 dark:via-zinc-950/90 dark:to-zinc-900 backdrop-blur-xl border border-gray-200/60 dark:border-zinc-800 rounded-[2rem] p-6 sm:p-8 text-left shadow-2xl shadow-gray-200/50 dark:shadow-black/70 hover:shadow-indigo-500/5 dark:hover:shadow-indigo-400/5 transition-all duration-500">
+                            <h3 className="text-xs sm:text-sm font-black text-gray-900 dark:text-white uppercase tracking-[0.2em] mb-6 flex items-center gap-3 drop-shadow-sm">
+                                <span className="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3">
                                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                                  <span className="relative inline-flex rounded-full h-3 w-3 sm:h-3.5 sm:w-3.5 bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.8)]"></span>
+                                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 sm:h-3 sm:w-3 bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.8)]"></span>
                                 </span>
                                 PROJECT DELIVERY APP
                             </h3>
-                            <div className="relative w-full min-h-[100px] sm:min-h-[70px] flex items-center">
+                            <div className="relative w-full min-h-[125px] sm:min-h-[85px]">
                                 {appFeatures.map((feature, idx) => (
                                     <div 
                                         key={idx} 
-                                        className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${activeAppFeatureIndex === idx ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 z-0 pointer-events-none'}`}
+                                        className={`absolute inset-0 transition-all duration-500 ease-in-out flex items-start gap-4 sm:gap-5 ${activeAppFeatureIndex === idx ? 'opacity-100 translate-y-0 z-10 pointer-events-auto' : 'opacity-0 translate-y-2 z-0 pointer-events-none'}`}
                                     >
-                                        <p className="text-sm sm:text-[15px] text-gray-500 dark:text-gray-400 leading-relaxed m-0">
-                                            <strong className="text-gray-900 dark:text-white mr-1.5">{feature.title}:</strong> 
-                                            {feature.desc}
-                                        </p>
+                                        {/* Icon Badge */}
+                                        <div className="p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-zinc-850/80 text-black dark:text-white border border-gray-100 dark:border-zinc-700/80 shadow-[0_4px_12px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_12px_rgba(0,0,0,0.3)] shrink-0 flex items-center justify-center">
+                                            {feature.icon}
+                                        </div>
+                                        
+                                        {/* Text Details */}
+                                        <div className="flex flex-col gap-1.5">
+                                            <h4 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 dark:text-white leading-tight">
+                                                {feature.title}
+                                            </h4>
+                                            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed m-0">
+                                                {feature.desc}
+                                            </p>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
@@ -480,7 +502,7 @@ export default function Home() {
                                     <button
                                         key={idx}
                                         onClick={() => setActiveAppFeatureIndex(idx)}
-                                        className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 focus:outline-none ${activeAppFeatureIndex === idx ? 'w-6 sm:w-8 bg-gray-900 dark:bg-white' : 'w-1.5 sm:w-2 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600'}`}
+                                        className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 focus:outline-none ${activeAppFeatureIndex === idx ? 'w-6 sm:w-8 bg-black dark:bg-white' : 'w-1.5 sm:w-2 bg-gray-300 dark:bg-zinc-800 hover:bg-gray-400 dark:hover:bg-zinc-700'}`}
                                         aria-label={`Go to feature ${idx + 1}`}
                                     />
                                 ))}
@@ -547,7 +569,7 @@ export default function Home() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-20 sm:gap-8 max-w-5xl mx-auto pt-10 sm:pt-16">
                         {/*  Card 1: Creative  */}
                         <div className="reveal-on-scroll relative bg-white dark:bg-[#0a0a0a] rounded-[2rem] p-8 sm:p-10 border border-gray-100 dark:border-gray-700/60 shadow-[0_4px_20px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 group">
-                            <div className="w-full h-40 sm:h-56 -mt-16 sm:-mt-24 mb-6 select-none flex items-center justify-center relative z-20">
+                            <div className="w-full h-40 sm:h-56 mt-0 sm:-mt-24 mb-6 select-none flex items-center justify-center relative z-20">
                                 <img src="/creativetech/1.png" alt="Creative Media Illustration" className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" />
                             </div>
                             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Creative Media</h3>
@@ -556,7 +578,7 @@ export default function Home() {
                         
                         {/*  Card 2: Tech (Offset downwards on larger screens)  */}
                         <div className="reveal-on-scroll sm:translate-y-8 relative bg-white dark:bg-[#0a0a0a] rounded-[2rem] p-8 sm:p-10 border border-gray-100 dark:border-gray-700/60 shadow-[0_4px_20px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 group">
-                            <div className="w-full h-40 sm:h-56 -mt-16 sm:-mt-24 mb-6 select-none flex items-center justify-center relative z-20">
+                            <div className="w-full h-40 sm:h-56 mt-0 sm:-mt-24 mb-6 select-none flex items-center justify-center relative z-20">
                                 <img src="/creativetech/2.png" alt="Tech & Automation Illustration" className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" />
                             </div>
                             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Tech & Automation</h3>

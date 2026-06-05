@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useModal } from '../context/ModalContext';
 import { X, RefreshCw, Layers } from 'lucide-react';
-import ExploreSidebar from './ExploreSidebar';
 
 export default function Modals() {
   const {
@@ -11,8 +10,21 @@ export default function Modals() {
     isPortfolioOpen, setIsPortfolioOpen,
     isAppPreviewOpen, setIsAppPreviewOpen,
     infoModal, setInfoModal,
-    setIsMouseLoopPaused
+    setIsMouseLoopPaused,
+    isExploreOpen
   } = useModal();
+
+  // Add helper class to body when sitemap/explorer is open to disable backdrop filters and avoid white glow artifacts
+  useEffect(() => {
+    if (isExploreOpen) {
+      document.body.classList.add('sitemap-open');
+    } else {
+      document.body.classList.remove('sitemap-open');
+    }
+    return () => {
+      document.body.classList.remove('sitemap-open');
+    };
+  }, [isExploreOpen]);
 
   const iframeRef = useRef(null);
   const portfolioRef = useRef(null);
@@ -214,8 +226,6 @@ export default function Modals() {
           </button>
         </div>
       </div>
-
-      <ExploreSidebar />
     </>
   );
 }

@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Maximize, ChevronLeft, ChevronRight, X, Sparkles } from 'lucide-react';
+import { ArrowLeft, Maximize, ChevronLeft, ChevronRight, X, Sparkles, Film, Cpu } from 'lucide-react';
 import { useRevealOnScroll } from '../../hooks/useRevealOnScroll';
 import RelatedContent from '../../components/RelatedContent';
 
@@ -18,16 +18,16 @@ const FOUNDERS = [
         name: "Piyush Chaudhary",
         role: "Founder & Director",
         image: "https://uploads.onecompiler.io/445by7jfj/448sznub6/piyush.jpg",
-        quote: "Video editing must be rooted in deep psychological strategy.",
-        bio: "Piyush Chaudhary is the visionary behind Docdril. He developed the \"Atomic Editing\" vision and drives the core philosophy that video editing must be rooted in deep psychological strategy to maximize client ROI and build lasting brand authority.",
+        quote: "I found excuses in doing what I want to...",
+        bio: "Piyush is the visionary behind Docdril. He has shaped the brand’s vision, mission, and foundational principles. His expertise lies in deeply understanding how to scale and elevate Docdril to its highest potential.",
         linkedin: "https://www.linkedin.com/in/ipsole/"
     },
     {
         name: "Arushi Bhansali",
         role: "Co-Founder & Managing Director",
         image: "https://uploads.onecompiler.io/445by7jfj/448sznub6/arushi.jpg",
-        quote: "Excellence is not an act, but a habit of execution.",
-        bio: "Arushi Bhansali expertly oversees the strategic direction and operational execution. She ensures that Docdril’s commitment to premium, high-quality deliverables and streamlined client success is consistently met.",
+        quote: "Trust isn’t won in meetings. It’s earned in execution.",
+        bio: "Arushi leads Docdril’s strategic direction and operational excellence. She ensures every project is delivered with precision, consistency, and a commitment to exceeding client expectations.",
         linkedin: "https://www.linkedin.com/in/arushi-bhansali-b1a53b277/"
     }
 ];
@@ -188,31 +188,97 @@ export default function About() {
             </section>
 
             {/* Company Philosophy Section */}
-            <section className="py-16 px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="max-w-4xl mx-auto text-center mb-8">
-                    <div className="inline-flex items-center justify-center px-4 py-1.5 mb-8 rounded-full bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm border border-gray-100 dark:border-gray-700 shadow-sm">
-                        <Sparkles className="w-4 h-4 text-red-700 dark:text-red-400 mr-2" />
-                        <span className="text-xs font-semibold tracking-wider uppercase text-gray-800 dark:text-gray-200">Who We Are</span>
+            <section className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="max-w-5xl mx-auto">
+                    
+                    {/* Badge */}
+                    <div className="text-center mb-12">
+                        <div className="inline-flex items-center justify-center px-4 py-1.5 mb-4 rounded-full bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm border border-gray-100 dark:border-zinc-800 shadow-sm">
+                            <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400 mr-2 animate-pulse" />
+                            <span className="text-xs font-semibold tracking-wider uppercase text-gray-800 dark:text-zinc-200">Who We Are</span>
+                        </div>
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white mt-2 drop-shadow-sm">
+                            The Creative-Tech DNA
+                        </h2>
                     </div>
 
-                    <div className="space-y-6 text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed font-medium">
-                        <p>
-                            Docdril is a creative studio that inspires brand stories through <span className="text-gray-900 dark:text-white font-semibold">cinematic visuals</span>, design intelligence, and emotionally charged narratives.
-                        </p>
-                        <p>
-                            We craft <span className="text-gray-900 dark:text-white font-semibold">thesis-driven motion graphics</span> and proof-based visual edits that transform ideas into powerful, finished content. Our media expertise spans across high-retention <span className="text-gray-900 dark:text-white font-semibold">Short-Form</span> content for TikToks and Reels, to clean, professional <span className="text-gray-900 dark:text-white font-semibold">Long-Form</span> edits for vlogs and podcasts. From end-to-end <span className="text-gray-900 dark:text-white font-semibold">Social Media</span> management to original <span className="text-gray-900 dark:text-white font-semibold">Beat Making</span> and sound design, we create experiences that inspire, provoke, and awaken audiences.
-                        </p>
-                        <p>
-                            Alongside creative production, Docdril operates at the cutting edge of tech. We build custom <span className="text-gray-900 dark:text-white font-semibold">Web Apps</span> and high-converting <span className="text-gray-900 dark:text-white font-semibold">SaaS Websites</span> that turn complex ideas into scalable products. Furthermore, we develop intelligent <span className="text-gray-900 dark:text-white font-semibold">AI Agents</span> designed to automate operations, streamline decision-making, and save hours of manual workflows.
-                        </p>
-                        <div className="pt-6 mt-6 border-t border-gray-200 dark:border-gray-700/60 dark:border-gray-700/60">
-                            <p className="text-lg sm:text-xl text-gray-900 dark:text-white font-bold leading-snug">
-                                Built for visionaries, creators, and brands shaping the future, we offer bespoke solutions tailored to your demands—operating seamlessly at the intersection of creativity, systems, and intelligent automation.
+                    {/* Bento Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                        
+                        {/* Creative Media Card */}
+                        <div className="relative group overflow-hidden bg-white/40 dark:bg-zinc-900/30 backdrop-blur-xl rounded-[2.5rem] border border-gray-200/50 dark:border-zinc-800/50 p-8 sm:p-10 shadow-[0_4px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_50px_rgba(75,78,252,0.08)] hover:-translate-y-1 transition-all duration-500">
+                            {/* Glow background */}
+                            <div className="absolute -top-20 -right-20 w-48 h-48 bg-indigo-500/10 rounded-full blur-3xl group-hover:bg-indigo-500/20 transition-all duration-500"></div>
+                            
+                            <div className="flex items-center gap-4 mb-6">
+                                <div className="p-3.5 sm:p-4 rounded-2xl bg-[#4B4EFC]/10 text-[#4B4EFC] dark:text-[#818cf8] border border-[#4B4EFC]/20 shrink-0">
+                                    <Film className="w-6 h-6 sm:w-7 sm:h-7" />
+                                </div>
+                                <h3 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight">Creative Media</h3>
+                            </div>
+                            
+                            <p className="text-sm sm:text-base text-gray-600 dark:text-zinc-400 leading-relaxed mb-8 font-medium">
+                                We craft thesis-driven motion graphics and proof-based visual edits that transform ideas into powerful, finished content. Our media pipeline inspires brand stories through cinematic visuals and emotionally charged narratives.
                             </p>
+                            
+                            <div className="grid grid-cols-2 gap-3.5">
+                                {[
+                                    { name: "Cinematic VFX", desc: "Premium grading" },
+                                    { name: "Short-Form", desc: "Reels & TikTok hooks" },
+                                    { name: "Long-Form Edits", desc: "Podcasts & vlogs" },
+                                    { name: "Beat Making", desc: "Custom audio scores" }
+                                ].map((tag) => (
+                                    <div key={tag.name} className="flex flex-col p-3 rounded-xl bg-gray-50/50 dark:bg-zinc-900/40 border border-gray-100 dark:border-zinc-800/80">
+                                        <span className="text-xs sm:text-sm font-bold text-gray-800 dark:text-zinc-200">{tag.name}</span>
+                                        <span className="text-[10px] text-gray-400 dark:text-zinc-500 mt-0.5">{tag.desc}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Tech & Automation Card */}
+                        <div className="relative group overflow-hidden bg-white/40 dark:bg-zinc-900/30 backdrop-blur-xl rounded-[2.5rem] border border-gray-200/50 dark:border-zinc-800/50 p-8 sm:p-10 shadow-[0_4px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_50px_rgba(168,85,247,0.08)] hover:-translate-y-1 transition-all duration-500">
+                            {/* Glow background */}
+                            <div className="absolute -top-20 -right-20 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl group-hover:bg-purple-500/20 transition-all duration-500"></div>
+
+                            <div className="flex items-center gap-4 mb-6">
+                                <div className="p-3.5 sm:p-4 rounded-2xl bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20 shrink-0">
+                                    <Cpu className="w-6 h-6 sm:w-7 sm:h-7" />
+                                </div>
+                                <h3 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight">Tech &amp; Automation</h3>
+                            </div>
+                            
+                            <p className="text-sm sm:text-base text-gray-600 dark:text-zinc-400 leading-relaxed mb-8 font-medium">
+                                Docdril operates at the cutting edge of engineering. We build interactive next-gen web applications and integrate intelligent AI agents designed to automate operations, streamline decision-making, and eliminate manual loops.
+                            </p>
+                            
+                            <div className="grid grid-cols-2 gap-3.5">
+                                {[
+                                    { name: "Next.js Apps", desc: "Interactive web apps" },
+                                    { name: "SaaS Websites", desc: "High-converting designs" },
+                                    { name: "AI Agents", desc: "Automated scenarios" },
+                                    { name: "API Integrations", desc: "Make & Zapier sync" }
+                                ].map((tag) => (
+                                    <div key={tag.name} className="flex flex-col p-3 rounded-xl bg-gray-50/50 dark:bg-zinc-900/40 border border-gray-100 dark:border-zinc-800/80">
+                                        <span className="text-xs sm:text-sm font-bold text-gray-800 dark:text-zinc-200">{tag.name}</span>
+                                        <span className="text-[10px] text-gray-400 dark:text-zinc-500 mt-0.5">{tag.desc}</span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
+
+                    {/* Bottom Callout Banner */}
+                    <div className="relative overflow-hidden bg-gradient-to-br from-indigo-50/40 via-white to-purple-50/40 dark:from-zinc-900/60 dark:via-zinc-950/80 dark:to-zinc-900/60 rounded-[2.5rem] p-8 sm:p-12 border border-gray-200/60 dark:border-zinc-800/80 text-center shadow-lg shadow-indigo-500/5 dark:shadow-none">
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-indigo-500/5 dark:bg-indigo-500/10 rounded-full blur-[80px] pointer-events-none"></div>
+                        <p className="relative z-10 text-lg sm:text-xl md:text-2xl font-medium text-gray-800 dark:text-zinc-200 leading-relaxed max-w-3xl mx-auto">
+                            Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4B4EFC] to-purple-600 dark:from-blue-400 dark:to-indigo-300 font-bold">visionaries</span>, creators, and brands shaping the future. We deliver bespoke systems operating seamlessly at the intersection of <span className="font-bold text-gray-900 dark:text-white">creativity</span>, <span className="font-bold text-gray-900 dark:text-white">technology</span>, and <span className="font-bold text-gray-900 dark:text-white">automation</span>.
+                        </p>
+                    </div>
+
                 </div>
             </section>
+
 
             {/* Founders Section */}
             <section className="py-12 px-2 sm:px-6 lg:px-8 relative z-10">

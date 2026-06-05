@@ -32,7 +32,7 @@ export default function ServicesBrandingGrowthBrandIdentityDesign() {
                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-xs md:text-sm font-medium z-0">
                     Put: hero-brand-identity.webp here
                 </div>
-                <img src="/services/branding-growth/brand-identity-design/images/hero-brand-identity.webp" alt="Brand Identity Design Services" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
+                <img src="/allservice/hero-brand-identity.webp" alt="Brand Identity Design Services" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
             </div>
         </header>
 

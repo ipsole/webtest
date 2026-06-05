@@ -30,7 +30,7 @@ export default function ServicesBrandingGrowth() {
                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-xs md:text-sm font-medium z-0">
                     Put: hero-branding-growth.webp here
                 </div>
-                <img src="/services/branding-growth/images/hero-branding-growth.webp" alt="Branding and Growth Strategy" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
+                <img src="/branding/hero-branding-growth.webp" alt="Branding and Growth Strategy" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
             </div>
         </header>
 
@@ -49,7 +49,7 @@ export default function ServicesBrandingGrowth() {
                         <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-xs md:text-sm font-medium z-0">
                             Put: branding-methodology.webp here
                         </div>
-                        <img src="/services/branding-growth/images/branding-methodology.webp" alt="Brand Positioning Methodology" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
+                        <img src="/branding/branding-methodology.webp" alt="Brand Positioning Methodology" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@ export default function ServicesBrandingGrowth() {
                                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-[10px] md:text-xs font-medium z-0">
                                     service-social-media.webp
                                 </div>
-                                <img src="/services/branding-growth/images/service-social-media.webp" alt="Social Media Management" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
+                                <img src="/branding/service-social-media.webp" alt="Social Media Management" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
                             </div>
                             <div className="p-6 md:p-8">
                                 <div className="flex justify-between items-center mb-3 md:mb-4">
@@ -92,7 +92,7 @@ export default function ServicesBrandingGrowth() {
                                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-[10px] md:text-xs font-medium z-0">
                                     service-graphic-design.webp
                                 </div>
-                                <img src="/services/branding-growth/images/service-graphic-design.webp" alt="Graphic Design Services" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
+                                <img src="/branding/service-graphic-design.webp" alt="Graphic Design Services" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
                             </div>
                             <div className="p-6 md:p-8">
                                 <div className="flex justify-between items-center mb-3 md:mb-4">
@@ -113,7 +113,7 @@ export default function ServicesBrandingGrowth() {
                                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-[10px] md:text-xs font-medium z-0">
                                     service-brand-identity.webp
                                 </div>
-                                <img src="/services/branding-growth/images/service-brand-identity.webp" alt="Brand Identity Design" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
+                                <img src="/branding/service-brand-identity.webp" alt="Brand Identity Design" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
                             </div>
                             <div className="p-6 md:p-8">
                                 <div className="flex justify-between items-center mb-3 md:mb-4">
@@ -134,7 +134,7 @@ export default function ServicesBrandingGrowth() {
                                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-[10px] md:text-xs font-medium z-0">
                                     service-consultancy.webp
                                 </div>
-                                <img src="/services/branding-growth/images/service-consultancy.webp" alt="Consultancy Services" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
+                                <img src="/branding/service-consultancy.webp" alt="Consultancy Services" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
                             </div>
                             <div className="p-6 md:p-8">
                                 <div className="flex justify-between items-center mb-3 md:mb-4">
@@ -155,7 +155,7 @@ export default function ServicesBrandingGrowth() {
                                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-[10px] md:text-xs font-medium z-0">
                                     service-pitch-deck.webp
                                 </div>
-                                <img src="/services/branding-growth/images/service-pitch-deck.webp" alt="Pitch Deck Design" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
+                                <img src="/branding/service-pitch-deck.webp" alt="Pitch Deck Design" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
                             </div>
                             <div className="p-6 md:p-8">
                                 <div className="flex justify-between items-center mb-3 md:mb-4">

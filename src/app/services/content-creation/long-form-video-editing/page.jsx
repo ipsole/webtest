@@ -32,7 +32,7 @@ export default function ServicesContentCreationLongFormVideoEditing() {
                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-xs md:text-sm font-medium z-0">
                     Put: hero-long-form.webp here
                 </div>
-                <img src="/services/content-creation/long-form-video-editing/images/hero-long-form.webp" alt="Long Form Video Editing" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
+                <img src="/allservice/hero-long-form.webp" alt="Long Form Video Editing" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
             </div>
         </header>
 

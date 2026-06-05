@@ -32,7 +32,7 @@ export default function ServicesBrandingGrowthGraphicDesignServices() {
                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-xs md:text-sm font-medium z-0">
                     Put: hero-graphic-design.webp here
                 </div>
-                <img src="/services/branding-growth/graphic-design-services/images/hero-graphic-design.webp" alt="Graphic Design Services" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
+                <img src="/allservice/hero-graphic-design.webp" alt="Graphic Design Services" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
             </div>
         </header>
 

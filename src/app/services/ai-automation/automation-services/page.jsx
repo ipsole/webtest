@@ -32,7 +32,7 @@ export default function ServicesAiAutomationAutomationServices() {
                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-xs md:text-sm font-medium z-0">
                     Put: hero-business-automation.webp here
                 </div>
-                <img src="/services/ai-automation/automation-services/images/hero-business-automation.webp" alt="AI and Business Automation Systems" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
+                <img src="/allservice/hero-business-automation.webp" alt="AI and Business Automation Systems" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
             </div>
         </header>
 

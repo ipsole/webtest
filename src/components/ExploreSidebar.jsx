@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useModal } from '../context/ModalContext';
-import { X, ChevronRight, Layers, Cpu, Sparkles, Scale, Activity, Users, Compass, Link2 } from 'lucide-react';
+import { X, ChevronRight, Layers, Cpu, Sparkles, Scale, Activity, Users, Compass, Link2, BookOpen, Terminal, Heart, LifeBuoy } from 'lucide-react';
 
 const EXPLORE_TREE = [
   {
@@ -63,6 +63,25 @@ const EXPLORE_TREE = [
     ]
   },
   {
+    name: 'Blogs',
+    children: [
+      { name: 'Industry Insights', path: '/blogs' },
+      { name: 'Creative Technology', path: '/blogs' },
+      { name: 'Video Strategy', path: '/blogs' },
+      { name: 'Automation Guides', path: '/blogs' },
+    ]
+  },
+  {
+    name: 'Softwares',
+    children: [
+      { name: 'Premiere Pro', path: '/services/video-editing' },
+      { name: 'After Effects', path: '/services/video-editing' },
+      { name: 'Figma', path: '/services/website-design' },
+      { name: 'Make.com', path: '/ecosystem/make-automation' },
+      { name: 'Zapier', path: '/ecosystem/zapier-automation' },
+    ]
+  },
+  {
     name: 'Company Core',
     children: [
       { name: 'About Us', path: '/about' },
@@ -76,11 +95,29 @@ const EXPLORE_TREE = [
       { name: 'Privacy Policy', path: '/privacy' },
       { name: 'Terms of Service', path: '/terms' },
     ]
+  },
+  {
+    name: 'Testimonials',
+    children: [
+      { name: 'Wall of Love', path: '/#testimonials' },
+      { name: 'Client Reviews', path: '/portfolio' },
+      { name: 'Video Showcase', path: '/portfolio' },
+      { name: 'Share Feedback', path: '/contact' },
+    ]
+  },
+  {
+    name: 'Support',
+    children: [
+      { name: 'Submit Enquiry', path: '/enquiry' },
+      { name: 'FAQs', path: '/faqs' },
+      { name: 'System Status', path: '/status' },
+      { name: 'Contact Support', path: '/contact' },
+    ]
   }
 ];
 
 const getFolderIcon = (name, isOpen) => {
-  const props = { className: `w-4.5 h-4.5 transition-all duration-300 ${isOpen ? 'text-[#4B4EFC] dark:text-[#6c6efc] scale-110' : 'text-gray-600 dark:text-zinc-400'}` };
+  const props = { className: `w-4.5 h-4.5 ${isOpen ? 'text-[#4B4EFC] dark:text-[#6c6efc] scale-110' : 'text-gray-600 dark:text-zinc-400'}` };
   switch(name) {
     case 'Services': return <Layers {...props} />;
     case 'Ecosystem': return <Cpu {...props} />;
@@ -88,7 +125,11 @@ const getFolderIcon = (name, isOpen) => {
     case 'VS Comparisons': return <Scale {...props} />;
     case 'Industries': return <Activity {...props} />;
     case 'Roles': return <Users {...props} />;
+    case 'Blogs': return <BookOpen {...props} />;
+    case 'Softwares': return <Terminal {...props} />;
     case 'Company Core': return <Compass {...props} />;
+    case 'Testimonials': return <Heart {...props} />;
+    case 'Support': return <LifeBuoy {...props} />;
     default: return <Compass {...props} />;
   }
 };
@@ -110,31 +151,29 @@ export default function ExploreSidebar() {
 
   return (
     <>
-      {/* Centered Modal Dialogue Overlay (No blur as requested) */}
+      {/* Centered Modal Dialogue Overlay (Instant display, no blur as requested) */}
       <div 
         onClick={() => setIsExploreOpen(false)}
         onTouchStart={() => setIsExploreOpen(false)}
-        className={`fixed inset-0 bg-black/45 flex items-center justify-center p-4 z-[99998] transition-all duration-300 cursor-pointer ${
-          isExploreOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+        className={`fixed inset-0 bg-black/45 flex items-end md:items-center justify-center p-0 md:p-4 z-[99998] cursor-pointer ${
+          isExploreOpen ? 'block' : 'hidden'
         }`}
       >
-        {/* Dialogue Box container */}
+        {/* Dialogue Box container (Instant resize & display, responsive size) */}
         <div 
           onClick={(e) => e.stopPropagation()}
           onTouchStart={(e) => e.stopPropagation()}
-          className={`relative bg-white/95 dark:bg-zinc-950/95 border border-gray-200/50 dark:border-zinc-800/60 rounded-[2rem] w-full max-w-lg max-h-[75vh] shadow-2xl flex flex-col overflow-hidden transition-all duration-300 transform cursor-default ${
-            isExploreOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 translate-y-4'
-          }`}
+          className="relative bg-white dark:bg-zinc-950 w-full h-full md:h-auto md:max-w-lg md:max-h-[75vh] md:rounded-[2rem] md:border md:border-gray-200/50 md:dark:border-zinc-800/60 md:shadow-2xl flex flex-col overflow-hidden cursor-default"
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-zinc-800/60 bg-white/50 dark:bg-black/50 backdrop-blur shrink-0">
+          <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-zinc-800/60 bg-white dark:bg-zinc-950 shrink-0 md:rounded-t-[1.9rem]">
             <div className="flex flex-col">
               <span className="text-lg font-bold text-gray-900 dark:text-white">Explore Docdril™</span>
               <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">Sitemap &amp; Ecosystem Explorer</span>
             </div>
             <button 
               onClick={() => setIsExploreOpen(false)}
-              className="p-2 text-gray-400 hover:text-gray-900 dark:text-white dark:hover:text-white transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800"
+              className="p-2 text-gray-400 hover:text-gray-900 dark:text-white dark:hover:text-white transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 focus:outline-none focus:ring-0"
               title="Close Explorer"
             >
               <X className="w-5 h-5" />
@@ -142,7 +181,7 @@ export default function ExploreSidebar() {
           </div>
 
           {/* Tree list content (sans-serif font matching site theme) */}
-          <div className="flex-grow p-6 overflow-y-auto no-scrollbar">
+          <div className="flex-grow p-6 overflow-y-auto no-scrollbar md:rounded-b-[1.9rem]">
             <div className="flex flex-col gap-2.5 font-sans text-sm select-none">
               {EXPLORE_TREE.map((folder) => {
                 const isOpen = !!openFolders[folder.name];
@@ -151,30 +190,34 @@ export default function ExploreSidebar() {
                     {/* Folder Row */}
                     <div 
                       onClick={() => toggleFolder(folder.name)}
-                      className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-100/70 dark:hover:bg-zinc-900/60 cursor-pointer transition-all group border border-transparent hover:border-gray-200/30 dark:hover:border-zinc-800/30"
+                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFolder(folder.name); } }}
+                      role="button"
+                      tabIndex={0}
+                      className="sitemap-folder-row flex items-center justify-between p-3 rounded-xl cursor-pointer select-none border border-transparent md:hover:bg-gray-100/70 md:dark:hover:bg-zinc-900/60 md:hover:border-gray-200/30 md:dark:hover:border-zinc-800/30 focus:outline-none focus:ring-0 active:bg-transparent"
+                      style={{ WebkitTapHighlightColor: 'transparent', outline: 'none' }}
                     >
                       <div className="flex items-center gap-3">
-                        <ChevronRight className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-90 text-indigo-500 dark:text-indigo-400' : ''}`} />
+                        <ChevronRight className={`w-4 h-4 text-gray-450 ${isOpen ? 'rotate-90 text-indigo-500 dark:text-indigo-400' : ''}`} />
                         {getFolderIcon(folder.name, isOpen)}
-                        <span className="font-semibold text-gray-800 dark:text-gray-200 tracking-tight">{folder.name}</span>
+                        <span className="font-bold text-gray-800 dark:text-zinc-200 tracking-tight text-sm">{folder.name}</span>
                       </div>
-                      <span className="text-[10px] bg-gray-100/80 dark:bg-zinc-900/80 text-gray-500 dark:text-gray-400 font-bold px-2 py-0.5 rounded-full group-hover:bg-[#4B4EFC] group-hover:text-white dark:group-hover:bg-[#6c6efc] transition-all">
+                      <span className="text-[10px] bg-gray-100/80 dark:bg-zinc-900/80 text-gray-500 dark:text-gray-400 font-bold px-2 py-0.5 rounded-full">
                         {folder.children.length}
                       </span>
                     </div>
 
-                    {/* Children Sub-tree */}
+                    {/* Children List */}
                     <div 
-                      className={`transition-all duration-300 ease-in-out overflow-hidden flex flex-col pl-9 ${
-                        isOpen ? 'max-h-[500px] opacity-100 mt-1 mb-2' : 'max-h-0 opacity-0'
+                      className={`flex flex-col pl-9 ${
+                        isOpen ? 'block mt-1 mb-2' : 'hidden'
                       }`}
                     >
                       {folder.children.map((child) => (
                         <Link 
-                          key={child.path} 
+                          key={child.name} 
                           href={child.path}
                           onClick={handleLinkClick}
-                          className="flex items-center gap-2.5 p-2 rounded-lg text-gray-600 dark:text-zinc-400 hover:bg-indigo-50/50 dark:hover:bg-zinc-900/40 hover:text-[#4B4EFC] dark:hover:text-[#818cf8] transition-all text-xs border border-transparent hover:border-indigo-100/50 dark:hover:border-zinc-800/40 font-medium"
+                          className="flex items-center gap-2.5 p-2 rounded-lg text-gray-600 dark:text-zinc-400 hover:bg-indigo-50/50 dark:hover:bg-zinc-900/40 hover:text-[#4B4EFC] dark:hover:text-[#818cf8] transition-all text-xs font-medium focus:outline-none focus:ring-0"
                         >
                           <Link2 className="w-3.5 h-3.5 text-[#4B4EFC]/70 dark:text-[#6c6efc]/70 shrink-0" />
                           <span className="truncate">{child.name}</span>

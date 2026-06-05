@@ -32,7 +32,7 @@ export default function ServicesWebDevelopmentWebAppDevelopment() {
                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-xs md:text-sm font-medium z-0">
                     Put: hero-web-app.webp here
                 </div>
-                <img src="/services/web-development/web-app-development/images/hero-web-app.webp" alt="Web App Development Architecture" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
+                <img src="/allservice/hero-web-app.webp" alt="Web App Development Architecture" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
             </div>
         </header>
 

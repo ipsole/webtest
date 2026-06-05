@@ -153,14 +153,14 @@ export default function Header() {
               <Play className="w-4 h-4 md:w-5 md:h-5 fill-current ml-0.5" />
             </button>
 
-            {/* Folder/Sitemap Explorer - placed on the left next to theme as requested */}
-            <button 
-              onClick={() => setIsExploreOpen(!isExploreOpen)} 
+            {/* Folder/Sitemap Explorer - navigates to dedicated explore page */}
+            <Link 
+              href="/explore" 
               className="bg-white dark:bg-black text-black dark:text-white hover:text-gray-700 dark:hover:text-gray-300 rounded-full p-1.5 sm:p-2 shadow-lg hover:shadow-2xl transition-transform transform hover:scale-110 border border-gray-100 dark:border-gray-800 flex items-center justify-center" 
               title="Explore Sitemap"
             >
-              {isExploreOpen ? <FolderOpen className="w-4 h-4 md:w-5 md:h-5" /> : <Folder className="w-4 h-4 md:w-5 md:h-5" />}
-            </button>
+              {pathname === '/explore' ? <FolderOpen className="w-4 h-4 md:w-5 md:h-5" /> : <Folder className="w-4 h-4 md:w-5 md:h-5" />}
+            </Link>
           </div>
           
           {/* Right Side: Navigation Links (Desktop) & Action Toggles (Mobile & Desktop) */}

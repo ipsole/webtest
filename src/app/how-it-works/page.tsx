@@ -137,21 +137,16 @@ export default function Page() {
       />
 
       <main className="seo-page how-it-works">
-        <section className="hero-section">
+        <section className="hero-section !mb-2 md:!mb-4">
           <p className="tagline">Our Methodology</p>
           <h1 className="title">A clear, simple, and professional process.</h1>
           <p className="subtitle !text-base md:!text-lg">
             We combine creative precision with technical engineering. Here is exactly how we onboarding, design, automate, and deliver premium assets for your brand.
           </p>
-          <div className="cta-wrapper">
-            <button className="cta-button primary shadow-sm hover:shadow-md transition-shadow cursor-pointer">
-              Get Started Today
-            </button>
-          </div>
         </section>
 
         {/* Timeline Section - Editorial Panels */}
-        <section className="relative w-full max-w-4xl mx-auto py-12 px-4 sm:px-6">
+        <section className="relative w-full max-w-4xl mx-auto pt-2 pb-12 px-2 sm:px-6">
           <h2 className="text-2xl font-bold tracking-tight text-center text-slate-900 dark:text-slate-50 uppercase mb-16">
             The 8-Step Collaboration Timeline
           </h2>
@@ -163,13 +158,13 @@ export default function Page() {
             <div className="absolute bottom-1/10 left-1/3 w-80 h-80 rounded-full bg-purple-400/8 dark:bg-purple-500/5 blur-[110px] pointer-events-none select-none" />
 
             {/* Phase 1: Alignment */}
-            <div className={`p-8 md:p-12 bg-slate-550/5 dark:bg-zinc-900/10 border border-slate-200/50 dark:border-zinc-800/50 rounded-3xl ${baseShadowClass} ${hoverShadowClass} transition-all duration-500 relative z-10`}>
+            <div className={`px-3 py-5 sm:p-8 md:p-12 bg-slate-550/5 dark:bg-zinc-900/10 border border-slate-200/50 dark:border-zinc-800/50 rounded-3xl ${baseShadowClass} ${hoverShadowClass} transition-all duration-500 relative z-10`}>
               <div className="border-b border-slate-200 dark:border-zinc-800/80 pb-4 mb-8">
                 <span className="font-sans tracking-widest text-xs font-semibold text-slate-455 dark:text-zinc-550 uppercase">
                   Phase I &mdash; Alignment & Strategy
                 </span>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
                 {phaseOne.map((step, idx) => (
                   <div 
                     key={idx} 
@@ -177,7 +172,7 @@ export default function Page() {
                   >
                     <div>
                       {/* Top-bleed Illustration Image */}
-                      <div className="relative w-full h-48 bg-white/20 dark:bg-zinc-950/5 border-b border-white/40 dark:border-zinc-800/20 overflow-hidden select-none p-4 flex items-center justify-center">
+                      <div className="relative w-full h-40 sm:h-48 bg-white/20 dark:bg-zinc-950/5 border-b border-white/40 dark:border-zinc-800/20 overflow-hidden select-none p-4 flex items-center justify-center">
                         <div className="absolute top-3 left-3 z-10 px-2.5 py-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[10px] font-black tracking-widest rounded shadow-sm select-none">
                           STEP {step.number}
                         </div>
@@ -189,19 +184,19 @@ export default function Page() {
                       </div>
                       
                       {/* Content Padding Wrapper */}
-                      <div className="p-6">
-                        <div className="flex items-center justify-between gap-4 mb-4">
+                      <div className="p-5 sm:p-6">
+                        <div className="flex items-center justify-between gap-4 mb-3 sm:mb-4">
                           <div className="p-2.5 bg-slate-100/80 dark:bg-zinc-800/80 text-slate-855 dark:text-zinc-250 border border-slate-200/50 dark:border-zinc-800/50 rounded-lg shadow-sm">
                             {step.icon}
                           </div>
-                          <span className="font-sans font-black text-4xl text-slate-900 dark:text-white select-none leading-none opacity-90">
+                          <span className="font-sans font-black text-3xl sm:text-4xl text-slate-900 dark:text-white select-none leading-none opacity-90">
                             {step.number}
                           </span>
                         </div>
-                        <h3 className="text-base md:text-lg font-bold text-slate-900 dark:text-slate-50 mb-2">
+                        <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-50 mb-1.5 sm:mb-2 leading-tight">
                           {step.title}
                         </h3>
-                        <p className="text-[14px] leading-relaxed text-slate-655 dark:text-zinc-350">
+                        <p className="text-sm leading-normal sm:leading-relaxed text-slate-655 dark:text-zinc-350">
                           {step.desc}
                         </p>
                       </div>
@@ -212,13 +207,13 @@ export default function Page() {
             </div>
 
             {/* Phase 2: Integration */}
-            <div className={`p-8 md:p-12 bg-slate-550/5 dark:bg-zinc-900/10 border border-slate-200/50 dark:border-zinc-800/50 rounded-3xl ${baseShadowClass} ${hoverShadowClass} transition-all duration-500 relative z-10`}>
+            <div className={`px-3 py-5 sm:p-8 md:p-12 bg-slate-550/5 dark:bg-zinc-900/10 border border-slate-200/50 dark:border-zinc-800/50 rounded-3xl ${baseShadowClass} ${hoverShadowClass} transition-all duration-500 relative z-10`}>
               <div className="border-b border-slate-200 dark:border-zinc-800/80 pb-4 mb-8">
                 <span className="font-sans tracking-widest text-xs font-semibold text-slate-455 dark:text-zinc-550 uppercase">
                   Phase II &mdash; Onboarding & Settlement
                 </span>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
                 {phaseTwo.map((step, idx) => (
                   <div 
                     key={idx} 
@@ -226,7 +221,7 @@ export default function Page() {
                   >
                     <div>
                       {/* Top-bleed Illustration Image */}
-                      <div className="relative w-full h-48 bg-white/20 dark:bg-zinc-950/5 border-b border-white/40 dark:border-zinc-800/20 overflow-hidden select-none p-4 flex items-center justify-center">
+                      <div className="relative w-full h-40 sm:h-48 bg-white/20 dark:bg-zinc-950/5 border-b border-white/40 dark:border-zinc-800/20 overflow-hidden select-none p-4 flex items-center justify-center">
                         <div className="absolute top-3 left-3 z-10 px-2.5 py-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[10px] font-black tracking-widest rounded shadow-sm select-none">
                           STEP {step.number}
                         </div>
@@ -238,19 +233,19 @@ export default function Page() {
                       </div>
 
                       {/* Content Padding Wrapper */}
-                      <div className="p-6">
-                        <div className="flex items-center justify-between gap-4 mb-4">
+                      <div className="p-5 sm:p-6">
+                        <div className="flex items-center justify-between gap-4 mb-3 sm:mb-4">
                           <div className="p-2.5 bg-slate-100/80 dark:bg-zinc-800/80 text-slate-855 dark:text-zinc-250 border border-slate-200/50 dark:border-zinc-800/50 rounded-lg shadow-sm">
                             {step.icon}
                           </div>
-                          <span className="font-sans font-black text-4xl text-slate-900 dark:text-white select-none leading-none opacity-90">
+                          <span className="font-sans font-black text-3xl sm:text-4xl text-slate-900 dark:text-white select-none leading-none opacity-90">
                             {step.number}
                           </span>
                         </div>
-                        <h3 className="text-base md:text-lg font-bold text-slate-900 dark:text-slate-50 mb-2">
+                        <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-50 mb-1.5 sm:mb-2 leading-tight">
                           {step.title}
                         </h3>
-                        <p className="text-[14px] leading-relaxed text-slate-655 dark:text-zinc-350">
+                        <p className="text-sm leading-normal sm:leading-relaxed text-slate-655 dark:text-zinc-350">
                           {step.desc}
                         </p>
                       </div>
@@ -261,13 +256,13 @@ export default function Page() {
             </div>
 
             {/* Phase 3: Velocity */}
-            <div className={`p-8 md:p-12 bg-slate-550/5 dark:bg-zinc-900/10 border border-slate-200/50 dark:border-zinc-800/50 rounded-3xl ${baseShadowClass} ${hoverShadowClass} transition-all duration-500 relative z-10`}>
+            <div className={`px-3 py-5 sm:p-8 md:p-12 bg-slate-550/5 dark:bg-zinc-900/10 border border-slate-200/50 dark:border-zinc-800/50 rounded-3xl ${baseShadowClass} ${hoverShadowClass} transition-all duration-500 relative z-10`}>
               <div className="border-b border-slate-200 dark:border-zinc-800/80 pb-4 mb-8">
                 <span className="font-sans tracking-widest text-xs font-semibold text-slate-455 dark:text-zinc-550 uppercase">
                   Phase III &mdash; Production & Launch
                 </span>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
                 {phaseThree.map((step, idx) => (
                   <div 
                     key={idx} 
@@ -275,7 +270,7 @@ export default function Page() {
                   >
                     <div>
                       {/* Top-bleed Illustration Image */}
-                      <div className="relative w-full h-48 bg-white/20 dark:bg-zinc-950/5 border-b border-white/40 dark:border-zinc-800/20 overflow-hidden select-none p-4 flex items-center justify-center">
+                      <div className="relative w-full h-40 sm:h-48 bg-white/20 dark:bg-zinc-950/5 border-b border-white/40 dark:border-zinc-800/20 overflow-hidden select-none p-4 flex items-center justify-center">
                         <div className="absolute top-3 left-3 z-10 px-2.5 py-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[10px] font-black tracking-widest rounded shadow-sm select-none">
                           STEP {step.number}
                         </div>
@@ -287,19 +282,19 @@ export default function Page() {
                       </div>
 
                       {/* Content Padding Wrapper */}
-                      <div className="p-6">
-                        <div className="flex items-center justify-between gap-4 mb-4">
+                      <div className="p-5 sm:p-6">
+                        <div className="flex items-center justify-between gap-4 mb-3 sm:mb-4">
                           <div className="p-2.5 bg-slate-100/80 dark:bg-zinc-800/80 text-slate-855 dark:text-zinc-250 border border-slate-200/50 dark:border-zinc-800/50 rounded-lg shadow-sm">
                             {step.icon}
                           </div>
-                          <span className="font-sans font-black text-4xl text-slate-900 dark:text-white select-none leading-none opacity-90">
+                          <span className="font-sans font-black text-3xl sm:text-4xl text-slate-900 dark:text-white select-none leading-none opacity-90">
                             {step.number}
                           </span>
                         </div>
-                        <h3 className="text-base md:text-lg font-bold text-slate-900 dark:text-slate-50 mb-2">
+                        <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-50 mb-1.5 sm:mb-2 leading-tight">
                           {step.title}
                         </h3>
-                        <p className="text-[14px] leading-relaxed text-slate-655 dark:text-zinc-350">
+                        <p className="text-sm leading-normal sm:leading-relaxed text-slate-655 dark:text-zinc-350">
                           {step.desc}
                         </p>
                       </div>
@@ -308,6 +303,13 @@ export default function Page() {
                 ))}
               </div>
             </div>
+          </div>
+
+          {/* Moved CTA Button here */}
+          <div className="cta-wrapper mt-16">
+            <button className="cta-button primary shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+              Get Started Today
+            </button>
           </div>
         </section>
 

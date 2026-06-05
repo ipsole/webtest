@@ -129,34 +129,13 @@ export default function Page() {
       />
 
       <main className="seo-page careers-page">
-        <section className="hero-section !mb-8">
-          <h1 className="title">Shape the next era of storytelling and systems.</h1>
-          <p className="subtitle !text-base md:!text-lg">
+        <section className="hero-section !mb-8 flex flex-col items-center text-center">
+          <h1 className="title mx-auto text-center">Shape the next era of storytelling and systems.</h1>
+          <p className="subtitle !text-base md:!text-lg mx-auto text-center">
             We are building an elite crew of creatives, engineers, and strategists. If you are driven by high ownership, outstanding work ethics, and real-world business outcomes, explore our open roles.
           </p>
         </section>
 
-        {/* Operating Pillars */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-8 border-t border-b border-slate-200/60 dark:border-zinc-800/40 max-w-4xl mx-auto my-8 text-center md:text-left">
-          <div className="md:border-r border-slate-200/60 dark:border-zinc-800/40 last:border-r-0 md:pr-6">
-            <h3 className="text-base font-bold text-slate-900 dark:text-white uppercase tracking-wider">High Autonomy</h3>
-            <p className="text-[15px] text-slate-550 dark:text-zinc-400 mt-2 leading-relaxed">
-              We focus entirely on outcomes, not logged hours. You take full ownership of your schedule.
-            </p>
-          </div>
-          <div className="md:border-r border-slate-200/60 dark:border-zinc-800/40 last:border-r-0 md:px-6">
-            <h3 className="text-base font-bold text-slate-900 dark:text-white uppercase tracking-wider">Quality First</h3>
-            <p className="text-[15px] text-slate-550 dark:text-zinc-400 mt-2 leading-relaxed">
-              Zero compromise on detail. We build systems and stories engineered to stand out globally.
-            </p>
-          </div>
-          <div className="md:pl-6">
-            <h3 className="text-base font-bold text-slate-900 dark:text-white uppercase tracking-wider">Async Flow</h3>
-            <p className="text-[15px] text-slate-550 dark:text-zinc-400 mt-2 leading-relaxed">
-              We minimize meetings and focus on documentation, enabling uninterrupted deep work.
-            </p>
-          </div>
-        </div>
 
         {/* Repositioned and Upscaled Tagline */}
         <div className="text-center mt-16 mb-8">
@@ -166,17 +145,25 @@ export default function Page() {
         </div>
 
         {/* Workspace Visual Section - Using career.jpg */}
-        <div className="relative w-full max-w-4xl mx-auto rounded-3xl overflow-hidden border border-slate-200/80 dark:border-zinc-800/80 shadow-[0_25px_50px_rgba(0,0,0,0.08)] dark:shadow-[0_25px_50px_rgba(0,0,0,0.5)] mb-16 aspect-video bg-zinc-900">
-          <img 
-            src="/career.jpg" 
-            alt="Docdril Workspace Setup" 
-            className="object-cover w-full h-full"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none flex items-end p-6 md:p-8">
-            <div>
-              <p className="text-white font-bold text-lg md:text-xl uppercase tracking-wider">Engineered for Storytelling & Systems</p>
-              <p className="text-zinc-350 text-xs md:text-sm mt-1">Inside the creative powerhouse running Docdril global operations.</p>
+        <div className="mb-16">
+          <div className="relative w-full max-w-4xl mx-auto rounded-3xl overflow-hidden border border-slate-200/80 dark:border-zinc-800/80 shadow-[0_25px_50px_rgba(0,0,0,0.08)] dark:shadow-[0_25px_50px_rgba(0,0,0,0.5)] aspect-video bg-zinc-900">
+            <img 
+              src="/career.jpg" 
+              alt="Docdril Workspace Setup" 
+              className="object-cover w-full h-full"
+            />
+            {/* Desktop Overlay - Hidden on Mobile */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none hidden md:flex items-end p-8">
+              <div>
+                <p className="text-white font-bold text-lg md:text-xl uppercase tracking-wider">Engineered for Storytelling & Systems</p>
+                <p className="text-zinc-300 text-xs md:text-sm mt-1">Inside the creative powerhouse running Docdril global operations.</p>
+              </div>
             </div>
+          </div>
+          {/* Mobile Caption - Shown only on Mobile */}
+          <div className="block md:hidden mt-4 text-center px-4">
+            <p className="text-slate-900 dark:text-zinc-100 font-bold text-sm uppercase tracking-wider">Engineered for Storytelling & Systems</p>
+            <p className="text-slate-500 dark:text-zinc-400 text-xs mt-1">Inside the creative powerhouse running Docdril global operations.</p>
           </div>
         </div>
 
@@ -186,7 +173,7 @@ export default function Page() {
             {openRoles.map((role, idx) => (
               <div 
                 key={idx} 
-                className={`relative p-5 pl-4 pr-6 bg-white dark:bg-zinc-900/30 border border-slate-200/80 dark:border-zinc-800/80 rounded-2xl ${baseSolidShadow} ${hoverSolidShadow} hover:bg-white dark:hover:bg-zinc-900/80 hover:border-slate-800 dark:hover:border-zinc-200 transition-all duration-300 flex gap-4 items-center group overflow-hidden`}
+                className={`relative p-6 sm:p-5 sm:pl-4 sm:pr-6 bg-white dark:bg-zinc-900/30 border border-slate-200/80 dark:border-zinc-800/80 rounded-2xl ${baseSolidShadow} ${hoverSolidShadow} hover:bg-white dark:hover:bg-zinc-900/80 hover:border-slate-800 dark:hover:border-zinc-200 transition-all duration-300 flex flex-col sm:flex-row gap-4 items-center sm:items-start text-center sm:text-left group overflow-hidden`}
               >
                 {/* Illustration */}
                 <div className="w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0 flex items-center justify-center">
@@ -198,7 +185,7 @@ export default function Page() {
                 </div>
 
                 {/* Content */}
-                <div className="flex-grow flex flex-col justify-between min-h-[96px] sm:min-h-[112px]">
+                <div className="flex-grow flex flex-col justify-between min-h-[96px] sm:min-h-[112px] w-full">
                   <div>
                     <h3 className="text-base font-bold text-slate-900 dark:text-slate-50 mb-2.5">{role.title}</h3>
                     <p className="text-[13px] sm:text-[14px] text-slate-655 dark:text-zinc-350 leading-relaxed mb-3">{role.desc}</p>
@@ -344,7 +331,7 @@ export default function Page() {
                 {applySteps.map((step, idx) => (
                   <div 
                     key={idx} 
-                    className={`relative p-5 pl-4 pr-6 bg-white dark:bg-zinc-900/30 border border-slate-200/80 dark:border-zinc-800/80 rounded-2xl ${baseSolidShadow} ${hoverSolidShadow} hover:bg-white dark:hover:bg-zinc-900/80 hover:border-slate-800 dark:hover:border-zinc-200 transition-all duration-300 flex gap-4 items-center group overflow-hidden`}
+                    className={`relative p-6 sm:p-5 sm:pl-4 sm:pr-6 bg-white dark:bg-zinc-900/30 border border-slate-200/80 dark:border-zinc-800/80 rounded-2xl ${baseSolidShadow} ${hoverSolidShadow} hover:bg-white dark:hover:bg-zinc-900/80 hover:border-slate-800 dark:hover:border-zinc-200 transition-all duration-300 flex flex-col sm:flex-row gap-4 items-center sm:items-start text-center sm:text-left group overflow-hidden`}
                   >
                     {/* Number Indicator Badge */}
                     <div className="absolute top-4 left-4 z-10 w-7 h-7 rounded-full bg-blue-50/90 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 text-xs font-extrabold flex items-center justify-center shadow-sm select-none">
@@ -361,7 +348,7 @@ export default function Page() {
                     </div>
 
                     {/* Content */}
-                    <div className="flex-grow pt-2">
+                    <div className="flex-grow pt-2 w-full">
                       <h4 className="font-semibold text-slate-900 dark:text-white mb-1 text-base">{step.title}</h4>
                       <p className="text-[13px] sm:text-[14px] text-slate-655 dark:text-zinc-350 leading-relaxed">{step.desc}</p>
                     </div>

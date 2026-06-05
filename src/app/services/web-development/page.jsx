@@ -30,7 +30,7 @@ export default function ServicesWebDevelopment() {
                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-xs md:text-sm font-medium z-0">
                     Put: hero-web-development.webp here
                 </div>
-                <img src="/services/web-development/images/hero-web-development.webp" alt="High-Performance Web Development" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
+                <img src="/webdev/hero-web-development.webp" alt="High-Performance Web Development" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
             </div>
         </header>
 
@@ -49,7 +49,7 @@ export default function ServicesWebDevelopment() {
                         <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-xs md:text-sm font-medium z-0">
                             Put: dev-methodology.webp here
                         </div>
-                        <img src="/services/web-development/images/dev-methodology.webp" alt="Web Development Methodology" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
+                        <img src="/webdev/dev-methodology.webp" alt="Web Development Methodology" className="relative z-10 object-cover w-full h-full" onError={(e) => { e.target.style.opacity = '0'; }} />
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@ export default function ServicesWebDevelopment() {
                                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-[10px] md:text-xs font-medium z-0">
                                     service-web-app.webp
                                 </div>
-                                <img src="/services/web-development/images/service-web-app.webp" alt="Web App Development" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
+                                <img src="/webdev/service-web-app.webp" alt="Web App Development" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
                             </div>
                             <div className="p-6 md:p-8">
                                 <div className="flex justify-between items-center mb-3 md:mb-4">
@@ -92,7 +92,7 @@ export default function ServicesWebDevelopment() {
                                 <div className="absolute inset-0 flex items-center justify-center text-zinc-400 text-[10px] md:text-xs font-medium z-0">
                                     service-saas.webp
                                 </div>
-                                <img src="/services/web-development/images/service-saas.webp" alt="SaaS Website Development" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
+                                <img src="/webdev/service-saas.webp" alt="SaaS Website Development" className="relative z-10 object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" onError={(e) => { e.target.style.opacity = '0'; }} />
                             </div>
                             <div className="p-6 md:p-8">
                                 <div className="flex justify-between items-center mb-3 md:mb-4">
