@@ -20,8 +20,7 @@ const FOUNDERS = [
         image: "https://uploads.onecompiler.io/445by7jfj/448sznub6/piyush.jpg",
         quote: "Video editing must be rooted in deep psychological strategy.",
         bio: "Piyush Chaudhary is the visionary behind Docdril. He developed the \"Atomic Editing\" vision and drives the core philosophy that video editing must be rooted in deep psychological strategy to maximize client ROI and build lasting brand authority.",
-        linkedin: "https://www.linkedin.com/in/ipsole/",
-        instagram: "https://www.instagram.com/cozicupid/"
+        linkedin: "https://www.linkedin.com/in/ipsole/"
     },
     {
         name: "Arushi Bhansali",
@@ -29,8 +28,7 @@ const FOUNDERS = [
         image: "https://uploads.onecompiler.io/445by7jfj/448sznub6/arushi.jpg",
         quote: "Excellence is not an act, but a habit of execution.",
         bio: "Arushi Bhansali expertly oversees the strategic direction and operational execution. She ensures that Docdril’s commitment to premium, high-quality deliverables and streamlined client success is consistently met.",
-        linkedin: "https://www.linkedin.com/in/arushi-bhansali-b1a53b277/",
-        instagram: "https://www.instagram.com/aruzie_/"
+        linkedin: "https://www.linkedin.com/in/arushi-bhansali-b1a53b277/"
     }
 ];
 
@@ -240,12 +238,16 @@ export default function About() {
                                             <p className="text-indigo-600 dark:text-indigo-400 font-bold tracking-wider uppercase text-xs sm:text-sm">{founder.role}</p>
                                         </div>
                                         <div className="flex gap-3 justify-center md:justify-start">
-                                            <a href={founder.linkedin} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-full transition-all shadow-sm flex items-center justify-center hover:scale-110 border border-gray-200 dark:border-gray-700">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 sm:w-5 sm:h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                                            </a>
-                                            <a href={founder.instagram} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 rounded-full transition-all shadow-sm flex items-center justify-center hover:scale-110 border border-gray-200 dark:border-gray-700">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 sm:w-5 sm:h-5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                                            </a>
+                                            {founder.linkedin && (
+                                                <a href={founder.linkedin} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-full transition-all shadow-sm flex items-center justify-center hover:scale-110 border border-gray-200 dark:border-gray-700">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 sm:w-5 sm:h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                                                </a>
+                                            )}
+                                            {founder.instagram && (
+                                                <a href={founder.instagram} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 rounded-full transition-all shadow-sm flex items-center justify-center hover:scale-110 border border-gray-200 dark:border-gray-700">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 sm:w-5 sm:h-5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                                                </a>
+                                            )}
                                         </div>
                                     </div>
                                     <div className="mb-6">
